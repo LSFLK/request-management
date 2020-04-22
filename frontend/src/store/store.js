@@ -8,6 +8,7 @@ import modalReducer from '../modals/state/modal.reducers';
 import { notificationReducer } 
         from '../notifications/state/notifications.reducers';
 
+import { authenticateReducer} from "../authentication/state/authentication.reducers";
 //new incidents reducer
 import incidentReducer from '../incident/state/incidentReducer';
 import guestViewReducer from '../guest-view/state/guestViewReducer';
@@ -25,7 +26,8 @@ const reducer = combineReducers({
     guestView: guestViewReducer,
     user: userReducer,
     loading: loadingReducer,
-    event: eventReducer
+    event: eventReducer,
+    authentication: authenticateReducer
 })
 
 const store = createStore(

@@ -11,6 +11,7 @@ import IncidentFormInternal from "../incident-filing/components/IncidentFormInte
 import { ReportViewer } from "../reporting";
 
 import SignInPage from "../app/SignInPage";
+import {SignIn } from "../authentication/sign-in";
 import PrivateRoute from "./PrivateRoute";
 
 import ReviewComplaintsListView from '../ongoing-incidents/components/ReviewComplaintsListView';
