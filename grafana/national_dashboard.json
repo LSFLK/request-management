@@ -15,20 +15,19 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 2,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 22,
-      "panels": [],
-      "title": "FOR THE GIVEN TIME RANGE",
+      "id": 30,
+      "title": "TODAY",
       "type": "row"
     },
     {
@@ -40,6 +39,7 @@
         "#E02F44",
         "#1F60C4"
       ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -49,8 +49,8 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 3,
-        "w": 6,
+        "h": 4,
+        "w": 8,
         "x": 0,
         "y": 1
       },
@@ -71,7 +71,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "pluginVersion": "6.2.5",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -90,7 +89,336 @@
         "lineColor": "rgb(31, 120, 193)",
         "show": false
       },
-      "tableColumn": "time",
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect created_date as \"time\",\ncount(*)\nfrom incidents_incident\nwhere    DAYOFYEAR(created_date) = DAYOFYEAR(now())\nGROUP BY current_status",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ISSUES SUBMITTED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "#56A64B",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 1
+      },
+      "id": 34,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect created_date as \"time\",\ncount(CASE WHEN current_status = 'CLOSED' then 'CLOSED'  end) as 'CLOSED'\nfrom incidents_incident\nwhere  DAYOFYEAR(created_date) = DAYOFYEAR(now())\nGROUP BY current_status",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CLOSED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#1F60C4",
+        "rgba(237, 129, 40, 0.89)",
+        "#5794F2"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 28,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect created_date as \"time\",\ncount(*)\nfrom incidents_incident\nwhere  current_status = 'ACTION_PENDING' || 'ACTION_TAKEN' || 'INFORMATION_PROVIDED' || 'INFORMATION_REQESTED' || 'VERIFIED' || 'REOPENED' and   DAYOFYEAR(created_date) = DAYOFYEAR(now())\nGROUP BY current_status",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "PENDING",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 22,
+      "panels": [],
+      "title": "FOR THE GIVEN TIME RANGE",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "#E02F44",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 6
+      },
+      "id": 31,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
       "targets": [
         {
           "format": "time_series",
@@ -124,7 +452,322 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "TOTAL",
+      "title": "ISSUES SUBMITED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "#56A64B",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 6
+      },
+      "id": 26,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect created_date as \"time\",\ncount(CASE WHEN current_status = 'CLOSED' || 'INVALIDATED' then 'CLOSED'  end) as 'CLOSED'\nfrom incidents_incident\nwhere $__timeFilter(created_date)\nGROUP BY current_status",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CLOSED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "#8F3BB8",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 6
+      },
+      "id": 38,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect created_date as \"time\",\ncount(*) as value\nfrom incidents_incident\nwhere \n(current_status = 'ACTION_PENDING' or  \ncurrent_status = 'INFORMATION_REQUESTED') and \n$__timeFilter(created_date)\n\nGROUP BY id",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "PENDING",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "#8F3BB8",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 10
+      },
+      "id": 25,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect created_date as \"time\",\ncount(*) as value\nfrom incidents_incident\nwhere \n(current_status = 'ACTION_TAKEN' or  \ncurrent_status = 'ACTION_PENDING' or \ncurrent_status = 'ADVICE_PROVIDED' or \ncurrent_status = 'ADVICE_REQESTED' or\ncurrent_status = 'VERIFIED' or\ncurrent_status = 'REOPENED') and \n$__timeFilter(created_date)\n\nGROUP BY id",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "IN-PROGRESS",
       "type": "singlestat",
       "valueFontSize": "150%",
       "valueMaps": [
@@ -145,6 +788,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#5794F2"
       ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -154,10 +798,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 6,
-        "y": 1
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 10
       },
       "id": 24,
       "interval": null,
@@ -176,7 +820,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "pluginVersion": "6.2.5",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -246,353 +889,11 @@
       "colorBackground": false,
       "colorValue": true,
       "colors": [
-        "#5794F2",
-        "#8F3BB8",
-        "#1F60C4"
-      ],
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 12,
-        "y": 1
-      },
-      "id": 25,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "pluginVersion": "6.2.5",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "110%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": true,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "\nselect created_date as \"time\",\ncount(*) as value\nfrom incidents_incident\nwhere \n(current_status = 'ACTION_TAKEN' or  \ncurrent_status = 'ACTION_PENDING' or \ncurrent_status = 'ADVICE_PROVIDED' or \ncurrent_status = 'ADVICE_REQESTED' or\ncurrent_status = 'VERIFIED' ) and \n$__timeFilter(created_date)\n\nGROUP BY id",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "auth_user",
-          "timeColumn": "last_login",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "IN-PROGRESS",
-      "type": "singlestat",
-      "valueFontSize": "150%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "0",
-          "value": "null"
-        }
-      ],
-      "valueName": "total"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#5794F2",
-        "#56A64B",
-        "#1F60C4"
-      ],
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 18,
-        "y": 1
-      },
-      "id": 26,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "pluginVersion": "6.2.5",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "110%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": true,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "\nselect created_date as \"time\",\ncount(CASE WHEN current_status = 'CLOSED' || 'INVALIDATED' then 'CLOSED'  end) as 'CLOSED'\nfrom incidents_incident\nwhere $__timeFilter(created_date)\nGROUP BY current_status",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "auth_user",
-          "timeColumn": "last_login",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CLOSED",
-      "type": "singlestat",
-      "valueFontSize": "150%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "0",
-          "value": "null"
-        }
-      ],
-      "valueName": "total"
-    },
-    {
-      "aliasColors": {},
-      "breakPoint": "50%",
-      "cacheTimeout": null,
-      "combine": {
-        "label": "Others",
-        "threshold": 0
-      },
-      "fontSize": "80%",
-      "format": "short",
-      "gridPos": {
-        "h": 6,
-        "w": 9,
-        "x": 0,
-        "y": 4
-      },
-      "id": 10,
-      "interval": null,
-      "legend": {
-        "show": true,
-        "values": true
-      },
-      "legendType": "Right side",
-      "links": [],
-      "maxDataPoints": 3,
-      "nullPointMode": "connected",
-      "options": {},
-      "pieType": "donut",
-      "pluginVersion": "6.2.5",
-      "strokeWidth": 1,
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "\n\n-- select UNIX_TIMESTAMP(date_time) AS time_sec,subcategory as metric, no_of_incidnets as value\n-- from (select date_time,\n--             category,\n--             subcategory,\n--             count(id) as no_of_incidnets\n--       from real_data\n--       where category = '$category'\n--       group by subcategory\n--       order by no_of_incidnets desc,subcategory desc) a\n-- where $__timeFilter(date_time) and (no_of_incidnets*100/'$total_incidents')>'$threshold'   and category = '$category'\n-- group by metric\n-- order by value desc, subcategory desc\n\n\n\n-- select UNIX_TIMESTAMP(date_time) AS time_sec,subcategory as metric, no_of_incidnets as value\n-- from (select date_time,\n--             category,\n--             subcategory,\n--             count(id) as no_of_incidnets\n--       from real_data\n      \n--       group by subcategory\n--       order by no_of_incidnets desc,subcategory desc) a\n-- where $__timeFilter(date_time)   \n-- group by metric\n-- order by value desc, subcategory desc limit 5\n\n\n\nSELECT UNIX_TIMESTAMP(incidents_incident.created_date) AS time_sec, CONCAT( code,' | ',sub_category) as metric,count(incidents_incident.id) as value\nfrom incidents_incident INNER JOIN common_category ON\ncommon_category.id = incidents_incident.category\nwhere\n  $__timeFilter(incidents_incident.created_date) and \n  common_category.top_category=\"Violation of election law\"\nGROUP by code\norder by value desc, code \nlimit 5\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "real_data",
-          "timeColumn": "date_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "VIOLATION OF ELECTION LAW: TOP 5 SUBCATEGORIES",
-      "type": "grafana-piechart-panel",
-      "valueName": "current"
-    },
-    {
-      "aliasColors": {},
-      "breakPoint": "50%",
-      "cacheTimeout": null,
-      "combine": {
-        "label": "Others",
-        "threshold": 0
-      },
-      "fontSize": "80%",
-      "format": "short",
-      "gridPos": {
-        "h": 6,
-        "w": 9,
-        "x": 9,
-        "y": 4
-      },
-      "id": 16,
-      "interval": null,
-      "legend": {
-        "show": true,
-        "values": true
-      },
-      "legendType": "Right side",
-      "links": [],
-      "maxDataPoints": 3,
-      "nullPointMode": "connected",
-      "options": {},
-      "pieType": "donut",
-      "pluginVersion": "6.2.5",
-      "strokeWidth": 1,
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "\n\n-- select UNIX_TIMESTAMP(date_time) AS time_sec,subcategory as metric, no_of_incidnets as value\n-- from (select date_time,\n--             category,\n--             subcategory,\n--             count(id) as no_of_incidnets\n--       from real_data\n--       where category = '$category'\n--       group by subcategory\n--       order by no_of_incidnets desc,subcategory desc) a\n-- where $__timeFilter(date_time) and (no_of_incidnets*100/'$total_incidents')>'$threshold'   and category = '$category'\n-- group by metric\n-- order by value desc, subcategory desc\n\n\n\n-- select UNIX_TIMESTAMP(date_time) AS time_sec,subcategory as metric, no_of_incidnets as value\n-- from (select date_time,\n--             category,\n--             subcategory,\n--             count(id) as no_of_incidnets\n--       from real_data\n      \n--       group by subcategory\n--       order by no_of_incidnets desc,subcategory desc) a\n-- where $__timeFilter(date_time)   \n-- group by metric\n-- order by value desc, subcategory desc limit 5\n\n\n\nSELECT UNIX_TIMESTAMP(incidents_incident.created_date) AS time_sec, CONCAT( code,' | ',sub_category) as metric,count(incidents_incident.id) as value\nfrom incidents_incident INNER JOIN common_category ON\ncommon_category.id = incidents_incident.category\nwhere\n  $__timeFilter(incidents_incident.created_date) and \n  common_category.top_category=\"Violence\"\nGROUP by code\norder by value desc, code \nlimit 5\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "real_data",
-          "timeColumn": "date_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "VIOLENCE: TOP 5 SUBCATEGORIES",
-      "type": "grafana-piechart-panel",
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
+        "#1F60C4",
         "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
+        "#5794F2"
       ],
-      "decimals": null,
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -602,12 +903,12 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 18,
-        "y": 4
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 10
       },
-      "id": 27,
+      "id": 33,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -624,12 +925,11 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "pluginVersion": "6.2.5",
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
-      "prefixFontSize": "150%",
+      "prefixFontSize": "110%",
       "rangeMaps": [
         {
           "from": "null",
@@ -650,7 +950,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(incidents_incident.created_date) AS time_sec, \ncount(incidents_incident.id) \nfrom incidents_incident INNER JOIN common_category ON\ncommon_category.id = incidents_incident.category\nwhere\n  $__timeFilter(incidents_incident.created_date) and \n  common_category.top_category=\"Other\"\nGROUP by sub_category\nlimit 5\n",
+          "rawSql": "\nselect created_date as \"time\",\ncount(*)\nfrom incidents_incident\nwhere  current_status = 'VERIFIED' and  $__timeFilter(created_date)\nGROUP BY current_status",
           "refId": "A",
           "select": [
             [
@@ -662,8 +962,8 @@
               }
             ]
           ],
-          "table": "real_data",
-          "timeColumn": "date_time",
+          "table": "auth_user",
+          "timeColumn": "last_login",
           "timeColumnType": "timestamp",
           "where": [
             {
@@ -677,7 +977,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "OTHER CATEGORY",
+      "title": "VERIFIED",
       "type": "singlestat",
       "valueFontSize": "150%",
       "valueMaps": [
@@ -690,268 +990,17 @@
       "valueName": "total"
     },
     {
-      "aliasColors": {
-        "High (8-10)": "red",
-        "value<3": "dark-green",
-        "value<8 and value >3": "dark-red",
-        "value>7": "dark-orange"
-      },
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
-      "decimals": 0,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 10
-      },
-      "id": 12,
-      "interval": "2h",
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": null,
-        "total": true,
-        "values": true
-      },
-      "lines": false,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "select\nUNIX_TIMESTAMP(occured_date) as time_sec,\ncount(id),'Low (1-3)' as metric\nfrom \nincidents_incident as ins\nwhere\n  $__timeFilter(occured_date) and  severity<4\ngroup by id\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "real_data",
-          "timeColumn": "date_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        },
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "select\nUNIX_TIMESTAMP(occured_date) as time_sec,\ncount(id),'Medium (4-7)' as metric\nfrom \nincidents_incident as ins\nwhere\n  $__timeFilter(occured_date) and  severity>3 and severity<8\ngroup by id\n",
-          "refId": "B",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "real_data",
-          "timeColumn": "date_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        },
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "select\nUNIX_TIMESTAMP(occured_date) as time_sec,\ncount(id),'High (8-10)' as metric\nfrom \nincidents_incident as ins\nwhere\n  $__timeFilter(occured_date) and  severity>7\ngroup by id\n",
-          "refId": "C",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "real_data",
-          "timeColumn": "date_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "NO. OF INCIDENTS BY SEVERITY LEVEL",
-      "tooltip": {
-        "shared": false,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "series",
-        "name": null,
-        "show": true,
-        "values": [
-          "total"
-        ]
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Resolved": "#56A64B",
-        "Unresolved": "#E02F44"
-      },
-      "breakPoint": "25%",
-      "cacheTimeout": null,
-      "combine": {
-        "label": "Others",
-        "threshold": 0
-      },
-      "decimals": 0,
-      "fontSize": "70%",
-      "format": "short",
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 10
-      },
-      "id": 14,
-      "interval": null,
-      "legend": {
-        "header": "",
-        "percentage": true,
-        "percentageDecimals": 0,
-        "show": true,
-        "sideWidth": null,
-        "sort": "total",
-        "sortDesc": true,
-        "values": true
-      },
-      "legendType": "Right side",
-      "links": [],
-      "maxDataPoints": 3,
-      "nullPointMode": "connected",
-      "options": {},
-      "pieType": "donut",
-      "strokeWidth": "2",
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "-- SELECT\n--   $__timeGroupAlias(date_time,1m),\n--   mode_of_recieve AS metric,\n--   count(mode_of_recieve) AS \"mode_of_recieve\"\n-- FROM real_data \n-- WHERE\n--   $__timeFilter(date_time)\n-- GROUP BY 1,2\n\n\nSELECT\n  $__timeFilter(date_time) as time_sec,\n  mode_of_recieve AS metric,\n  count(mode_of_recieve) AS \"mode_of_recieve\"\nFROM (select occured_date  as date_time , common_channel.name as mode_of_recieve from incidents_incident inner join common_channel on incidents_incident.infoChannel = common_channel.id where\n  $__timeFilter(occured_date)) as real_data\nGROUP BY 1,2",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "real_data",
-          "timeColumn": "date_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "NO. OF INCIDENTS BY MODE",
-      "type": "grafana-piechart-panel",
-      "valueName": "total"
-    },
-    {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 14
       },
       "id": 20,
       "panels": [],
-      "title": "ALL INCIDENTS",
+      "title": "OVERALL",
       "type": "row"
     },
     {
@@ -963,6 +1012,7 @@
         "#E02F44",
         "#1F60C4"
       ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -972,10 +1022,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 6,
         "x": 0,
-        "y": 16
+        "y": 15
       },
       "id": 18,
       "interval": null,
@@ -994,7 +1044,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "pluginVersion": "6.2.5",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -1016,7 +1065,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "format": "time_series",
+          "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
@@ -1047,13 +1096,13 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "TOTAL",
+      "title": "ISSUES SUBMITTED",
       "type": "singlestat",
       "valueFontSize": "150%",
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
+          "text": "0",
           "value": "null"
         }
       ],
@@ -1068,6 +1117,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#1F60C4"
       ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1077,10 +1127,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 6,
         "x": 6,
-        "y": 16
+        "y": 15
       },
       "id": 4,
       "interval": null,
@@ -1099,7 +1149,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "pluginVersion": "6.2.5",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -1121,7 +1170,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "format": "time_series",
+          "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
@@ -1158,7 +1207,7 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
+          "text": "0",
           "value": "null"
         }
       ],
@@ -1170,9 +1219,10 @@
       "colorValue": true,
       "colors": [
         "#5794F2",
-        "#8F3BB8",
+        "rgba(237, 129, 40, 0.89)",
         "#1F60C4"
       ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1182,12 +1232,12 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 6,
         "x": 12,
-        "y": 16
+        "y": 15
       },
-      "id": 5,
+      "id": 35,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -1204,7 +1254,111 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect occured_date as \"time\",\ncount(CASE WHEN current_status = 'VERIFIED' then 'VERIFIED'  end) as 'VERIFIED'\n--   count(CASE WHEN current_status != 'RESOLVED' then 'Unresolved' end) as Unresolved,\nfrom incidents_incident\nGROUP BY current_status",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "VERIFIED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "#56A64B",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 15
+      },
+      "id": 6,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
       "pluginVersion": "6.2.5",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -1226,11 +1380,221 @@
       "tableColumn": "",
       "targets": [
         {
-          "format": "time_series",
+          "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "\nselect occured_date as \"time\",\ncount(*) as 'ACTIVE' \n--   count(CASE WHEN current_status != 'RESOLVED' then 'Unresolved' end) as Unresolved,\nfrom incidents_incident\nwhere \ncurrent_status = 'ACTION_TAKEN' or  \ncurrent_status = 'ACTION_PENDING' or \ncurrent_status = 'ADVICE_PROVIDED' or \ncurrent_status = 'ADVICE_REQESTED' or\ncurrent_status = 'VERIFIED' or\ncurrent_status != 'CLOSED' and\ncurrent_status != 'INVALIDATED' and\ncurrent_status != 'NEW'\n\nGROUP BY current_status",
+          "rawSql": "\nselect occured_date as \"time\",\ncount(CASE WHEN current_status = 'ACTION_PENDING'  then 'ASSIGNED'  end) as 'ASSIGNED'\nfrom incidents_incident\nGROUP BY current_status",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ASSIGNED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "rgba(237, 129, 40, 0.89)",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 19
+      },
+      "id": 36,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect occured_date as \"time\",\ncount(CASE WHEN current_status = 'ACTION_PENDING' || 'INFORMATION_REQUESTED'  then 'PENDING'  end) as 'PENDING'\n--   count(CASE WHEN current_status != 'RESOLVED' then 'Unresolved' end) as Unresolved,\nfrom incidents_incident\nGROUP BY current_status",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ACTION PENDING / INFORMATION REQUESTED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "#8F3BB8",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 19
+      },
+      "id": 5,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect occured_date as \"time\",\ncount(*) as 'ACTIVE' \n--   count(CASE WHEN current_status != 'RESOLVED' then 'Unresolved' end) as Unresolved,\nfrom incidents_incident\nwhere \ncurrent_status = 'ACTION_TAKEN' or  \ncurrent_status = 'INFORMATION_PROVIDED' or \ncurrent_status = 'REOPENED'\n\nGROUP BY current_status",
           "refId": "A",
           "select": [
             [
@@ -1263,7 +1627,7 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
+          "text": "0",
           "value": "null"
         }
       ],
@@ -1274,10 +1638,11 @@
       "colorBackground": false,
       "colorValue": true,
       "colors": [
-        "#5794F2",
+        "rgb(212, 206, 126)",
         "#56A64B",
         "#1F60C4"
       ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1287,12 +1652,12 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 6,
-        "x": 18,
-        "y": 16
+        "x": 12,
+        "y": 19
       },
-      "id": 6,
+      "id": 37,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -1309,7 +1674,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "pluginVersion": "6.2.5",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -1331,7 +1695,112 @@
       "tableColumn": "",
       "targets": [
         {
-          "format": "time_series",
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "\nselect occured_date as \"time\",\ncount(CASE WHEN current_status = 'INVALIDATED' then 'INVALIDATED'  end) as 'INVALIDATED'\nfrom incidents_incident\nGROUP BY current_status",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "auth_user",
+          "timeColumn": "last_login",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "INVALIDATED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#5794F2",
+        "#56A64B",
+        "#1F60C4"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 19
+      },
+      "id": 39,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.2.5",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "110%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
@@ -1368,7 +1837,7 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
+          "text": "0",
           "value": "null"
         }
       ],
@@ -1376,15 +1845,15 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 19,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now/d-8h",
-    "to": "now/d+16h-d"
+    "from": "now/d",
+    "to": "now/d"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1414,5 +1883,8 @@
   "timezone": "",
   "title": "National Dashboard",
   "uid": "lIxPduhZz",
-  "version": 38
+  "variables": {
+    "list": []
+  },
+  "version": 47
 }
