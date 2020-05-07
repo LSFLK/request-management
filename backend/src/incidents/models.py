@@ -33,7 +33,7 @@ class StatusType(enum.Enum):
     ACTION_TAKEN = "Action Taken"
     ACTION_PENDING = "Action Pending"
     INFORMATION_PROVIDED = "Information Provided"
-    INFORMATION_REQESTED = "Information Requested"
+    INFORMATION_REQUESTED = "Information Requested"
     VERIFIED = "Verified"
     INVALIDATED = "Invalidated"
     REOPENED = "Reopened"

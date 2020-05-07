@@ -563,7 +563,13 @@ function IncidentFormInternal(props) {
     infoChannel: Yup.mixed().required(f({ id: "request.management.incident.error.channel", defaultMessage: "Mode of receipt is Required" })),
     language: Yup.string().required(f({ id: "request.management.incident.error.language", defaultMessage: "Language is Required" })),
     reporterName: Yup.string().required(f({ id: "request.management.incident.error.name", defaultMessage: "Name is Required" })),
-    reporterNic: Yup.string().required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" })),
+
+    reporterNic: Yup
+                .string()
+                .trim()
+                .matches(/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/ , f({ id: "request.management.report.incidents.invalidNic.error.message", defaultMessage: "NIC Number is Required" }))
+                .required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" })),
+
     reporterTitle: Yup.string().required(f({ id: "request.management.incident.error.title", defaultMessage: "Title is Required" })),
     reporterAddress: Yup.string().required(f({ id: "request.management.incident.error.address", defaultMessage: "Address is Required" })),
     // reporterType: Yup.string().required(f({ id: "request.management.incident.error.type", defaultMessage: "Reporter Type is Required" })),
@@ -576,8 +582,17 @@ function IncidentFormInternal(props) {
         ? IncidentSchema.required(f({ id: "request.management.incident.error.district", defaultMessage: "District is Required" }))
         : IncidentSchema
     ),
-    reporterMobile: Yup.number().required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" })),
-    reporterTelephone: Yup.number(),
+    // reporterMobile: Yup.number().required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" })),
+    reporterMobile: Yup
+                    .string()
+                    .trim()
+                    .matches(/^(?:0|94|\+94)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|912)(0|2|3|4|5|7|9)|7(0|1|2|5|6|7|8)\d)\d{6}$/ , f({ id: "request.management.incident.error.invalidMobile", defaultMessage: "This is not a valid phone number" }))
+                    .required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" })),
+
+    reporterTelephone: Yup
+                      .string()
+                      .trim()
+                      .matches(/^(?:0|94|\+94)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|912)(0|2|3|4|5|7|9)|7(0|1|2|5|6|7|8)\d)\d{6}$/ , f({ id: "request.management.incident.error.invalidMobile", defaultMessage: "This is not a valid phone number" })),
     reporterEmail: Yup.string().email(f({ id: "request.management.incident.error.email", defaultMessage: "Invalid email" })),
     institution: Yup.mixed().when(
       "incidentType",
@@ -607,9 +622,13 @@ function IncidentFormInternal(props) {
         ? IncidentSchema.required(f({ id: "request.management.incident.error.recipient", defaultMessage: "Recipient is Required" }))
         : IncidentSchema
     ),
-    recipientNic: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    recipientNic: Yup
+    .string()
+    .trim()
+    .when("showRecipient", (showRecipient, IncidentSchema) =>
     showRecipient == "YES"
         ? IncidentSchema.required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" }))
+        .matches(/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/ , f({ id: "request.management.report.incidents.invalidNic.error.message", defaultMessage: "NIC Number is Required" }))
         : IncidentSchema
     ),
     recipientTitle: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
@@ -633,11 +652,26 @@ function IncidentFormInternal(props) {
         : IncidentSchema
     ),
 
-    recipientMobile: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    recipientMobile: Yup
+    .string()
+    .trim()
+    .when("showRecipient", (showRecipient, IncidentSchema) =>
     showRecipient == "YES"
         ? IncidentSchema.required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" }))
+        .matches(/^(?:0|94|\+94)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|912)(0|2|3|4|5|7|9)|7(0|1|2|5|6|7|8)\d)\d{6}$/ , f({ id: "request.management.incident.error.invalidMobile", defaultMessage: "This is not a valid phone number" }))
         : IncidentSchema
     ),
+
+    recipientTelephone: Yup
+    .string()
+    .trim()
+    .when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "YES"
+        ? IncidentSchema.matches(/^(?:0|94|\+94)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|912)(0|2|3|4|5|7|9)|7(0|1|2|5|6|7|8)\d)\d{6}$/ , f({ id: "request.management.incident.error.invalidMobile", defaultMessage: "This is not a valid phone number" }))
+        : IncidentSchema
+    ),
+
+    
     recipientDistrict: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
     showRecipient == "YES"
         ? IncidentSchema.required(f({ id: "request.management.incident.error.district", defaultMessage: "District is Required" }))
@@ -1427,7 +1461,7 @@ function IncidentFormInternal(props) {
                     <TextField
                       id="reporterNic"
                       name="reporterNic"
-                      label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC Nubmer*" })}
+                      label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC/SLIN Nubmer*" })}
                       className={classes.textField3}
                       value={values.reporterNic}
                       onChange={handleChange}
@@ -1773,7 +1807,7 @@ function IncidentFormInternal(props) {
                           <TextField
                             id="recipientNic"
                             name="recipientNic"
-                            label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC Nubmer*" })}
+                            label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC/SLIN Nubmer*" })}
                             className={classes.textField3}
                             value={values.recipientNic}
                             onChange={handleChange}

@@ -31,7 +31,8 @@
   "request.management.report.incidents.datetime.error.message": "Date and time are required",
   "request.management.report.incidents.recaptcha.error.message": "This verification is required",
   "request.management.report.incidents.name.error.message": "Name is required",
-  "request.management.report.incidents.nic.error.message": "NIC Number is required",
+  "request.management.report.incidents.nic.error.message": "NIC/SLIN Number is required",
+  "request.management.report.incidents.invalidNic.error.message": "This is not a valid NIC or SLIN number",
   "request.management.report.incidents.reporterType.error.message": "Individual/Organization is required",
   "request.management.report.incidents.phone.error.message": "Contact number is required",
   "request.management.report.incidents.address.error.message": "Address is required",
@@ -73,7 +74,7 @@
   "request.management.report.incidents.section.contact": "Your contact details",
   "request.management.report.incidents.section.category": "Select the most suitable category",
   "request.management.report.incidents.contact.name": "Name*",
-  "request.management.report.incidents.contact.nic": "NIC Number*",
+  "request.management.report.incidents.contact.nic": "NIC/SLIN Number*",
   "request.management.report.incidents.contact.mobile": "Primary Contact / Mobile number*",
   "request.management.report.incidents.contact.telephone": "Secondary Contact / Landline",
   "request.management.report.incidents.contact.email": "Email",
@@ -158,6 +159,8 @@
   "request.management.incident.error.email": "Invalid email",
   "request.management.incident.error.recipient": "Recipient is Required",
   "request.management.incident.error.mobile": "Mobile is Required",
+  "request.management.incident.error.invalidMobile": "This is not a valid Phone Number",
+  "request.management.incident.error.invaliEmail": "This is not a valid Email",
 
   "request.management.incident.error.incidenttype": "Incident Type is Required",
 

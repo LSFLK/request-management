@@ -68,9 +68,30 @@ export function updateInternalIncident(incidentId, incidentData) {
     return async function(dispatch) {
         dispatch(updateInternalIncidentRequest());
         try{
+            const recipientUpdate = {
+                "name": incidentData["recipientName"],
+                "nic": incidentData["recipientNic"],
+                "title": incidentData["recipientTitle"],
+                "email": incidentData["recipientEmail"],
+                "mobile": incidentData["recipientMobile"],
+                "telephone": incidentData["recipientTelephone"],
+                "address": incidentData["recipientAddress"],
+                "city": incidentData["recipientCity"],
+                "district": incidentData["recipientDistrict"],
+                "gnDivision": incidentData["recipientGramaNiladhari"]
+            }
+            if(incidentData.recipient){
+                await incidentsApi.updateRecipient(incidentData.recipient, recipientUpdate);
+            }else{
+                const recipient = await incidentsApi.insertRecipient(recipientUpdate);
+                console.log(recipient.data);
+                if(recipient.data){
+                incidentData.recipient = recipient.data.id;
+                }
+            }
+
             const incident = (await incidentsApi.updateIncident(incidentId, incidentData)).data;
             const reporterId = incident.reporter;
-            const recipientId = incident.recipient;
             const reporterUpdate = {
                 "name": incidentData["reporterName"],
                 "nic": incidentData["reporterNic"],
@@ -84,19 +105,8 @@ export function updateInternalIncident(incidentId, incidentData) {
                 "gnDivision": incidentData["reporterGramaNiladhari"]
             }
             await incidentsApi.updateReporter(reporterId, reporterUpdate);
-            const recipientUpdate = {
-                "name": incidentData["recipientName"],
-                "nic": incidentData["recipientNic"],
-                "title": incidentData["recipientTitle"],
-                "email": incidentData["recipientEmail"],
-                "mobile": incidentData["recipientMobile"],
-                "telephone": incidentData["recipientTelephone"],
-                "address": incidentData["recipientAddress"],
-                "city": incidentData["recipientCity"],
-                "district": incidentData["recipientDistrict"],
-                "gnDivision": incidentData["recipientGramaNiladhari"]
-            }
-            await incidentsApi.updateRecipient(recipientId, recipientUpdate);
+           
+            
 
             dispatch(updateInternalIncidentSuccess(incident));
             dispatch(loadIncident(incidentId));

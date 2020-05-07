@@ -267,8 +267,8 @@
         "fields": {
             "code": "PS",
             "displayName": "Presidential Secretariat",
-            "displayName_sn": "Presidential Secretariat",
-            "displayName_tm": "Presidential Secretariat",
+            "displayName_sn": "ජනාධිපති ලේකම් කාර්යාලය",
+            "displayName_tm": "ஜனாதிபதி செயலகம்",
             "created_date": "2019-11-07T11:21:56.468Z"
         }
     },
@@ -278,8 +278,8 @@
         "fields": {
             "code": "SLP",
             "displayName": "Police",
-            "displayName_sn": "Police",
-            "displayName_tm": "Police",
+            "displayName_sn": "පොලිසිය",
+            "displayName_tm": "காவல்",
             "created_date": "2019-11-07T11:22:08.958Z"
         }
     },

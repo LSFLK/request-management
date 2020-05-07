@@ -101,6 +101,10 @@ export const updateRecipient = async (recipientId, recipientData) => {
   return (await handler.put(`/recipients/${recipientId}`, recipientData)).data;
 }
 
+export const insertRecipient = async (recipientData) => {
+  return (await handler.post(`/recipients/`, recipientData)).data;
+}
+
 export const changeStatus = async (incidentId, status) => {
   return (await handler.get(`/incidents/${incidentId}/status?action=update&type=${status}`)).data;
 };

@@ -140,6 +140,7 @@ function IncidentList({
             hover
             className={classes.row}
             key={row.id}
+            style={row.currentStatus==="ACTION_TAKEN" ||row.currentStatus==="INFORMATION_PROVIDED"||row.currentStatus==="VERIFIED" ? {backgroundColor:"rgba(0,255,0,0.2)"}:{}}
           >
             <CustomTableCell scope="center">
               <p>{row.refId}</p>

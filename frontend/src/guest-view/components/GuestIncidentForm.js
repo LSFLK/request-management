@@ -314,6 +314,7 @@ const VerticalLinearStepper = (props) => {
       incidentElectionErrorMsg: null,
       incidentDatetimeErrorMsg: null,
       incidentContactErrorMsg: null,
+      incidentLandlineErrorMsg: null,
       incidentNameErrorMsg: null,
       incidentNicErrorMsg: null,
       incidentReporterTypeErrorMsg: null,
@@ -327,6 +328,10 @@ const VerticalLinearStepper = (props) => {
       recipientAddressErrorMsg: null,
       recipientDistrictErrorMsg: null,
       recipientCityErrorMsg: null,
+      recipientContactErrorMsg: null,
+      recipientLandlineErrorMsg: null,
+      incidentEmailErrorMsg: null,
+      recipientEmailErrorMsg: null
     });
     let errorMsg = { ...formErrors };
     let valid = true;
@@ -340,7 +345,45 @@ const VerticalLinearStepper = (props) => {
         }),
       };
       valid = false;
+    }else{
+      if(!(incidentContact.mobile.match("^[0-9]{10}$"))){
+      errorMsg = {
+        ...errorMsg,
+        incidentContactErrorMsg: f({
+          id: "request.management.incident.error.invalidMobile",
+          defaultMessage: "mobile Number is required",
+        }),
+      };
+      valid = false;
     }
+    }
+
+    if (incidentContact.phone) {
+      if(!(incidentContact.phone.match("^[0-9]{10}$"))){
+        errorMsg = {
+          ...errorMsg,
+          incidentLandlineErrorMsg: f({
+            id: "request.management.incident.error.invalidMobile",
+            defaultMessage: "mobile Number is required",
+          }),
+        };
+        valid = false;
+      }
+    }
+
+    if (incidentContact.email) {
+      if(!(incidentContact.email.match("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"))){
+        errorMsg = {
+          ...errorMsg,
+          incidentEmailErrorMsg: f({
+            id: "request.management.incident.error.invaliEmail",
+            defaultMessage: "Email is invalid",
+          }),
+        };
+        valid = false;
+      }
+    }
+
     if (!incidentContact.name) {
       errorMsg = {
         ...errorMsg,
@@ -360,6 +403,17 @@ const VerticalLinearStepper = (props) => {
         }),
       };
       valid = false;
+    }else{
+      if(!(incidentContact.nic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$"))){
+      errorMsg = {
+        ...errorMsg,
+        incidentNicErrorMsg: f({
+          id: "request.management.report.incidents.invalidNic.error.message",
+          defaultMessage: "NIC Number is required",
+        }),
+      };
+      valid = false;
+    }
     }
     // if (!incidentContact.reporterType) {
     //   errorMsg = {
@@ -411,7 +465,45 @@ const VerticalLinearStepper = (props) => {
           }),
         };
         valid = false;
+      }else{
+        if(!(incidentContact.recipientMobile.match("^[0-9]{10}$"))){
+        errorMsg = {
+          ...errorMsg,
+          recipientContactErrorMsg: f({
+            id: "request.management.incident.error.invalidMobile",
+            defaultMessage: "mobile Number is required",
+          }),
+        };
+        valid = false;
       }
+      }
+
+      if (incidentContact.recipientEmail) {
+        if(!(incidentContact.recipientEmail.match("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"))){
+          errorMsg = {
+            ...errorMsg,
+            recipientEmailErrorMsg: f({
+              id: "request.management.incident.error.invaliEmail",
+              defaultMessage: "Email is invalid",
+            }),
+          };
+          valid = false;
+        }
+      }
+
+      if (incidentContact.recipientPhone) {
+        if(!(incidentContact.recipientPhone.match("^[0-9]{10}$"))){
+          errorMsg = {
+            ...errorMsg,
+            recipientLandlineErrorMsg: f({
+              id: "request.management.incident.error.invalidMobile",
+              defaultMessage: "mobile Number is required",
+            }),
+          };
+          valid = false;
+        }
+      }
+
       if (!incidentContact.recipientName) {
         errorMsg = {
           ...errorMsg,
@@ -431,6 +523,17 @@ const VerticalLinearStepper = (props) => {
           }),
         };
         valid = false;
+      }else{
+        if(!(incidentContact.recipientNic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$"))){
+        errorMsg = {
+          ...errorMsg,
+          recipientNicErrorMsg: f({
+            id: "request.management.report.incidents.invalidNic.error.message",
+            defaultMessage: "NIC Number is required",
+          }),
+        };
+        valid = false;
+      }
       }
       
       // if (!incidentContact.recipientType) {

@@ -156,7 +156,7 @@ const IncidentContact = (props) => {
             id="nic"
             label={f({
               id: "request.management.report.incidents.contact.nic",
-              defaultMessage: "NIC",
+              defaultMessage: "NIC/SLIN Number",
             })}
             fullWidth
             rowsMax="4"
@@ -196,7 +196,6 @@ const IncidentContact = (props) => {
             }}
             className={classes.textField}
             margin="normal"
-            type="number"
             helperText={formErrors.incidentContactErrorMsg || ""}
             error={formErrors.incidentContactErrorMsg ? true : false}
           />
@@ -218,11 +217,13 @@ const IncidentContact = (props) => {
                 { ...contactDetials, phone: e.target.value },
                 e.target.value
               );
+              formErrors.incidentLandlineErrorMsg = null;
             }}
             // onChange={(e) => { handlePhoneNumberInput({ ...contactDetials, phone:e.target.value}, e.target.value)}}
             className={classes.textField}
             margin="normal"
-            type="number"
+            helperText={formErrors.incidentLandlineErrorMsg || ""}
+            error={formErrors.incidentLandlineErrorMsg ? true : false}
           />
         </Grid>
         <Grid item xs={2} sm={6} lg={4} />
@@ -243,9 +244,12 @@ const IncidentContact = (props) => {
                 ...contactDetials,
                 email: e.target.value,
               });
+              formErrors.incidentEmailErrorMsg = null;
             }}
             className={classes.textField}
             margin="normal"
+            helperText={formErrors.incidentEmailErrorMsg || ""}
+            error={formErrors.incidentEmailErrorMsg ? true : false}
           />
         </Grid>
         <Grid item xs={2} sm={6} lg={4}  />
@@ -473,7 +477,6 @@ const IncidentContact = (props) => {
             }}
             className={classes.textField}
             margin="normal"
-            type="number"
             helperText={formErrors.recipientContactErrorMsg || ""}
             error={formErrors.recipientContactErrorMsg ? true : false}
           />
@@ -495,11 +498,13 @@ const IncidentContact = (props) => {
                 { ...contactDetials, recipientPhone: e.target.value },
                 e.target.value
               );
+              formErrors.recipientLandlineErrorMsg = null;
             }}
             // onChange={(e) => { handlePhoneNumberInput({ ...contactDetials, phone:e.target.value}, e.target.value)}}
             className={classes.textField}
             margin="normal"
-            type="number"
+            helperText={formErrors.recipientLandlineErrorMsg || ""}
+            error={formErrors.recipientLandlineErrorMsg ? true : false}
           />
         </Grid>
         <Grid item xs={2} sm={6} lg={4} />
@@ -520,9 +525,12 @@ const IncidentContact = (props) => {
                 ...contactDetials,
                 recipientEmail: e.target.value,
               });
+              formErrors.recipientEmailErrorMsg = null;
             }}
             className={classes.textField}
             margin="normal"
+            helperText={formErrors.recipientEmailErrorMsg || ""}
+            error={formErrors.recipientEmailErrorMsg ? true : false}
           />
         </Grid>
         <Grid item xs={2} sm={6} lg={4} />

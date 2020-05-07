@@ -32,6 +32,7 @@
   "request.management.report.incidents.recaptcha.error.message": "இந்த சரிபார்ப்பு தேவை",
   "request.management.report.incidents.name.error.message": "பெயர் தேவை",
   "request.management.report.incidents.nic.error.message": "தேசிய அடையாள அட்டை எண் தேவை",
+  "request.management.report.incidents.invalidNic.error.message": "இது சரியான தேசிய அடையாள அட்டை எண் அல்ல",
   "request.management.report.incidents.reporterType.error.message": "தனிநபர் / அமைப்பு தேவை",
   "request.management.report.incidents.phone.error.message": "தொடர்பு எண் தேவை",
   "request.management.report.incidents.address.error.message": "முகவரி தேவை",
@@ -158,6 +159,8 @@
   "request.management.incident.error.email": "தவறான மின்னஞ்சல் முகவரி",
   "request.management.incident.error.recipient": "பெறுநரின் பெயர் தேவை",
   "request.management.incident.error.mobile": "கைபேசி தேவை",
+  "request.management.incident.error.invalidMobile": "இது சரியான தொலைபேசி எண் அல்ல",
+  "request.management.incident.error.invaliEmail": "இது சரியான மின்னஞ்சல் அல்ல",
 
   "request.management.incident.error.incidenttype": "சம்பவ வகை தேவை",
 
