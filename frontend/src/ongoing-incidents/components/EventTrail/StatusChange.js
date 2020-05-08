@@ -28,7 +28,7 @@ const statusMap = {
     "VERIFIED": "Verified",
     "ACTION_TAKEN": "Action Taken",
     "ACTION_PENDING": "Action Pending",
-    "INFORMATION_REQESTED": "Information Requested",
+    "INFORMATION_REQUESTED": "Information Requested",
     "INFORMATION_PROVIDED": "Information Provided",
     "CLOSED": "Closed"
 }

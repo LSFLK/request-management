@@ -85,7 +85,7 @@ def get_incident_status_guest(refId):
         status["reply"] = "Your request has been received. Please check again later for status updates."
     elif incident.current_status == StatusType.VERIFIED.name:
         status["reply"] = "Your request has been acknowledged."
-    elif incident.current_status == StatusType.INFORMATION_REQESTED.name or has_pending_information_request(incident):
+    elif incident.current_status == StatusType.INFORMATION_REQUESTED.name or has_pending_information_request(incident):
         status = get_public_status_on_information_request(incident)
     elif incident.current_status == StatusType.ACTION_PENDING.name or incident.current_status == StatusType.ACTION_TAKEN.name \
         or incident.current_status == StatusType.INFORMATION_PROVIDED.name:
@@ -593,7 +593,7 @@ def incident_escalate(user: User, incident: Incident, escalate_dir: str = "UP", 
         incident.current_status == StatusType.NEW.name
         or incident.current_status == StatusType.REOPENED.name
         or incident.current_status == StatusType.ACTION_PENDING.name
-        or incident.current_status == StatusType.INFORMATION_REQESTED.name
+        or incident.current_status == StatusType.INFORMATION_REQUESTED.name
     ) :
         raise WorkflowException("Incident cannot be escalated at this Status")
 
@@ -670,7 +670,7 @@ def incident_close(user: User, incident: Incident, details: str):
     # outcomes = IncidentComment.objects.filter(
     #     incident=incident, is_outcome=True).count()
 
-    if incident.current_status == StatusType.INFORMATION_REQESTED.name:
+    if incident.current_status == StatusType.INFORMATION_REQUESTED.name:
         raise WorkflowException(
             "All pending advices must be resolved first")
 
@@ -817,7 +817,7 @@ def incident_complete_external_action(user: User, incident: Incident, comment: s
 
 
 def incident_request_information(user: User, incident: Incident, comment: str):
-    if incident.current_status == StatusType.INFORMATION_REQESTED.name:
+    if incident.current_status == StatusType.INFORMATION_REQUESTED.name:
         raise WorkflowException("Issue already has a pending advice request")
 
     # request workflow
@@ -830,7 +830,7 @@ def incident_request_information(user: User, incident: Incident, comment: str):
     workflow.save()
 
     status = IncidentStatus(
-        current_status=StatusType.INFORMATION_REQESTED,
+        current_status=StatusType.INFORMATION_REQUESTED,
         previous_status=incident.current_status,
         incident=incident,
         approved=True
@@ -857,7 +857,7 @@ def incident_provide_information(user: User, incident: Incident, comment: str, s
     # if not Incident.objects.filter(linked_individuals__id=user.id).exists():
     #     raise WorkflowException("User not linked to the given incident")
 
-    # if incident.current_status != StatusType.INFORMATION_REQESTED.name:
+    # if incident.current_status != StatusType.INFORMATION_REQUESTED.name:
     #     raise WorkflowException("Incident does not have pending advice requests")
 
     initiated_workflow = start_event.refered_model
@@ -991,7 +991,7 @@ def get_incidents_to_escalate():
                 b.`current_status` <> 'CLOSED' AND
                 b.`current_status` <> 'ACTION_PENDING' AND
                 b.`current_status` <> 'NEW' AND
-                b.`current_status` <> 'INFORMATION_REQESTED'
+                b.`current_status` <> 'INFORMATION_REQUESTED'
     """
 
     with connection.cursor() as cursor:
