@@ -126,9 +126,6 @@ urlpatterns = [
     path("public/incidents/",
         incident_views.IncidentPublicUserView.as_view()
     ),
-    path("public/incidents/<uuid:incident_id>",
-         incident_views.IncidentPublicUserView.as_view()
-    ),
     path("public/reporters/<uuid:reporter_id>",
          incident_views.ReporterPublicUserView.as_view()
     ),

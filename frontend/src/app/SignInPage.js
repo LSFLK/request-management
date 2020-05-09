@@ -15,6 +15,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {  Redirect, withRouter } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { fetchSignIn, toggleRememberUser } from '../shared/state/sharedActions'
 import { FormattedMessage } from 'react-intl';
@@ -57,7 +58,8 @@ class SignInPage extends Component {
 
     state ={
         userName:null,
-        password:null
+        password:null,
+        incidentRecaptcha:null
     }
 
     handleSignIn = () => {
@@ -65,10 +67,16 @@ class SignInPage extends Component {
         signIn(this.state.userName, this.state.password);
     } 
 
+    setIncidentRecaptcha = () => {
+        this.setState({ incidentRecaptcha: true })
+        } 
+
     render() {
         const { classes, isSignedIn, location, rememberMe, toggleRememberMe } = this.props;
         let { from } = location.state || { from: { pathname: "/app/home" } };
-    
+
+        const recaptchaRef = React.createRef();
+
 
         if(isSignedIn){
             return <Redirect to={from} />;
@@ -100,6 +108,14 @@ class SignInPage extends Component {
                             control={<Checkbox checked={rememberMe} value="remember" color="primary" onChange={toggleRememberMe} />}
                             label="Remember me"
                         />
+                        <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
+                            onChange={(e) => {
+                            // formErrors.incidentRecaptchaErrorMsg = null;
+                            this.setIncidentRecaptcha(recaptchaRef.current.getValue());
+                            }}
+                        />
                         <Button
                             type="button"
                             fullWidth
@@ -107,6 +123,9 @@ class SignInPage extends Component {
                             color="primary"
                             className={classes.submit}
                             onClick={this.handleSignIn}
+                            disabled={
+                                !this.state.incidentRecaptcha
+                              }
                         >
                             <FormattedMessage id="request.management.login.sign_in" />
                     </Button>

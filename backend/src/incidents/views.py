@@ -600,20 +600,20 @@ class IncidentPublicUserView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, incident_id, format=None):
-        """
-            Update existing incident
-        """
-        incident = get_incident_by_id(incident_id)
-        serializer = IncidentSerializer(incident, data=request.data)
+    # def put(self, request, incident_id, format=None):
+    #     """
+    #         Update existing incident
+    #     """
+    #     incident = get_incident_by_id(incident_id)
+    #     serializer = IncidentSerializer(incident, data=request.data)
 
-        if serializer.is_valid():
-            serializer.save()
-            return_data = serializer.data
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return_data = serializer.data
 
-            return Response(return_data)
+    #         return Response(return_data)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ReporterPublicUserView(APIView):
     serializer_class = ReporterSerializer

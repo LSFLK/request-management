@@ -35,6 +35,7 @@ def env_var(key, default=None):
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_var('django_debug', True)
 
+
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost"
@@ -185,6 +186,9 @@ JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': False
 }
 
+# Application security
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 CORS_ORIGIN_ALLOW_ALL = True
 X_FRAME_OPTIONS = "ALLOW ALL"
 
