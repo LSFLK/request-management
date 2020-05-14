@@ -9,10 +9,10 @@ COPY . /app
 
 # set baseurl to get connected with backend API
 # ENV REACT_APP_API_BASE_URL=http://localhost:8000
-ENV REACT_APP_API_BASE_URL=https://api.query.lgcc.gov.lk
-ENV REACT_APP_WEB_SOCKET_BASE_URL=wss://api.query.lgcc.gov.lk
+# ENV REACT_APP_API_BASE_URL=https://api.query.lgcc.gov.lk
+# ENV REACT_APP_WEB_SOCKET_BASE_URL=wss://api.query.lgcc.gov.lk
 
-ENV REACT_APP_RECAPTCHA_SITEKEY=6LfmW-oUAAAAAAMEyDxHLZ06yA37G1SG3pur-Ol5
+# ENV REACT_APP_RECAPTCHA_SITEKEY=6LfmW-oUAAAAAAMEyDxHLZ06yA37G1SG3pur-Ol5
 ENV NODE_OPTIONS=--max_old_space_size=4096
 RUN npm run build
 
