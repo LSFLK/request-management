@@ -80,6 +80,7 @@ export function updateInternalIncident(incidentId, incidentData) {
                 "district": incidentData["recipientDistrict"],
                 "gnDivision": incidentData["recipientGramaNiladhari"]
             }
+            if(incidentData.recipientName !== "" || incidentData.recipientName === undefined){
             if(incidentData.recipient){
                 await incidentsApi.updateRecipient(incidentData.recipient, recipientUpdate);
             }else{
@@ -89,6 +90,7 @@ export function updateInternalIncident(incidentId, incidentData) {
                 incidentData.recipient = recipient.data.id;
                 }
             }
+        }
 
             const incident = (await incidentsApi.updateIncident(incidentId, incidentData)).data;
             const reporterId = incident.reporter;

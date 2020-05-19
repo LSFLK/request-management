@@ -10,7 +10,6 @@ from django.utils.dateparse import parse_datetime
 from ..custom_auth.models import Profile, Organization
 from ..common.models import Category, Channel, District
 from ..incidents.models import Incident, IncidentType, CloseWorkflow, StatusType
-from django.contrib.auth.models import User
 from ..incidents.services import get_incident_by_id
 from .functions import get_detailed_report, get_general_report, encode_column_names, get_subcategory_report, \
     incident_type_query, incident_list_query, date_list_query, encode_value, get_subcategory_categorized_report
@@ -18,6 +17,9 @@ from ..common.data.Institutions import institutions
 # from django.conf import settings
 from django.db.models import Count
 import collections, functools, operator
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def get_total_opened_incident_count():
     count = Incident.objects.exclude(current_status=StatusType.CLOSED.name).exclude(current_status=StatusType.INVALIDATED.name).count()
@@ -88,21 +90,25 @@ def get_category_dict(incidents):
     for category in categories:
         if category.top_category in temp_category_dict:
             sub_cat = {}
-            sub_cat["name"] = category.sn_sub_category
+            sub_cat["nameEnglish"] = category.sub_category
+            sub_cat["nameSinhala"] = category.sn_sub_category
+            sub_cat["nameTamil"] = category.tm_sub_category
             if str(category.id) in category_count:
                 sub_cat["count"] = category_count[str(category.id)]
             else:
                 sub_cat["count"] = 0
-            temp_category_dict[category.top_category]["subCategories"].append(
-                sub_cat)
+            temp_category_dict[category.top_category]["subCategories"].append( sub_cat)
         else:
             top_cat = {}
+            top_cat["categoryNameEnglish"] = category.top_category
             top_cat["categoryNameSinhala"] = category.sn_top_category
             top_cat["categoryNameTamil"] = category.tm_top_category
             top_categories.append(category.top_category)
 
             sub_cat = {}
-            sub_cat["name"] = category.sn_sub_category
+            sub_cat["nameEnglish"] = category.sub_category
+            sub_cat["nameSinhala"] = category.sn_sub_category
+            sub_cat["nameTamil"] = category.tm_sub_category
             if str(category.id) in category_count:
                 sub_cat["count"] = category_count[str(category.id)]
             else:
@@ -136,20 +142,21 @@ def get_organization_dict(incidents, actionType = "OPENED"):
     for org_id, count in org_count.items():
         orgData = {}
         org = Organization.objects.get(id=org_id)
+        orgData["organizationNameEnglish"] = org.displayName
         orgData["organizationNameSinhala"] = org.displayName_sn
         orgData["organizationNameTamil"] = org.displayName_tm
         orgData["count"] = count
 
         organizations.append(orgData)
 
-    print(organizations)
     return organizations
 
-def get_daily_category_data():
+def get_daily_category_data(language="sinhala"):
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
+    file_dict["language"] = language
 
     incidents = get_daily_incidents()
     file_dict["total"] = len(incidents)
@@ -159,11 +166,12 @@ def get_daily_category_data():
 
     return file_dict
 
-def get_closed_daily_category_data():
+def get_closed_daily_category_data(language="sinhala"):
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_closed_summery_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
+    file_dict["language"] = language
 
     incidents = get_daily_incidents("CLOSED")
     file_dict["total"] = len(incidents)
@@ -173,12 +181,13 @@ def get_closed_daily_category_data():
 
     return file_dict
 
-def get_category_data_by_date_range(start_time, end_time):
+def get_category_data_by_date_range(start_time, end_time, language="sinhala"):
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise_with_timefilter.js"
     file_dict["StartDate"] = start_time
     file_dict["EndDate"] = end_time
+    file_dict["language"] = language
 
     incidents = Incident.objects.filter(created_date__range=(parse_date_timezone(start_time), parse_date_timezone(end_time)))
     file_dict["total"] = len(incidents)
@@ -188,7 +197,7 @@ def get_category_data_by_date_range(start_time, end_time):
 
     return file_dict
 
-def get_weekly_closed_complain_category_data():
+def get_weekly_closed_complain_category_data(language="sinhala"):
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/weekly_closed_request_report_categorywise.js"
@@ -196,6 +205,7 @@ def get_weekly_closed_complain_category_data():
     week_data = get_weekly_incidents("CLOSED")
     file_dict["StartDate"] = week_data["start_date"]
     file_dict["EndDate"] = week_data["end_date"]
+    file_dict["language"] = language
 
     incidents = week_data["incidents"]
     file_dict["total"] = len(incidents)
@@ -205,12 +215,13 @@ def get_weekly_closed_complain_category_data():
 
     return file_dict
 
-def get_organizationwise_data_with_timefilter(start_time, end_time):
+def get_organizationwise_data_with_timefilter(start_time, end_time, language="sinhala"):
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
     file_dict["StartDate"] = start_time
     file_dict["EndDate"] = end_time
+    file_dict["language"] = language
 
     incidents = Incident.objects.filter(created_date__range=(parse_date_timezone(start_time), parse_date_timezone(end_time)))
     file_dict["total"] = incidents.count()
@@ -221,11 +232,12 @@ def get_organizationwise_data_with_timefilter(start_time, end_time):
     return file_dict
 
 
-def get_weekly_closed_complain_organization_data():
+def get_weekly_closed_complain_organization_data(language="sinhala"):
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/weekly_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
+    file_dict["language"] = language
 
     week_data = get_weekly_incidents("CLOSED")
     file_dict["StartDate"] = week_data["start_date"]
@@ -239,11 +251,12 @@ def get_weekly_closed_complain_organization_data():
 
     return file_dict
 
-def get_daily_closed_complain_organization_data():
+def get_daily_closed_complain_organization_data(language="sinhala"):
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
+    file_dict["language"] = language
 
     start_datetime = (date.today() - timedelta(days=7)).strftime("%Y-%m-%d")
     end_datetime = date.today().strftime("%Y-%m-%d")

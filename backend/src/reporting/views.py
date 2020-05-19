@@ -43,55 +43,62 @@ class ReportingAccessView(APIView):
         if (template_type == "daily_category"):
             """
             daily_summery_report_categorywise
-            GET parameters => /?template_type=daily_category
+            GET parameters => /?template_type=daily_category&language=sinhala
             """
-            json_dict["file"] = get_daily_category_data()
+            language = request.query_params.get('language')
+            json_dict["file"] = get_daily_category_data(language)
 
         elif (template_type == "daily_category_closed"):
             """
             daily_closed_summery_report_categorywise
-            GET parameters => /?template_type=daily_category_closed
+            GET parameters => /?template_type=daily_category_closed&language=sinhala
             """
-            json_dict["file"] = get_closed_daily_category_data()
+            language = request.query_params.get('language')
+            json_dict["file"] = get_closed_daily_category_data(language)
 
         elif (template_type == "daily_category_with_timefilter"):
             """
             daily_summery_report_categorywise_with_timefilter
-            GET parameters => /?template_type=daily_category_with_timefilter&startTime=<startTime>&endTime=<endTime>
+            GET parameters => /?template_type=daily_category_with_timefilter&startTime=<startTime>&endTime=<endTime>&language=sinhala
             """
             start_time = request.query_params.get('startTime').replace('"', '') + ":00"
             end_time = request.query_params.get('endTime').replace('"', '') + ":00"
-            json_dict["file"] = get_category_data_by_date_range(start_time, end_time)
+            language = request.query_params.get('language')
+            json_dict["file"] = get_category_data_by_date_range(start_time, end_time, language)
 
         elif (template_type == "organizationwise_total_request_with_timefilter"):
             """
             summery_report_organizationwise_with_timefilter
-            GET parameters => /?template_type=organizationwise_total_request_with_timefilter&startTime=<startTime>&endTime=<endTime>
+            GET parameters => /?template_type=organizationwise_total_request_with_timefilter&startTime=<startTime>&endTime=<endTime>&language=sinhala
             """
             start_time = request.query_params.get('startTime').replace('"', '') + ":00"
             end_time = request.query_params.get('endTime').replace('"', '') + ":00"
-            json_dict["file"] = get_organizationwise_data_with_timefilter(start_time, end_time)
+            language = request.query_params.get('language')
+            json_dict["file"] = get_organizationwise_data_with_timefilter(start_time, end_time, language)
 
         elif (template_type == "weekly_closed_request_category"):
             """
             weekly_closed_request_report_categorywise
-            GET parameters => /?template_type=weekly_closed_request_category
+            GET parameters => /?template_type=weekly_closed_request_category&language=sinhala
             """
-            json_dict["file"] = get_weekly_closed_complain_category_data()
+            language = request.query_params.get('language')
+            json_dict["file"] = get_weekly_closed_complain_category_data(language)
 
         elif (template_type == "weekly_closed_request_organization"):
             """
             weekly_closed_request_report_organizationwise
-            GET parameters => /?template_type=weekly_closed_request_organization
+            GET parameters => /?template_type=weekly_closed_request_organization&language=sinhala
             """
-            json_dict["file"] = get_weekly_closed_complain_organization_data()
+            language = request.query_params.get('language')
+            json_dict["file"] = get_weekly_closed_complain_organization_data(language)
 
         elif (template_type == "daily_closed_request_organization"):
             """
             daily_closed_request_report_organizationwise
-            GET parameters => /?template_type=daily_closed_request_organization
+            GET parameters => /?template_type=daily_closed_request_organization&language=sinhala
             """
-            json_dict["file"] = get_daily_closed_complain_organization_data()
+            language = request.query_params.get('language')
+            json_dict["file"] = get_daily_closed_complain_organization_data(language)
 
         request_data = json.dumps(json_dict)
         # get the pdf

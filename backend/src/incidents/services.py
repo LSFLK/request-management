@@ -26,7 +26,7 @@ from .models import (
     Category
 )
 from ..common.models import (Channel)
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
 from ..events import services as event_services
@@ -56,6 +56,9 @@ from zeep import Client
 from zeep.wsse.username import UsernameToken
 import requests
 from django.conf import settings
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def generate_refId(user):
     """ Function to generate refId for requests on creation """
@@ -353,7 +356,7 @@ def get_user_from_level(user_level: UserLevel, division: Division) -> User:
     """
 
     sql = """
-            SELECT usr.id, COUNT(incident.id) as incident_count FROM `auth_user` as usr
+            SELECT usr.id, COUNT(incident.id) as incident_count FROM `custom_auth_user` as usr
             LEFT JOIN incidents_incident as incident on incident.assignee_id = usr.id
             INNER JOIN custom_auth_profile as prf on prf.user_id = usr.id
             INNER JOIN custom_auth_userlevel as ulvl on prf.level_id = ulvl.id
@@ -583,6 +586,22 @@ def get_incidents_before_date(date: str) -> Incident:
     except Exception as e:
         return None
 
+def get_incident_list_by_organization_id(org_id):
+    """ get all incident assigned or linked to given orgnization id. """
+
+    # get user list of the organization
+    profiles = Profile.objects.filter(organization=org_id)
+
+    all_incidents = []
+    # all external organizations will all ways be listed on linked-individuals
+    for profile in profiles:
+        incidents = Incident.objects.filter(linked_individuals__id=profile.user_id)
+        for incident in incidents:
+            if incident not in all_incidents:
+                all_incidents.append(incident)
+
+    return all_incidents
+
 
 def incident_escalate(user: User, incident: Incident, escalate_dir: str = "UP", comment=None, response_time=None):
     if incident.assignee != user:
@@ -731,7 +750,7 @@ To check status:
     for linked_user in incident.linked_individuals.all():
         if linked_user.profile.organization == default_division.organization:
             # send notification
-            add_notification(NotificationType.INCIDENT_CLOSED, 
+            add_notification(NotificationType.INCIDENT_CLOSED,
                                     user, linked_user, incident)
 
     event_services.update_workflow_event(user, incident, workflow)
@@ -895,7 +914,12 @@ def incident_verify(user: User, incident: Incident, comment: str, proof: bool):
         raise WorkflowException("Can only verify unverified incidents")
 
     if incident.assignee != user:
-        raise WorkflowException("Only assignee can verify the incident")
+        # need to check if the user got permission: 'CAN_ACTION_OVER_CURRENT_ASSIGNEE'
+        profile = Profile.objects.get(user_id=user.id)
+        required_permission = Permission.objects.get(codename=CAN_ACTION_OVER_CURRENT_ASSIGNEE)
+
+        if not user_level_has_permission(profile.level, required_permission):
+            raise WorkflowException("Only assignee can verify the incident")
 
     # create workflow action
     workflow = VerifyWorkflow(

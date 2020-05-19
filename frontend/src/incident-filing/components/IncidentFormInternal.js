@@ -724,15 +724,16 @@ function IncidentFormInternal(props) {
               autoComplete="off"
               onSubmit={(e) => {
                 e.preventDefault();
-                if (!isValid) {
-                  dispatch(
-                    showNotification(
-                      { message: "Missing required values" },
-                      null
-                    )
-                  );
-                  window.scroll(0, 0);
-                }
+                // if (!isValid) {
+                //   dispatch(
+                //     showNotification(
+                //       { message: "Missing required values" },
+                //       null
+                //     )
+                //   );
+                //   window.scroll(0, 0);
+                // }
+                window.scroll(0, 0);
                 handleSubmit(e);
               }}
             >

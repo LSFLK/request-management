@@ -1,12 +1,15 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User, Permission, Group
+from django.contrib.auth.models import Permission, Group
+from django.contrib.auth import get_user_model
 
-class PermissionSerializer(serializers.ModelSerializer): 
+User = get_user_model()
+
+class PermissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
         fields = ('name', 'codename')
 
-class GroupSerializer(serializers.ModelSerializer): 
+class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ['id','name']
@@ -27,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
     def get_entity(self, obj):
         if hasattr(obj, "profile"):
             if obj.profile.organization is not None:
-                return { 
+                return {
                     "gid" : obj.profile.organization.code,
                     "name": obj.profile.organization.displayName
                 }
@@ -37,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
     def get_profile(self, obj):
         if hasattr(obj, "profile"):
             profile = {}
-            
+
             if obj.profile.organization is not None:
                 profile["organization"] = {
                     "code": obj.profile.organization.code,
@@ -50,7 +53,7 @@ class UserSerializer(serializers.ModelSerializer):
                     "divisionType": obj.profile.division.division_type,
                     "name": obj.profile.division.name
                 }
-        
+
         return profile
 
     def get_permissions(self, obj):
@@ -65,7 +68,7 @@ class UserSerializer(serializers.ModelSerializer):
             permissions = Permission.objects.filter(group=group)
             permission_data = map(lambda p: p.codename, permissions)
             return permission_data
-        
+
         return []
         # return obj.get_group_permissions()
 

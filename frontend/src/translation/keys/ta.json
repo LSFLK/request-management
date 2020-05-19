@@ -106,6 +106,7 @@
   "request.management.incident.create.title": "Title",
   "request.management.incident.create.description": "வெளியீடு / கோரிக்கை விவரங்கள்*",
   "request.management.incident.create.category": "வகை",
+  "request.management.incident.create.organization": "அமைப்பு",
 
   "request.management.incident.create.date": "கோரிக்கை தேதி",
   "request.management.incident.create.time": "கோரிக்கை நேரம்",
@@ -127,6 +128,7 @@
   "request.management.incident.create.location.title.mr": "திரு.",
   "request.management.incident.create.location.title.mrs": "திருமதி.",
   "request.management.incident.create.location.title.ms": "செல்வி.",
+  "request.management.incident.create.location.language.search": "மொழி",
   "request.management.incident.create.location.language": "மொழியை தேர்ந்தெடுங்கள்*",
   "request.management.incident.create.location.language.sinhala": "சிங்களம்",
   "request.management.incident.create.location.language.tamil": "தமிழ்",

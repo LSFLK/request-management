@@ -1,15 +1,15 @@
 from django import forms
 from django.contrib import admin
-from .models import Organization, Division, UserLevel, Profile
+from .models import Organization, Division, UserLevel, Profile, User
 from django.contrib.auth.models import Permission
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
 import src.incidents.permissions as permissions
 
 ALLOWED_PERMISSIONS = list(filter(lambda p : "CAN" in p, permissions.__dict__.keys()))
 
 def _get_corrected_permissions():
-    perms = Permission.objects.filter(codename__in=ALLOWED_PERMISSIONS)   
+    perms = Permission.objects.filter(codename__in=ALLOWED_PERMISSIONS)
     return perms
 
 class MyGroupAdminForm(forms.ModelForm):
@@ -35,4 +35,5 @@ admin.site.register(Group, MyGroupAdmin)
 admin.site.register(Organization)
 admin.site.register(Division)
 admin.site.register(UserLevel)
+admin.site.register(User, UserAdmin)
 admin.site.register(Profile)

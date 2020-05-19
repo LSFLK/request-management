@@ -4,8 +4,8 @@ from rest_framework import serializers
 from rest_framework.exceptions import APIException
 
 from ..incidents.models import (
-    IncidentComment, 
-    IncidentStatus, 
+    IncidentComment,
+    IncidentStatus,
     VerifyWorkflow,
     EscalateExternalWorkflow,
     CompleteActionWorkflow,
@@ -18,13 +18,16 @@ from ..incidents.models import (
     ReopenWorkflow,
     SendCannedResponseWorkflow
 )
-from django.contrib.auth.models import User
 
 from ..incidents.serializers import IncidentSerializer, IncidentCommentSerializer
 from ..custom_auth.serializers import UserSerializer
 
 from ..file_upload.models import File
 from ..file_upload.serializers import FileSerializer
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class GenericDataRelatedField(serializers.RelatedField):
     def to_representation(self, value):

@@ -62,7 +62,8 @@ class SignInPage extends Component {
         incidentRecaptcha:null
     }
 
-    handleSignIn = () => {
+    handleSignIn = (e) => {
+        e.preventDefault();
         const {signIn} = this.props;
         signIn(this.state.userName, this.state.password);
     } 
@@ -92,7 +93,7 @@ class SignInPage extends Component {
                     <Typography component="h1" variant="h5">
                         <FormattedMessage id="request.management.login.sign_in" />
                 </Typography>
-                    <form className={classes.form} onSubmit={(e)=>{e.preventDefault(); this.handleSignIn()}}>
+                    <form className={classes.form} >
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email"><FormattedMessage id="request.management.login.username" /></InputLabel>
                             <Input id="email" name="email" value={this.state.userName} 
@@ -122,7 +123,8 @@ class SignInPage extends Component {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            onClick={this.handleSignIn}
+                            // onClick={(e)=>{e.preventDefault();this.handleSignIn()}}
+                            onClick={(e) => this.handleSignIn(e)}
                             disabled={
                                 !this.state.incidentRecaptcha
                               }

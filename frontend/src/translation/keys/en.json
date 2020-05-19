@@ -47,6 +47,7 @@
   "request.management.incident.create.location.title.ms": "Ms.",
   "request.management.incident.create.location.onbehalf.yes": "Yes",
   "request.management.incident.create.location.onbehalf.no": "No",
+  "request.management.incident.create.location.language.search": "Language",
   "request.management.incident.create.location.language.sinhala": "Sinhala",
   "request.management.incident.create.location.language.tamil": "Tamil",
   "request.management.incident.create.location.language.english": "English",
@@ -113,7 +114,8 @@
   "request.management.incident.create.title": "Title",
   "request.management.incident.create.description": "Issue / Request details*",
   "request.management.incident.create.category": "Category",
-
+  "request.management.incident.create.organization": "Organization",
+  
   "request.management.incident.create.date": "Request Date",
   "request.management.incident.create.time": "Request Time",
   "request.management.incident.create.severity": "Priority*",

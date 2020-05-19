@@ -1,7 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 import enum
 import uuid
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
 
 class NotificationType(enum.Enum):
     INCIDENT_ASSIGNED="Incident assigned"

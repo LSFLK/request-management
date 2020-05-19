@@ -45,6 +45,7 @@
   "request.management.incident.create.location.title.mr": "මයා.",
   "request.management.incident.create.location.title.mrs": "මිය.",
   "request.management.incident.create.location.title.ms": "මෙනෙවිය.",
+  "request.management.incident.create.location.language.search": "භාෂාව",
   "request.management.incident.create.location.language": "භාෂාව තෝරන්න*",
   "request.management.incident.create.location.language.sinhala": "සිංහල",
   "request.management.incident.create.location.language.tamil": "දෙමළ",
@@ -115,6 +116,7 @@
   "request.management.incident.create.title": "Title",
   "request.management.incident.create.description": "ප්‍රශ්නය / ඉල්ලීම පිළිබද විස්තර*",
   "request.management.incident.create.category": "වර්ගය",
+  "request.management.incident.create.organization": "සංවිධානය",
 
   "request.management.incident.create.date": "ඉල්ලුම් දිනය",
   "request.management.incident.create.time": "ඉල්ලුම් කාලය",

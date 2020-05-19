@@ -1,5 +1,8 @@
 from .exceptions import IdentityException
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import Permission
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def user_can(user: User, permission: str):
     try:

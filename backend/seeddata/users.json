@@ -1,572 +1,573 @@
 [
-    {
-        "model": "auth.group",
-        "pk": 1,
-        "fields": {
-            "name": "manager-view",
-            "permissions": [
-                102,
-                101,
-                95,
-                93,
-                94,
-                97,
-                104
-            ]
-        }
-    },
-    {
-        "model": "auth.group",
-        "pk": 2,
-        "fields": {
-            "name": "manager-action",
-            "permissions": [
-                98,
-                100,
-                102,
-                101,
-                103,
-                96,
-                181,
-                95,
-                93,
-                94,
-                97,
-                99,
-                104,
-                105
-            ]
-        }
-    },
-    {
-        "model": "auth.group",
-        "pk": 3,
-        "fields": {
-            "name": "coordinator-action",
-            "permissions": [
-                102,
-                101,
-                103,
-                96,
-                95,
-                93,
-                94,
-                97,
-                99,
-                104
-            ]
-        }
-    },
-    {
-        "model": "auth.group",
-        "pk": 4,
-        "fields": {
-            "name": "create-incident",
-            "permissions": [
-                101
-            ]
-        }
-    },
-    {
-        "model": "auth.group",
-        "pk": 5,
-        "fields": {
-            "name": "police-manager-view",
-            "permissions": [
-                102,
-                93,
-                94,
-                97,
-                100
-            ]
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 1,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$jknnn5Zmx8xG$1NbBKXYfCIq9XVTjJuK6Bh7jsap1/2D5CA7aIJD4Y4E=",
-            "last_login": "2019-11-07T19:16:05.560Z",
-            "is_superuser": true,
-            "username": "admin",
-            "first_name": "",
-            "last_name": "",
-            "email": "admin@email.com",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T11:20:52.979Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 2,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$jiWyPzFEFL51$wK/MdHyX7FGII6RDuYGEtnbxK4Nqg3eoTrkehDWrf+0=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "leadership",
-            "first_name": "Leadership",
-            "last_name": "pslk",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T11:33:07Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 3,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$EJFIhcurJ5fu$eENv1fH+DeRmTl6tbI3CT1yoZee9xXEckSF3qjPAN+8=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "chief",
-            "first_name": "chief",
-            "last_name": "pslk",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T11:33:30Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 4,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$8h1yy8wcvoju$iLXM3v1LvPV4QppiyhNPfY0d0/GShYO+8zHulgjVm5Y=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "manager",
-            "first_name": "manager",
-            "last_name": "pslk",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T11:33:53Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 5,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$5uJVokDyViZ8$IxjSVZtiZdC00WlyZV/l5K9ms13C5Zgvkc1J08aXbZI=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "coordinator",
-            "first_name": "coordinator",
-            "last_name": "pslk",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T11:34:15Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 6,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$wPdiF7Dmikz7$2ptl73Bd0RBvdMJm/ky/ssfDZZYASTYkRl+YpCNJP2c=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "dataentry",
-            "first_name": "dataentry",
-            "last_name": "pslk",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T11:34:45Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 7,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$SsomDd3SAMuL$uBXWHhsye4QSbXHbq1GbClomu8Tj7Sx52Js+3TvSAJI=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "guest",
-            "first_name": "",
-            "last_name": "",
-            "email": "",
-            "is_staff": false,
-            "is_active": true,
-            "date_joined": "2019-11-07T11:36:18Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 8,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$vkya4v6QRNol$FknDOvEVusBJ2vA9GS6Unitph9Xv3ENB0j/USCmGJos=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "pleadership",
-            "first_name": "Police",
-            "last_name": "Leadership",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T13:22:01Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 9,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$PXqJG3mZZ8wc$PO7sk1lqg33tJeVaYGJBACC/W31eQ+OFjny0N9d0q+k=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "pmanager",
-            "first_name": "Police",
-            "last_name": "Manager",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T13:22:35Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 10,
-        "fields": {
-            "password": "pbkdf2_sha256$150000$ml2FRTND8d2S$X6Y0xG1i+6julzq9hcr+OkUPbLid9K7Hnb3ZL/0pous=",
-            "last_login": null,
-            "is_superuser": false,
-            "username": "pdataentry",
-            "first_name": "Police",
-            "last_name": "Dataentry",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2019-11-07T13:23:06Z",
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "custom_auth.organization",
-        "pk": 1,
-        "fields": {
-            "code": "PS",
-            "displayName": "Presidential Secretariat",
-            "displayName_sn": "ජනාධිපති ලේකම් කාර්යාලය",
-            "displayName_tm": "ஜனாதிபதி செயலகம்",
-            "created_date": "2019-11-07T11:21:56.468Z"
-        }
-    },
-    {
-        "model": "custom_auth.organization",
-        "pk": 2,
-        "fields": {
-            "code": "SLP",
-            "displayName": "Police",
-            "displayName_sn": "පොලිසිය",
-            "displayName_tm": "காவல்",
-            "created_date": "2019-11-07T11:22:08.958Z"
-        }
-    },
-    {
-        "model": "custom_auth.division",
-        "pk": 1,
-        "fields": {
-            "code": "ps-hq",
-            "organization": 1,
-            "division_type": "District-Branch",
-            "name": "PS HQ",
-            "is_default_division": true,
-            "is_hq": true,
-            "created_date": "2019-11-07T11:22:58.174Z"
-        }
-    },
-    {
-        "model": "custom_auth.division",
-        "pk": 2,
-        "fields": {
-            "code": "ec-cmb-city",
-            "organization": 1,
-            "division_type": "District-Branch",
-            "name": "EC Colombo City",
-            "is_default_division": false,
-            "is_hq": false,
-            "created_date": "2019-11-07T11:23:26.959Z"
-        }
-    },
-    {
-        "model": "custom_auth.division",
-        "pk": 3,
-        "fields": {
-            "code": "ec-kegalle",
-            "organization": 1,
-            "division_type": "District-Branch",
-            "name": "EC Kegalle",
-            "is_default_division": false,
-            "is_hq": false,
-            "created_date": "2019-11-07T11:23:46.879Z"
-        }
-    },
-    {
-        "model": "custom_auth.division",
-        "pk": 4,
-        "fields": {
-            "code": "police-hq",
-            "organization": 2,
-            "division_type": "police-station",
-            "name": "Police HQ",
-            "is_default_division": false,
-            "is_hq": true,
-            "created_date": "2019-11-07T12:23:37.223Z"
-        }
-    },
-    {
-        "model": "custom_auth.division",
-        "pk": 5,
-        "fields": {
-            "code": "police-colombo",
-            "organization": 2,
-            "division_type": "police-station",
-            "name": "Colombo Police Station",
-            "is_default_division": false,
-            "is_hq": false,
-            "created_date": "2019-11-07T12:25:20.474Z"
-        }
-    },
-    {
-        "model": "custom_auth.division",
-        "pk": 6,
-        "fields": {
-            "code": "police-kegalle",
-            "organization": 2,
-            "division_type": "police-station",
-            "name": "Kegalle Police Station",
-            "is_default_division": false,
-            "is_hq": false,
-            "created_date": "2019-11-07T12:26:39.557Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 1,
-        "fields": {
-            "code": "leadership",
-            "displayName": "Leadership",
-            "organization": 1,
-            "parent": null,
-            "role": 1,
-            "created_date": "2019-11-07T11:25:55.250Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 2,
-        "fields": {
-            "code": "chief-manager",
-            "displayName": "Chief Manager",
-            "organization": 1,
-            "parent": 1,
-            "role": 2,
-            "created_date": "2019-11-07T11:26:37.838Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 3,
-        "fields": {
-            "code": "manager",
-            "displayName": "Manager",
-            "organization": 1,
-            "parent": 2,
-            "role": 2,
-            "created_date": "2019-11-07T11:27:18.895Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 4,
-        "fields": {
-            "code": "coordinator",
-            "displayName": "Coordinator",
-            "organization": 1,
-            "parent": 3,
-            "role": 3,
-            "created_date": "2019-11-07T11:28:39.330Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 5,
-        "fields": {
-            "code": "ps-dataentry",
-            "displayName": "PS Dataentry",
-            "organization": 1,
-            "parent": 4,
-            "role": 4,
-            "created_date": "2019-11-07T11:31:53.161Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 6,
-        "fields": {
-            "code": "guest",
-            "displayName": "Guest",
-            "organization": 1,
-            "parent": 4,
-            "role": 4,
-            "created_date": "2019-11-07T11:32:33.188Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 7,
-        "fields": {
-            "code": "police-leadership",
-            "displayName": "Leadership",
-            "organization": 2,
-            "parent": null,
-            "role": 5,
-            "created_date": "2019-11-07T12:43:22.793Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 8,
-        "fields": {
-            "code": "police-manager",
-            "displayName": "Manager",
-            "organization": 2,
-            "parent": 7,
-            "role": 5,
-            "created_date": "2019-11-07T12:44:53.044Z"
-        }
-    },
-    {
-        "model": "custom_auth.userlevel",
-        "pk": 9,
-        "fields": {
-            "code": "police-dataentry",
-            "displayName": "Dataentry",
-            "organization": 2,
-            "parent": 8,
-            "role": 4,
-            "created_date": "2019-11-07T12:45:33.538Z"
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 1,
-        "fields": {
-            "user": 1,
-            "organization": null,
-            "division": null,
-            "level": null
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 2,
-        "fields": {
-            "user": 2,
-            "organization": 1,
-            "division": 1,
-            "level": 1
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 3,
-        "fields": {
-            "user": 3,
-            "organization": 1,
-            "division": 1,
-            "level": 2
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 4,
-        "fields": {
-            "user": 4,
-            "organization": 1,
-            "division": 1,
-            "level": 3
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 5,
-        "fields": {
-            "user": 5,
-            "organization": 1,
-            "division": 1,
-            "level": 4
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 6,
-        "fields": {
-            "user": 6,
-            "organization": 1,
-            "division": 1,
-            "level": 5
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 7,
-        "fields": {
-            "user": 7,
-            "organization": 1,
-            "division": 1,
-            "level": 6
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 8,
-        "fields": {
-            "user": 8,
-            "organization": 2,
-            "division": 4,
-            "level": 7
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 9,
-        "fields": {
-            "user": 9,
-            "organization": 2,
-            "division": 4,
-            "level": 8
-        }
-    },
-    {
-        "model": "custom_auth.profile",
-        "pk": 10,
-        "fields": {
-            "user": 10,
-            "organization": 2,
-            "division": 4,
-            "level": 9
-        }
+{
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+        "name": "manager-view",
+        "permissions": [
+            106,
+            105,
+            108,
+            99,
+            97,
+            98,
+            101
+        ]
     }
+},
+{
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+        "name": "manager-action",
+        "permissions": [
+            109,
+            102,
+            104,
+            106,
+            105,
+            107,
+            100,
+            108,
+            99,
+            97,
+            98,
+            101,
+            103,
+            110
+        ]
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+        "name": "coordinator-action",
+        "permissions": [
+            106,
+            105,
+            107,
+            100,
+            108,
+            99,
+            97,
+            98,
+            101,
+            103
+        ]
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 4,
+    "fields": {
+        "name": "create-incident",
+        "permissions": [
+            105
+        ]
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 5,
+    "fields": {
+        "name": "police-manager-view",
+        "permissions": [
+            104,
+            106,
+            105,
+            97,
+            98,
+            101
+        ]
+    }
+},
+{
+    "model": "custom_auth.organization",
+    "pk": 1,
+    "fields": {
+        "code": "PS",
+        "displayName": "Presidential Secretariat",
+        "displayName_sn": "\u0da2\u0db1\u0dcf\u0db0\u0dd2\u0db4\u0dad\u0dd2 \u0dbd\u0dda\u0d9a\u0db8\u0dca \u0d9a\u0dcf\u0dbb\u0dca\u0dba\u0dcf\u0dbd\u0dba",
+        "displayName_tm": "\u0b9c\u0ba9\u0bbe\u0ba4\u0bbf\u0baa\u0ba4\u0bbf \u0b9a\u0bc6\u0baf\u0bb2\u0b95\u0bae\u0bcd",
+        "created_date": "2019-11-07T11:21:56.468Z"
+    }
+},
+{
+    "model": "custom_auth.organization",
+    "pk": 2,
+    "fields": {
+        "code": "SLP",
+        "displayName": "Police",
+        "displayName_sn": "\u0db4\u0ddc\u0dbd\u0dd2\u0dc3\u0dd2\u0dba",
+        "displayName_tm": "\u0b95\u0bbe\u0bb5\u0bb2\u0bcd",
+        "created_date": "2019-11-07T11:22:08.958Z"
+    }
+},
+{
+    "model": "custom_auth.division",
+    "pk": 1,
+    "fields": {
+        "code": "ps-hq",
+        "organization": 1,
+        "division_type": "District-Branch",
+        "name": "PS HQ",
+        "is_default_division": true,
+        "is_hq": true,
+        "created_date": "2019-11-07T11:22:58.174Z"
+    }
+},
+{
+    "model": "custom_auth.division",
+    "pk": 2,
+    "fields": {
+        "code": "ec-cmb-city",
+        "organization": 1,
+        "division_type": "District-Branch",
+        "name": "EC Colombo City",
+        "is_default_division": false,
+        "is_hq": false,
+        "created_date": "2019-11-07T11:23:26.959Z"
+    }
+},
+{
+    "model": "custom_auth.division",
+    "pk": 3,
+    "fields": {
+        "code": "ec-kegalle",
+        "organization": 1,
+        "division_type": "District-Branch",
+        "name": "EC Kegalle",
+        "is_default_division": false,
+        "is_hq": false,
+        "created_date": "2019-11-07T11:23:46.879Z"
+    }
+},
+{
+    "model": "custom_auth.division",
+    "pk": 4,
+    "fields": {
+        "code": "police-hq",
+        "organization": 2,
+        "division_type": "police-station",
+        "name": "Police HQ",
+        "is_default_division": false,
+        "is_hq": true,
+        "created_date": "2019-11-07T12:23:37.223Z"
+    }
+},
+{
+    "model": "custom_auth.division",
+    "pk": 5,
+    "fields": {
+        "code": "police-colombo",
+        "organization": 2,
+        "division_type": "police-station",
+        "name": "Colombo Police Station",
+        "is_default_division": false,
+        "is_hq": false,
+        "created_date": "2019-11-07T12:25:20.474Z"
+    }
+},
+{
+    "model": "custom_auth.division",
+    "pk": 6,
+    "fields": {
+        "code": "police-kegalle",
+        "organization": 2,
+        "division_type": "police-station",
+        "name": "Kegalle Police Station",
+        "is_default_division": false,
+        "is_hq": false,
+        "created_date": "2019-11-07T12:26:39.557Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 1,
+    "fields": {
+        "code": "leadership",
+        "displayName": "Leadership",
+        "organization": 1,
+        "parent": null,
+        "role": 1,
+        "created_date": "2019-11-07T11:25:55.250Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 2,
+    "fields": {
+        "code": "chief-manager",
+        "displayName": "Chief Manager",
+        "organization": 1,
+        "parent": 1,
+        "role": 2,
+        "created_date": "2019-11-07T11:26:37.838Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 3,
+    "fields": {
+        "code": "manager",
+        "displayName": "Manager",
+        "organization": 1,
+        "parent": 2,
+        "role": 2,
+        "created_date": "2019-11-07T11:27:18.895Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 4,
+    "fields": {
+        "code": "coordinator",
+        "displayName": "Coordinator",
+        "organization": 1,
+        "parent": 3,
+        "role": 3,
+        "created_date": "2019-11-07T11:28:39.330Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 5,
+    "fields": {
+        "code": "ps-dataentry",
+        "displayName": "PS Dataentry",
+        "organization": 1,
+        "parent": 4,
+        "role": 4,
+        "created_date": "2019-11-07T11:31:53.161Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 6,
+    "fields": {
+        "code": "guest",
+        "displayName": "Guest",
+        "organization": 1,
+        "parent": 4,
+        "role": 4,
+        "created_date": "2019-11-07T11:32:33.188Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 7,
+    "fields": {
+        "code": "police-leadership",
+        "displayName": "Leadership",
+        "organization": 2,
+        "parent": null,
+        "role": 5,
+        "created_date": "2019-11-07T12:43:22.793Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 8,
+    "fields": {
+        "code": "police-manager",
+        "displayName": "Manager",
+        "organization": 2,
+        "parent": 7,
+        "role": 5,
+        "created_date": "2019-11-07T12:44:53.044Z"
+    }
+},
+{
+    "model": "custom_auth.userlevel",
+    "pk": 9,
+    "fields": {
+        "code": "police-dataentry",
+        "displayName": "Dataentry",
+        "organization": 2,
+        "parent": 8,
+        "role": 4,
+        "created_date": "2019-11-07T12:45:33.538Z"
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$jknnn5Zmx8xG$1NbBKXYfCIq9XVTjJuK6Bh7jsap1/2D5CA7aIJD4Y4E=",
+        "last_login": "2020-05-17T17:42:30.157Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@email.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T11:20:52.979Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$jiWyPzFEFL51$wK/MdHyX7FGII6RDuYGEtnbxK4Nqg3eoTrkehDWrf+0=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "leadership",
+        "first_name": "Leadership",
+        "last_name": "pslk",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T11:33:07Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$EJFIhcurJ5fu$eENv1fH+DeRmTl6tbI3CT1yoZee9xXEckSF3qjPAN+8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "chief",
+        "first_name": "chief",
+        "last_name": "pslk",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T11:33:30Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$8h1yy8wcvoju$iLXM3v1LvPV4QppiyhNPfY0d0/GShYO+8zHulgjVm5Y=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "manager",
+        "first_name": "manager",
+        "last_name": "pslk",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T11:33:53Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$5uJVokDyViZ8$IxjSVZtiZdC00WlyZV/l5K9ms13C5Zgvkc1J08aXbZI=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "coordinator",
+        "first_name": "coordinator",
+        "last_name": "pslk",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T11:34:15Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$wPdiF7Dmikz7$2ptl73Bd0RBvdMJm/ky/ssfDZZYASTYkRl+YpCNJP2c=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "dataentry",
+        "first_name": "dataentry",
+        "last_name": "pslk",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T11:34:45Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$SsomDd3SAMuL$uBXWHhsye4QSbXHbq1GbClomu8Tj7Sx52Js+3TvSAJI=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "guest",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-11-07T11:36:18Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$vkya4v6QRNol$FknDOvEVusBJ2vA9GS6Unitph9Xv3ENB0j/USCmGJos=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "pleadership",
+        "first_name": "Police",
+        "last_name": "Leadership",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T13:22:01Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$PXqJG3mZZ8wc$PO7sk1lqg33tJeVaYGJBACC/W31eQ+OFjny0N9d0q+k=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "pmanager",
+        "first_name": "Police",
+        "last_name": "Manager",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T13:22:35Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.user",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$ml2FRTND8d2S$X6Y0xG1i+6julzq9hcr+OkUPbLid9K7Hnb3ZL/0pous=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "pdataentry",
+        "first_name": "Police",
+        "last_name": "Dataentry",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-07T13:23:06Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "organization": null,
+        "division": null,
+        "level": null
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "organization": 1,
+        "division": 1,
+        "level": 1
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "organization": 1,
+        "division": 1,
+        "level": 2
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 4,
+    "fields": {
+        "user": 4,
+        "organization": 1,
+        "division": 1,
+        "level": 3
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 5,
+    "fields": {
+        "user": 5,
+        "organization": 1,
+        "division": 1,
+        "level": 4
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 6,
+    "fields": {
+        "user": 6,
+        "organization": 1,
+        "division": 1,
+        "level": 5
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 7,
+    "fields": {
+        "user": 7,
+        "organization": 1,
+        "division": 1,
+        "level": 6
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 8,
+    "fields": {
+        "user": 8,
+        "organization": 2,
+        "division": 4,
+        "level": 7
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 9,
+    "fields": {
+        "user": 9,
+        "organization": 2,
+        "division": 4,
+        "level": 8
+    }
+},
+{
+    "model": "custom_auth.profile",
+    "pk": 10,
+    "fields": {
+        "user": 10,
+        "organization": 2,
+        "division": 4,
+        "level": 9
+    }
+}
 ]

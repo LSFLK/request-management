@@ -14,7 +14,7 @@ import moment from "moment";
 import * as Yup from "yup";
 import { showNotification } from "../../notifications/state/notifications.actions";
 import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 const styles = theme => ({
     root: {
@@ -75,7 +75,7 @@ function ListItemLink(props) {
 export default function TempReportList(){
     const dispatch = useDispatch();
     const { formatMessage: f } = useIntl();
-
+    const selectedLanguage = useSelector((state) => state.shared.selectedLanguage);
     const [state, setState] = useState({
         startTime: null,
         endTime: null,
@@ -88,10 +88,10 @@ export default function TempReportList(){
           endTime = moment(endTime).format("YYYY-MM-DD HH:mm");
 
       if(expanded==="panel2"){
-        window.open(`${API_BASE_URL}/pdfgen/?template_type=daily_category_with_timefilter&startTime="${startTime}"&endTime="${endTime}"`,"_blank");
+        window.open(`${API_BASE_URL}/pdfgen/?template_type=daily_category_with_timefilter&startTime="${startTime}"&endTime="${endTime}"&language="${selectedLanguage}"`,"_blank");
       }
       if(expanded==="panel3"){
-        window.open(`${API_BASE_URL}/pdfgen/?template_type=organizationwise_total_request_with_timefilter&startTime="${startTime}"&endTime="${endTime}"`,"_blank");
+        window.open(`${API_BASE_URL}/pdfgen/?template_type=organizationwise_total_request_with_timefilter&startTime="${startTime}"&endTime="${endTime}"&language="${selectedLanguage}"`,"_blank");
       }
     };
 
@@ -153,13 +153,13 @@ export default function TempReportList(){
                       <li><Typography variant="h6"> {f({id: "request.management.report.cat_reports", defaultMessage: "View Reports"})} </Typography></li>
                     </ul>
                     <List>
-                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category`} target="_blank">
+                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category&language="${selectedLanguage}"`} target="_blank">
                             <ListItemText primary={f({id: "request.management.report.daily_summary_by_category", defaultMessage: "Daily Summary Report - Total number of requests received by category"})} />
                         </ListItemLink>
-                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category_closed`} target="_blank">
+                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category_closed&language="${selectedLanguage}"`} target="_blank">
                             <ListItemText primary={f({id: "request.management.report.daily_closed_request_category", defaultMessage: "Daily Summary Report - No. of requests closed by category"})} />
                         </ListItemLink>
-                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_category`} target="_blank">
+                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_category&language="${selectedLanguage}"`} target="_blank">
                             <ListItemText primary={f({id: "request.management.report.weekly_closed_request_category", defaultMessage: "Weekly Summary Report - No. of requests closed by Category"})} />
                         </ListItemLink>
                     </List>
@@ -223,10 +223,10 @@ export default function TempReportList(){
                       <li><Typography variant="h6"> {f({id: "request.management.report.org_reports", defaultMessage: "View Reports"})} </Typography></li>
                     </ul>
                     <List>
-                    <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
+                    <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization&language="${selectedLanguage}"`} target="_blank">
                             <ListItemText primary={f({id: "request.management.report.weekly_closed_request_organization", defaultMessage: "Weekly Summary Report - No. of requests closed by organization"})} />
                         </ListItemLink>
-                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_closed_request_organization`} target="_blank">
+                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_closed_request_organization&language="${selectedLanguage}"`} target="_blank">
                             <ListItemText primary={f({id: "request.management.report.daily_closed_request_organization", defaultMessage: "Daily Summary Report - No. of requests closed by organization"})} />
                         </ListItemLink>
                     </List>

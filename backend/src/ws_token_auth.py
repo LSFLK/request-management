@@ -1,8 +1,10 @@
 from channels.auth import AuthMiddlewareStack
 from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.auth.models import AnonymousUser
 from rest_framework_jwt.settings import api_settings
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 jwt_get_user_handler = api_settings.JWT_PAYLOAD_GET_USER_ID_HANDLER
 jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
 

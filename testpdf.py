@@ -8,7 +8,7 @@ html = """
     
 </head>
 <body>
-    HUTTO
+    Check
     බයිස්කෝප් ඩවුන්ලෝඩ්
     தமிழ்
 </body>

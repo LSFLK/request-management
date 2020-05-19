@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from django.contrib.staticfiles.views import serve as serve_static
 
 from .common import views as common_views
 
@@ -36,7 +37,18 @@ from rest_framework_jwt.views import obtain_jwt_token
 #swagger
 from rest_framework_swagger.views import get_swagger_view
 
-schema_view = get_swagger_view(title='Incident Backend API')
+schema_view = get_swagger_view(title='Issue Backend API')
+
+def _static_butler(request, path, **kwargs):
+    """
+    Serve static files using the django static files configuration
+    WITHOUT collectstatic. This is slower, but very useful for API 
+    only servers where the static files are really just for /admin
+
+    Passing insecure=True allows serve_static to process, and ignores
+    the DEBUG=False setting
+    """
+    return serve_static(request, path, insecure=True, **kwargs)
 
 urlpatterns = [
     path('', schema_view),
@@ -138,4 +150,5 @@ urlpatterns = [
     path("public/incidents/<uuid:incident_id>/workflow/<str:workflow>",
          incident_views.IncidentWorkflowPublicView.as_view()
     ),
+    re_path(r'static/(.+)', _static_butler),
 ]

@@ -92,11 +92,13 @@ function SearchForm(props) {
   // const severityValues = Array(10).fill(0).map((e, i) => i + 1);
   const severityValues = ['High','Medium','Low'];
   const institutions = useSelector(state => state.shared.institutions);
+  const organizations = useSelector(state => state.user.organizations);
   const districts = useSelector(state => state.shared.districts);
   const [selectedInstitution, setSelectedInstitution] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const {channels} = useSelector((state) => state.shared);
   const { formatMessage: f } = useIntl();
-
+  
   let orgSearch = props.incidentType === 'INQUIRY' ?
       (<Search
           institutions={institutions}
@@ -173,6 +175,28 @@ function SearchForm(props) {
               <ExpansionPanelDetails>
                 <Grid container spacing={8}>
                   <Grid item xs={12}>
+                  <FormControl className={classes.formControl}>
+                      <InputLabel shrink htmlFor="status-label-placeholder">
+                      {f({ id: "request.management.incident.create.location.language.search", defaultMessage: "Language" })}
+                      </InputLabel>
+                      <Select
+                        input={
+                          <Input name="status" id="status-label-placeholder" />
+                        }
+                        displayEmpty
+                        name="language"
+                        value={values.status}
+                        onChange={handleChange}
+                        className={classes.selectEmpty}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={"SINHALA"}>{f({ id: "request.management.incident.create.location.language.sinhala", defaultMessage: "Language" })}</MenuItem>
+                        <MenuItem value={"TAMIL"}>{f({ id: "request.management.incident.create.location.language.tamil", defaultMessage: "Language" })}</MenuItem>
+                        <MenuItem value={"ENGLISH"}>{f({ id: "request.management.incident.create.location.language.english", defaultMessage: "Language" })}</MenuItem>
+                      </Select>
+                    </FormControl>
                     <FormControl className={classes.formControl}>
                       <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({ id: "request.management.home.incidents.list.status", defaultMessage: "Status" })}
@@ -224,6 +248,31 @@ function SearchForm(props) {
                     </FormControl>
                     <FormControl className={classes.formControl}>
                       <InputLabel shrink htmlFor="status-label-placeholder">
+                      {f({id: "request.management.home.incidents.list.channel", defaultMessage: "Mode of Recipet"})}
+                      </InputLabel>
+                      <Select
+                        input={
+                          <Input
+                            name="channel"
+                            id="severity-label-placeholder"
+                          />
+                        }
+                        displayEmpty
+                        name="channel"
+                        value={values.channel}
+                        onChange={handleChange}
+                        className={classes.selectEmpty}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {channels.map((val) => (
+                          <MenuItem value={val.id} key={val.id}>{val.name}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.category", defaultMessage: "Category"})}
                       </InputLabel>
                       <Select
@@ -247,6 +296,38 @@ function SearchForm(props) {
                             {sub_category}
                           </MenuItem>
                         ))}
+                      </Select>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel shrink htmlFor="status-label-placeholder">
+                      {f({id: "request.management.incident.create.organization", defaultMessage: "Organization"})}
+                      </InputLabel>
+                      <Select
+                        input={
+                          <Input
+                            name="organization"
+                            id="severity-label-placeholder"
+                          />
+                        }
+                        displayEmpty
+                        name="organization"
+                        value={values.organization}
+                        onChange={handleChange}
+                        className={classes.selectEmpty}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {organizations.allIds.map((c, k) => {
+                              let currentOrg = organizations.byIds[c];
+                              return (
+                                currentOrg.name !== "NONE" && (
+                                  <MenuItem value={currentOrg.code} key={k}>
+                                    {currentOrg.name}
+                                  </MenuItem>
+                                )
+                              );
+                            })}
                       </Select>
                     </FormControl>
                   </Grid>
