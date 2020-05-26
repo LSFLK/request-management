@@ -1,10 +1,10 @@
-# Incident Management
+# Request Management
 
-Incident Management System for Elections Commission of Sri Lanka
+Request Management System for Presidential Secretariat of Sri Lanka
 
 ## Setting up
 
-Refer the [documentation](https://eclk.github.io/IncidentManagement)
+Refer the [documentation](https://opensource.lk/request-management/)
 
 ## Contribution
 
