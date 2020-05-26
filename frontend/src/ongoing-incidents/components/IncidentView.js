@@ -106,6 +106,7 @@ function NavTabs({ classes, match }) {
     });
 
     const [files, setFiles] = useState([]);
+    const [fileError, setFileError] = useState(true);
     const [activeIncident, setActiveIncident] = useState(null);
     const [activeReporter, setActiveReporter] = useState(null);
     const [activeRecipient, setActiveRecipient] = useState(null);
@@ -157,6 +158,9 @@ function NavTabs({ classes, match }) {
                     break
                 case 'RESPONSE_TIME_EDIT':
                     dispatch(showModal('RESPONSE_TIME_EDIT', { activeIncident }))
+                    break
+                case 'DUE_DATE_TIME_EDIT_MODAL':
+                    dispatch(showModal('DUE_DATE_TIME_EDIT_MODAL', { activeIncident }))
                     break
 
                 default:
@@ -241,12 +245,13 @@ function NavTabs({ classes, match }) {
                                     <FileUploader
                                         files={files}
                                         setFiles={setFiles}
+                                        setFileError={setFileError}
                                         watchedActions={[
                                             attachFileRequest()
                                         ]}
                                     />
                                     <div className={classes.uploadButtonWrapper}>
-                                    <Button disabled={!files.length} onClick={onUploadClick}>
+                                    <Button disabled={fileError} onClick={onUploadClick}>
                                         Upload
                                     </Button>
                                     </div>

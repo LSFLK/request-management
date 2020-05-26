@@ -16,6 +16,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import CustomAutocompleteCategory from './AutocompleteCategory';
+import CustomAutocompleteDistrict from './AutocompleteDistrict';
+import CustomAutocompleteOrganization from './AutocompleteOrganization';
+
 import moment from "moment";
 import { useSelector } from 'react-redux'
 import { withStyles } from "@material-ui/core/styles";
@@ -55,6 +59,11 @@ const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit * 2,
+    minWidth: 300
+  },
+  formControl2: {
+    margin: theme.spacing.unit * 2,
+    marginTop: 27,
     minWidth: 300
   },
   formControlSearch: {
@@ -108,6 +117,23 @@ function SearchForm(props) {
             districts={districts}
             onChange={setSelectedDistrict}
       ></Search>);
+      const suggestionOrganizations = organizations.allIds.map((c, k) => {
+        let currOrg = organizations.byIds[c];
+        return (
+          currOrg.name !== "NONE" && (
+            {label: currOrg.name, value: currOrg.code }
+          )
+        );
+      })
+      const suggestionDistricts = districts.allCodes.map((c, k) => {
+        let currDistrict = districts.byCode[c];
+        return (
+          currDistrict.name !== "NONE" && (
+            {label: currDistrict.name, value: currDistrict.code }
+          )
+        );
+      })
+    const suggestions = categories.map((o) => ( {label: o.sub_category, value: o.id }) ); 
 
   return (
     <Formik
@@ -271,8 +297,9 @@ function SearchForm(props) {
                         ))}
                       </Select>
                     </FormControl>
-                    <FormControl className={classes.formControl}>
-                      <InputLabel shrink htmlFor="status-label-placeholder">
+                    <FormControl className={classes.formControl2}>
+                    <CustomAutocompleteCategory suggestions={suggestions} value={values.category} handleChange={handleChange} categories={categories} />
+                      {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.category", defaultMessage: "Category"})}
                       </InputLabel>
                       <Select
@@ -296,10 +323,11 @@ function SearchForm(props) {
                             {sub_category}
                           </MenuItem>
                         ))}
-                      </Select>
+                      </Select> */}
                     </FormControl>
-                    <FormControl className={classes.formControl}>
-                      <InputLabel shrink htmlFor="status-label-placeholder">
+                    <FormControl className={classes.formControl2}>
+                     <CustomAutocompleteOrganization suggestions={suggestionOrganizations} value={values.organization} handleChange={handleChange} organizations={organizations} />
+                      {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.organization", defaultMessage: "Organization"})}
                       </InputLabel>
                       <Select
@@ -328,7 +356,7 @@ function SearchForm(props) {
                                 )
                               );
                             })}
-                      </Select>
+                      </Select> */}
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
@@ -360,8 +388,9 @@ function SearchForm(props) {
                         onChange={handleChange}
                       />
                     </FormControl>
-                    <FormControl className={classes.formControl}>
-                      <InputLabel shrink htmlFor="status-label-placeholder">
+                    <FormControl className={classes.formControl2}>
+                    <CustomAutocompleteDistrict suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} />
+                      {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.location.district", defaultMessage: "District"})}
                       </InputLabel>
                       <Select
@@ -390,7 +419,7 @@ function SearchForm(props) {
                                 )
                               );
                             })}
-                      </Select>
+                      </Select> */}
                     </FormControl>
                     <FormControl className={classes.buttonContainer}>
                       {/* Reset workflow is pending

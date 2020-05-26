@@ -27,7 +27,11 @@ import {
   resetActiveIncident,
   changeLanguage
 } from "../../shared/state/sharedActions";
-
+import CustomAutocompleteCategory from "../../ongoing-incidents/components/AutocompleteCategory"
+import CustomAutocompleteDistrict from "../../ongoing-incidents/components/AutocompleteDistrict"
+import CustomAutocompleteRecipientDistrict from "../../ongoing-incidents/components/AutocompleteRecipientDistrict"
+import CustomAutocompleteGn from "../../ongoing-incidents/components/AutocompleteGn"
+import CustomAutocompleteRecipientGn from "../../ongoing-incidents/components/AutocompleteRecipientGn"
 import Button from "@material-ui/core/Button";
 // import Checkbox from "@material-ui/core/Checkbox";
 import Dialog from "@material-ui/core/Dialog";
@@ -99,6 +103,10 @@ const styles = (theme) => ({
   },
   formControl: {
     width: "100%",
+  },
+  formControl2: {
+    width: "100%",
+    marginTop: 12
   },
   datetime: {
     marginLeft: theme.spacing.unit,
@@ -454,6 +462,7 @@ function IncidentFormInternal(props) {
       files: selectedFiles,
     });
   };
+  const [fileError, setFileError] = useState(false);
 
   const tableRowAdd = (setFieldValue, fieldName, tableData, record) => {
     return new Promise((resolve, reject) => {
@@ -696,6 +705,15 @@ function IncidentFormInternal(props) {
     }
   }
 
+  const suggestions = complaintCategories ? complaintCategories.map((o) => ( {label: o.sub_category, value: o.id }) ) : []; 
+  const suggestionDistricts = districts.allCodes.map((c, k) => {
+    let currDistrict = districts.byCode[c];
+    return (
+      currDistrict.name !== "NONE" && (
+        {label: currDistrict.name, value: currDistrict.code }
+      )
+    );
+  })
   return (
     <div className={classes.root}>
       <Formik
@@ -955,11 +973,18 @@ function IncidentFormInternal(props) {
                                     </Grid> */}
                   <Grid item xs={12} sm={6}>
                     <FormControl
-                      className={classes.formControl}
+                      className={classes.formControl2}
                       error={touched.category && errors.category}
                     >
-                      <InputLabel htmlFor="category">{f({ id: "request.management.incident.create.category", defaultMessage: "Category" })}*</InputLabel>
-                      <Select
+                      {/* <InputLabel htmlFor="category">{f({ id: "request.management.incident.create.category", defaultMessage: "Category" })}*</InputLabel> */}
+                      <CustomAutocompleteCategory  
+                          suggestions={suggestions} 
+                          value={values.category} 
+                          handleChange={(event) => handleChange(event)}
+                          error={(errors.category) == 'Category is Required' ? true : false}
+                          categories={complaintCategories} />
+                      
+                      {/* <Select
                         value={values.category}
                         onChange={handleChange}
                         inputProps={{
@@ -997,11 +1022,10 @@ function IncidentFormInternal(props) {
                               </div>
                             </MenuItem>
                           ))}
-                      </Select>
+                      </Select> */}
                       <FormHelperText>
-                        {touched.category && errors.category
-                          ? errors.category
-                          : ""}
+                        {touched.category && errors.category ? errors.category : ""}
+                        {/* {(errors.category) == 'Category is Required' ? true : false} */}
                       </FormHelperText>
                     </FormControl>
                   </Grid>
@@ -1388,6 +1412,7 @@ function IncidentFormInternal(props) {
                       <FileUploader
                         files={state.files}
                         setFiles={handleFileSelect}
+                        setFileError={setFileError}
                       />
                     </Grid>
                   )}
@@ -1595,9 +1620,10 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} md={4} sm={6}>
                         <FormControl
                           error={touched.district && errors.district}
-                          className={classes.formControl}
+                          className={classes.formControl2}
                         >
-                          <InputLabel htmlFor="district">{f({ id: "request.management.incident.create.location.district", defaultMessage: "District" })}*</InputLabel>
+                          <CustomAutocompleteDistrict suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} />
+                          {/* <InputLabel htmlFor="district">{f({ id: "request.management.incident.create.location.district", defaultMessage: "District" })}*</InputLabel>
                           <Select
                             value={values.district}
                             onChange={handleChange}
@@ -1620,7 +1646,7 @@ function IncidentFormInternal(props) {
                                 )
                               );
                             })}
-                          </Select>
+                          </Select> */}
                           <FormHelperText>
                             {touched.district && errors.district
                               ? errors.district
@@ -1629,8 +1655,14 @@ function IncidentFormInternal(props) {
                         </FormControl>
                       </Grid>
                       <Grid item xs={12} md={4} sm={6}>
-                        <FormControl className={classes.formControl}>
-                          <InputLabel htmlFor="gramaNiladhari">
+                        <FormControl className={classes.formControl2}>
+                        <CustomAutocompleteGn
+                              dataObj={getGramaNilidariDivisions(values.district)}
+                              value={values.gramaNiladhari} 
+                              handleChange={handleChange} 
+                              />
+
+                          {/* <InputLabel htmlFor="gramaNiladhari">
                             {f({ id: "request.management.incident.create.location.gn_division", defaultMessage: "Grama Niladhari Division" })}
                           </InputLabel>
                           <IntlSelect
@@ -1638,7 +1670,7 @@ function IncidentFormInternal(props) {
                             handleChange={handleChange}
                             name="gramaNiladhari"
                             dataObj={getGramaNilidariDivisions(values.district)}
-                          />
+                          /> */}
                         </FormControl>
                       </Grid>
                       <Grid item xs={12}>
@@ -1941,9 +1973,10 @@ function IncidentFormInternal(props) {
                             <Grid item xs={12} sm={4}>
                               <FormControl
                                 error={touched.recipientDistrict && errors.recipientDistrict}
-                                className={classes.formControl}
+                                className={classes.formControl2}
                               >
-                                <InputLabel htmlFor="recipientDistrict">{f({ id: "request.management.incident.create.location.district" })}*</InputLabel>
+                              <CustomAutocompleteRecipientDistrict suggestions={suggestionDistricts} value={values.recipientDistrict} handleChange={handleChange} districts={districts} />
+                                {/* <InputLabel htmlFor="recipientDistrict">{f({ id: "request.management.incident.create.location.district" })}*</InputLabel>
                                 <Select
                                   value={values.recipientDistrict}
                                   onChange={handleChange}
@@ -1966,7 +1999,7 @@ function IncidentFormInternal(props) {
                                       )
                                     );
                                   })}
-                                </Select>
+                                </Select> */}
                                 <FormHelperText>
                                   {touched.district && errors.recipientDistrict
                                     ? errors.recipientDistrict
@@ -1975,8 +2008,13 @@ function IncidentFormInternal(props) {
                               </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                              <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="recipientGramaNiladhari">
+                              <FormControl className={classes.formControl2}>
+                              <CustomAutocompleteRecipientGn
+                              dataObj={getGramaNilidariDivisions(values.recipientDistrict)}
+                              value={values.recipientGramaNiladhari} 
+                              handleChange={handleChange} 
+                              />
+                                {/* <InputLabel htmlFor="recipientGramaNiladhari">
                                   {f({ id: "request.management.incident.create.location.gn_division" })}
                                 </InputLabel>
                                 <IntlSelect
@@ -1984,7 +2022,7 @@ function IncidentFormInternal(props) {
                                   handleChange={handleChange}
                                   name="recipientGramaNiladhari"
                                   dataObj={getGramaNilidariDivisions(values.recipientDistrict)}
-                                />
+                                /> */}
                               </FormControl>
                             </Grid>
                             </Grid>
@@ -2311,6 +2349,7 @@ function IncidentFormInternal(props) {
                     type="submit"
                     variant="contained"
                     color="primary"
+                    disabled={fileError}
                     className={classes.button}
                   >
                     {" "}

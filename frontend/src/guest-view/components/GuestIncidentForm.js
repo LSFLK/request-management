@@ -48,6 +48,8 @@ import {
   requestIncidentCatogories,
 } from "../../shared/state/sharedActions";
 
+import {loadOrganization} from "../state/guestViewActions";
+
 import {
   createGuestIncident,
   updateGuestIncident,
@@ -106,12 +108,16 @@ const styles = (theme) => ({
   },
 });
 
+const queryString = require('query-string');
+
 const VerticalLinearStepper = (props) => {
+    const queryParams = queryString.parse(props.location.search);
   useEffect(() => {
     dispatch(fetchElections());
     dispatch(fetchCategories());
     dispatch(fetchChannels());
     dispatch(fetchDistricts());
+    dispatch(loadOrganization(queryParams.organization))
   }, []);
 
   const { formatMessage: f } = useIntl();
@@ -188,6 +194,7 @@ const VerticalLinearStepper = (props) => {
   }
 
   const [incidentFiles, setIncidentFiles] = useState(null);
+  const [fileError, setFileError] = useState(false);
   const [incidentDateTime, setIncidentDateTime] = useState({
     date:
       incidentId && incidentData.occured_date
@@ -535,7 +542,7 @@ const VerticalLinearStepper = (props) => {
         valid = false;
       }
       }
-      
+
       // if (!incidentContact.recipientType) {
       //   errorMsg = {
       //     ...errorMsg,
@@ -607,7 +614,7 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    
+
     setFormErrors({ ...errorMsg });
     return valid;
   };
@@ -803,7 +810,7 @@ const VerticalLinearStepper = (props) => {
       }),
       content: (
         <>
-          <FileUploader files={incidentFiles} setFiles={setIncidentFiles} />
+          <FileUploader files={incidentFiles} setFiles={setIncidentFiles} setFileError={setFileError} />
           <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
@@ -906,7 +913,8 @@ const VerticalLinearStepper = (props) => {
                 recipientTelephone: incidentContact.recipientPhone,
                 recipientMobile: incidentContact.recipientMobile,
                 recipientEmail: incidentContact.recipientEmail,
-                recipientTitle:recipientTitle
+                recipientTitle:recipientTitle,
+                organizationId:queryParams.organization
               };
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -1145,12 +1153,14 @@ const VerticalLinearStepper = (props) => {
   }
 
   const isLoading = isLoadingIncident || isLoadingMetaData;
+  const organization = useSelector((state) => state.guestView.organization);
+
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={6}>
-            <Logo />
+            <Logo image={organization? organization.logo:null} />
           </Grid>
         </Grid>
 
@@ -1318,7 +1328,7 @@ const VerticalLinearStepper = (props) => {
                       onClick={handleNext}
                       className={classes.button}
                       disabled={
-                        index == 3 ? isLoading || !incidentRecaptcha : isLoading
+                        index == 3 ? isLoading || !incidentRecaptcha || fileError : isLoading 
                       }
                     >
                       {activeStep === steps.length - 1

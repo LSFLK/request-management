@@ -15,8 +15,8 @@
 # in the templates via {{ site.myvariable }}.
 title: Incident Management
 description: Documentation for Incident Management System
-baseurl: "/IncidentManagement" # the subpath of your site, e.g. /blog
-url: "https://eclk.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/request-management" # the subpath of your site, e.g. /blog
+url: "https://lsflk.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 permalink: pretty
 exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"]
@@ -39,7 +39,7 @@ heading_anchors: true
 #     - "//github.com/pmarsceill/just-the-docs"
 
 # Footer content appears at the bottom of every page's main content
-footer_content: "Copyright &copy; 2019 Election Commision of Sri Lanka. Distributed by an <a href=\"https://github.com/ECLK/IncidentManagement/blob/master/LICENSE.md\">MIT license.</a>"
+footer_content: "Copyright &copy; 2020 Presidential Secretary of Sri Lanka. Distributed by an <a href=\"https://github.com/ECLK/IncidentManagement/blob/master/LICENSE.md\">Apache license.</a>"
 
 # Color scheme currently only supports "dark" or nil (default)
 color_scheme: nil

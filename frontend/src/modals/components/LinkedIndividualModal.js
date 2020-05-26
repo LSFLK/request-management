@@ -13,14 +13,13 @@ import { hideModal } from '../state/modal.actions'
 
 const LinkedIndividualsModal = (props) => {
 
-    const {activeIncident} = props
+    const {activeIncident,events} = props
     const dispatch = useDispatch()
-
     return (
         <div>
             <DialogTitle id="form-dialog-title">Assigned Individuals</DialogTitle>
             <DialogContent style={{ marginTop: 10 }}>
-                <UserList userIds={activeIncident.linked_individuals}/>
+                <UserList userIds={activeIncident.linked_individuals} events={events}/>
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => { dispatch(hideModal()) }} color="secondary">

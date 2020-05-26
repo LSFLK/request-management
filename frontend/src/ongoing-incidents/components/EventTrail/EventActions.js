@@ -95,7 +95,7 @@ const getLastActionTime = (events) => {
 };
 
 const EventActions = (props) => {
-  const { classes, users, divisions } = props;
+  const { classes, users, divisions,events } = props;
 
   var hourlyResponseTimes = [];
   for (var i = 1; i < 24; i++) {
@@ -142,7 +142,7 @@ const EventActions = (props) => {
           button
           onClick={() => {
             if (activeIncident.linked_individuals.length > 0) {
-              dispatch(showModal("LINKED_INDIVIDUAL_MODAL", { activeIncident }));
+              dispatch(showModal("LINKED_INDIVIDUAL_MODAL", { activeIncident,events }));
             }
           }}
         >
@@ -206,7 +206,7 @@ const EventActions = (props) => {
           />
         </ListItem>
 
-        <ListItem>
+        {/* <ListItem>
           <Avatar>
             <AccessTimeIcon />
           </Avatar>
@@ -226,14 +226,14 @@ const EventActions = (props) => {
               </IconButton>
             </ListItemSecondaryAction>
           )}
-        </ListItem>
+        </ListItem> */}
 
         <ListItem>
           <Avatar>
             <HourglassEmptyIcon />
           </Avatar>
           <ListItemText
-            primary="Close this before"
+            primary="Close this by"
             secondary={timeLimitText}
             classes={{
               // inset:true,
@@ -242,6 +242,18 @@ const EventActions = (props) => {
                 classes.timeLimitOverDue,
             }}
           />
+          {activeIncident.currentStatus !== "CLOSED" && (
+            <ListItemSecondaryAction>
+              <IconButton
+                aria-label="Edit"
+                onClick={() => {
+                  props.modalAction("DUE_DATE_TIME_EDIT_MODAL");
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          )}
         </ListItem>
 
         <ListItem>
@@ -312,7 +324,6 @@ const EventActions = (props) => {
                 </Button>
               )}
 
-            {/* TODO: add User Action permissions here */}
             <Button color="primary" size="large" variant='text' className={classes.button} onClick={() => { dispatch(showModal('REQUEST_ADVICE_MODAL', { activeIncident, users, divisions })) }}>
                     <HelpIcon className={classes.actionButtonIcon} />
                     Request for Infomation

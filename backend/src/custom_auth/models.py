@@ -8,8 +8,10 @@ from django.dispatch import receiver
 class Organization(models.Model):
     code = models.CharField(max_length=10)
     displayName = models.CharField(max_length=200)
-    displayName_sn = models.CharField(max_length=200, null=True, blank=True)
-    displayName_tm = models.CharField(max_length=200, null=True, blank=True)
+    sn_name = models.CharField(max_length=200, null=True, blank=True)
+    tm_name = models.CharField(max_length=200, null=True, blank=True)
+    organization_type = models.CharField(max_length=50, null=True, blank=True)
+    logo = models.FileField(upload_to='organization/', null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -18,8 +20,10 @@ class Organization(models.Model):
 class Division(models.Model):
     code = models.CharField(max_length=100)
     organization = models.ForeignKey(Organization, on_delete=models.DO_NOTHING)
-    division_type = models.CharField(max_length=200)
+    division_type = models.CharField(max_length=50)
     name = models.CharField(max_length=200)
+    sn_name = models.CharField(max_length=200, null=True, blank=True)
+    tm_name = models.CharField(max_length=200, null=True, blank=True)
     is_default_division = models.BooleanField(default=False)
     is_hq = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -55,7 +59,7 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, **kwargs):
     user = kwargs['instance']
-    
+
     if hasattr(user, 'profile') and user.profile is not None:
         return
 

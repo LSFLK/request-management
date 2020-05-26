@@ -22,19 +22,18 @@ export function getDateDiff(event){
 
 export function  calculateDeadline(incident){
 
-    let deadline = moment(incident.createdDate).add(incident.response_time,'hours')
-    let currTime = moment(new Date().getTime())
-    let remainingTime = deadline.diff(currTime, 'hours')
+    let deadline = moment(incident.dueDate)
+    let timeLeft = deadline.fromNow(true)
 
-    if(remainingTime>=0){
+    if(moment()<=deadline){
         return {
             status: 'PENDING',
-            text:`${deadline.format('llll')}, (${remainingTime} hours remaining.)`
+            text:`${deadline.format('llll')}, (${timeLeft} left)`
         }
     }else{
         return {
             status: 'OVERDUE',
-            text: `${deadline.format('llll')}, (overdue by ${remainingTime*-1} hours.)`
+            text: `${deadline.format('llll')}, (overdue in ${timeLeft})`
         }
     }
 }

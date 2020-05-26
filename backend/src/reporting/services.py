@@ -143,8 +143,8 @@ def get_organization_dict(incidents, actionType = "OPENED"):
         orgData = {}
         org = Organization.objects.get(id=org_id)
         orgData["organizationNameEnglish"] = org.displayName
-        orgData["organizationNameSinhala"] = org.displayName_sn
-        orgData["organizationNameTamil"] = org.displayName_tm
+        orgData["organizationNameSinhala"] = org.sn_name
+        orgData["organizationNameTamil"] = org.tm_name
         orgData["count"] = count
 
         organizations.append(orgData)

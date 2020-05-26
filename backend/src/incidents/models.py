@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import uuid
 import enum
-from datetime import datetime
+from datetime import datetime, timedelta
 from .permissions import *
 from ..common.models import Category
 from django.conf import settings
@@ -236,8 +236,6 @@ class Incident(models.Model):
     complainer_consent = models.BooleanField(default=False, null=True, blank=True)
     proof = models.BooleanField(default=False, null=True)
 
-    response_time = models.IntegerField(default=12)
-
     current_status = models.CharField(max_length=50, default=None, null=True, blank=True)
     current_severity = models.CharField(
         max_length=50,
@@ -249,6 +247,8 @@ class Incident(models.Model):
 
     current_decision = models.CharField(max_length=50, default=None, null=True, blank=True)
     occured_date = models.DateTimeField(null=True, blank=True)
+    due_date = models.DateTimeField(null=True, blank=True, default=datetime.now()+timedelta(days=1))
+    response_time = models.IntegerField(default=12)
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

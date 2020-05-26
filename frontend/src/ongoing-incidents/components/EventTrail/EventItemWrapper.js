@@ -22,7 +22,7 @@ const styles = theme => ({
 });
 
 function EventItemView(props) {
-  const { classes, event, eventAction, eventLinks } = props;
+  const { classes, event,color, eventAction, eventLinks } = props;
 
  
       return (
@@ -33,7 +33,7 @@ function EventItemView(props) {
         <ListItemText
           primary={
               <>
-                <CommentEvent event={event} eventLinks={eventLinks} eventAction={eventAction}/>
+                <CommentEvent event={event} eventLinks={eventLinks} color={color} eventAction={eventAction}/>
               </>
           }
         />

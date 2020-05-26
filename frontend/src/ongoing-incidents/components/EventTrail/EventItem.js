@@ -268,9 +268,10 @@ function getDateDiff(event){
 }
 
 
-const EventItemView = ({ event, classes }) => {
+const EventItemView = ({ event, classes, color }) => {
     const dispatch = useDispatch();
     const userData = useSelector((state)=>(state.user));
+
 
     let initiator = "Public User";
     if(event.initiator && event.initiator.userName !== "guest"){
@@ -280,8 +281,8 @@ const EventItemView = ({ event, classes }) => {
     let initiatorData = userData.users.byIds[event.initiator.uid];
 
     return (
-    <li className={event.action==='OUTCOME_ADDED'? classes.eventItemOutcome : classes.eventItem}>
-        <div className={classes.eventItemDetails}>
+    <li className={event.action==='OUTCOME_ADDED'? classes.eventItemOutcome : classes.eventItem} style={{border:"solid 1px "+color}}>
+        <div className={classes.eventItemDetails} style={{backgroundColor:color}}>
             <Chip label={!!(initiatorData) ? initiatorData.entity.name : ""} className={classes.chip} variant="outlined" />
             <div className={classes.eventItemUserDetails}>
                 <div className={classes.truncate}>
@@ -299,7 +300,7 @@ const EventItemView = ({ event, classes }) => {
 
                 {
                     hasPendingAction(event) && (
-                        <div className={classes.eventItemActions}>
+                        <div name={event.id} className={classes.eventItemActions}>
                             <Button
                                 color="primary"
                                 className={classes.button}

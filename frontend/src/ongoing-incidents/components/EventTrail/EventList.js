@@ -15,12 +15,23 @@ const styles = {
 };
 
 const EventListView = ({ events = [], classes, resolveEvent }) => {
+
+    const colorList=["#FF9AA2","#FFB7B2","#FFDAC1","#E2F0CB","#B5EAD7","#C7CEEA"];
+    let createdUserId=null;
+
     return (
         <Card className={classes.root}>
             <List>
-                {events.allIds.map(eventId => (
-                    <EventItem event={events.byIds[eventId]} eventAction={resolveEvent} key={eventId} />
-                ))}
+                {events.allIds.map(eventId => {
+                    let event=events.byIds[eventId];
+                    let color=colorList[(event.initiator.displayname%6)];
+                    if (event.action===`CREATED` || event.initiator.uid===createdUserId){
+                        color=colorList[4];
+                        createdUserId=event.initiator.uid;
+                    }
+                    return <EventItem event={event} color={color} eventAction={resolveEvent}
+                                      key={eventId}/>
+                })}
             </List>
         </Card>
     )

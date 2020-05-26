@@ -88,8 +88,8 @@
     "fields": {
         "code": "PS",
         "displayName": "Presidential Secretariat",
-        "displayName_sn": "\u0da2\u0db1\u0dcf\u0db0\u0dd2\u0db4\u0dad\u0dd2 \u0dbd\u0dda\u0d9a\u0db8\u0dca \u0d9a\u0dcf\u0dbb\u0dca\u0dba\u0dcf\u0dbd\u0dba",
-        "displayName_tm": "\u0b9c\u0ba9\u0bbe\u0ba4\u0bbf\u0baa\u0ba4\u0bbf \u0b9a\u0bc6\u0baf\u0bb2\u0b95\u0bae\u0bcd",
+        "sn_name": "\u0da2\u0db1\u0dcf\u0db0\u0dd2\u0db4\u0dad\u0dd2 \u0dbd\u0dda\u0d9a\u0db8\u0dca \u0d9a\u0dcf\u0dbb\u0dca\u0dba\u0dcf\u0dbd\u0dba",
+        "tm_name": "\u0b9c\u0ba9\u0bbe\u0ba4\u0bbf\u0baa\u0ba4\u0bbf \u0b9a\u0bc6\u0baf\u0bb2\u0b95\u0bae\u0bcd",
         "created_date": "2019-11-07T11:21:56.468Z"
     }
 },
@@ -99,8 +99,8 @@
     "fields": {
         "code": "SLP",
         "displayName": "Police",
-        "displayName_sn": "\u0db4\u0ddc\u0dbd\u0dd2\u0dc3\u0dd2\u0dba",
-        "displayName_tm": "\u0b95\u0bbe\u0bb5\u0bb2\u0bcd",
+        "sn_name": "\u0db4\u0ddc\u0dbd\u0dd2\u0dc3\u0dd2\u0dba",
+        "tm_name": "\u0b95\u0bbe\u0bb5\u0bb2\u0bcd",
         "created_date": "2019-11-07T11:22:08.958Z"
     }
 },

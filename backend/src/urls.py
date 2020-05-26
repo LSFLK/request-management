@@ -32,7 +32,7 @@ from .reporting import views as report_views
 from .notifications import views as notification_views
 
 # JWT
-from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 #swagger
 from rest_framework_swagger.views import get_swagger_view
@@ -54,6 +54,7 @@ urlpatterns = [
     path('', schema_view),
     path("admin/", admin.site.urls),
     path("auth-jwt/", obtain_jwt_token),
+    path("auth-jwt-refresh/", refresh_jwt_token),
     path("categories/", common_views.CategoryList.as_view()),
     path("channels/", common_views.ChannelList.as_view()),
     path("districts/", common_views.DistrictList.as_view()),
@@ -107,6 +108,10 @@ urlpatterns = [
     path(
         "entities/",
         user_views.OrganizationList.as_view(),
+    ),
+    path(
+        "organizations/<int:organization_id>",
+        user_views.OrganizationDetail.as_view(),
     ),
     path("incidents/<uuid:incident_id>/workflow/<str:workflow>",
          incident_views.IncidentWorkflowView.as_view()

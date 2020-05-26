@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import Permission, Group
 from django.contrib.auth import get_user_model
+from .models import Organization
 
 User = get_user_model()
 
@@ -13,6 +14,14 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ['id','name']
+
+class OrganizationSerializer(serializers.ModelSerializer):
+    createdDate = serializers.ReadOnlyField(source="created_date")
+    organizationType = serializers.CharField(source='organization_type', required=False, allow_null=True, allow_blank=True)
+
+    class Meta:
+        model = Organization
+        exclude = ['organization_type', 'created_date']
 
 class UserSerializer(serializers.ModelSerializer):
     uid = serializers.IntegerField(source="id")

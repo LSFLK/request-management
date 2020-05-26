@@ -104,7 +104,7 @@ export function updateInternalIncident(incidentId, incidentData) {
                 "address": incidentData["reporterAddress"],
                 "city": incidentData["reporterCity"],
                 "district": incidentData["reporterDistrict"],
-                "gnDivision": incidentData["reporterGramaNiladhari"]
+                "gnDivision": incidentData["gramaNiladhari"]
             }
             await incidentsApi.updateReporter(reporterId, reporterUpdate);
            

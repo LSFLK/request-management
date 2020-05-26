@@ -23,12 +23,17 @@ An Incident Management System specialized for Elections.
 ### Dependencies
 
 #### BACKEND
-  - Language: Python
-  - Framework: Django
+  - Language: Python 3.7+
+  - Framework: Django Rest Framework
 
 #### FRONTEND 
   - Language: Javascript
-  - Framework: ReactJS
+  - Framework: ReactJS 16+
+
+#### DATABASE
+  - MySQL 8+
+    - character set: utf8mb4
+    - collate: utf8mb4_unicode_ci
 
 ### Quick start: Use Docker-Compose 
 
@@ -55,7 +60,7 @@ $ docker-compose exec djangoapp python manage.py createsuperuser
 ```
 8. Run the seeder to populate data on the DB.
 ```bash
-$ docker-compose exec djangoapp python manage.py loaddata category channel province district police politicalparty segment
+$ docker-compose exec djangoapp python manage.py loaddata category channel province district police politicalparty segment gn
 ```
 9. In order to add predefined users, run users seeder.
 ```bash 
@@ -101,7 +106,7 @@ $ python manage.py createsuperuser
 ```
 7. Run the seeder to populate data on the DB.
 ```bash
-$ python manage.py loaddata category channel province district police politicalparty segment
+$ python manage.py loaddata category channel province district police politicalparty segment gn
 ```
 8. In order to add predefined users, run users seeder. <small>You may skip this step to implement you own user hierarchy.</small>
 ```bash

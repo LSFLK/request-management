@@ -169,7 +169,7 @@ class DomainContainer extends React.Component {
         this.props.getPoliceDivisions();
         this.props.getWards();
         this.props.loadAllUsers();
-        const signInData = localStorage.read('ECIncidentManagementUser');
+        const signInData = localStorage.read('RequestManagementUser');
         signInData && this.setState({ authToken: signInData.token })
         this.loadNotifications()
     }

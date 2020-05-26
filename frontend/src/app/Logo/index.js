@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 
 import ECLogo from "../../static/img/ps-logo.jpg";
 import "./Logo.css";
+import {API_BASE_URL} from '../../config';
 
 function Logo(props) {
   return (
     <div className="logo-container">
       <Link to="/">
         <img
-          src={ECLogo}
+          src={props.image? API_BASE_URL+"/media/"+props.image:ECLogo}
           alt="logo"
           style={{
             maxWidth: props.maxWidth,
