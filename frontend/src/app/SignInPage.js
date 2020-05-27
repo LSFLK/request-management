@@ -109,7 +109,8 @@ class SignInPage extends Component {
           <Typography component="h1" variant="h5">
             <FormattedMessage id="request.management.login.sign_in" />
           </Typography>
-          <form className={classes.form} autoComplete="off">
+          <div className={classes.form}>
+          {/* <form className={classes.form} autoComplete="off"> */}
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">
                 <FormattedMessage id="request.management.login.username" />
@@ -189,7 +190,8 @@ class SignInPage extends Component {
             >
               <FormattedMessage id="request.management.login.sign_in" />
             </Button>
-          </form>
+          {/* </form> */}
+          </div>
         </Paper>
       </main>
     );
