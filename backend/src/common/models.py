@@ -22,7 +22,10 @@ class Category(models.Model):
 
     class Meta:
         ordering = ('id',)
-    
+
+    def __str__(self):
+        return '%s | %s' % (self.code, self.sub_category)
+
 class Channel(models.Model):
     name = models.CharField(max_length=200)
     sn_name = models.CharField(max_length=200, null=True, blank=True)
@@ -31,7 +34,7 @@ class Channel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('id',)    
+        ordering = ('id',)
 
 class Province(models.Model):
     code = models.CharField(max_length=36, unique=True)
@@ -80,7 +83,7 @@ class PollingStation(models.Model):
     tm_division = models.CharField(max_length=200, null=True, blank=True)
     district = models.ForeignKey("District", on_delete=models.DO_NOTHING, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         ordering = ('id',)
 

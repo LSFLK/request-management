@@ -570,14 +570,14 @@ function IncidentFormInternal(props) {
     ),
     incidentType: Yup.mixed().required("Required"),
     infoChannel: Yup.mixed().required(f({ id: "request.management.incident.error.channel", defaultMessage: "Mode of receipt is Required" })),
-    language: Yup.string().required(f({ id: "request.management.incident.error.language", defaultMessage: "Language is Required" })),
+    // language: Yup.string().required(f({ id: "request.management.incident.error.language", defaultMessage: "Language is Required" })),
     reporterName: Yup.string().required(f({ id: "request.management.incident.error.name", defaultMessage: "Name is Required" })),
 
     reporterNic: Yup
                 .string()
                 .trim()
-                .matches(/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/ , f({ id: "request.management.report.incidents.invalidNic.error.message", defaultMessage: "NIC Number is Required" }))
-                .required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" })),
+                .matches(/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/ , f({ id: "request.management.report.incidents.invalidNic.error.message", defaultMessage: "NIC Number is Required" })),
+                // .required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" })),
 
     reporterTitle: Yup.string().required(f({ id: "request.management.incident.error.title", defaultMessage: "Title is Required" })),
     reporterAddress: Yup.string().required(f({ id: "request.management.incident.error.address", defaultMessage: "Address is Required" })),
@@ -595,8 +595,8 @@ function IncidentFormInternal(props) {
     reporterMobile: Yup
                     .string()
                     .trim()
-                    .matches(/^(?:0|94|\+94)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|912)(0|2|3|4|5|7|9)|7(0|1|2|5|6|7|8)\d)\d{6}$/ , f({ id: "request.management.incident.error.invalidMobile", defaultMessage: "This is not a valid phone number" }))
-                    .required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" })),
+                    .matches(/^(?:0|94|\+94)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|912)(0|2|3|4|5|7|9)|7(0|1|2|5|6|7|8)\d)\d{6}$/ , f({ id: "request.management.incident.error.invalidMobile", defaultMessage: "This is not a valid phone number" })),
+                    // .required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" })),
 
     reporterTelephone: Yup
                       .string()
@@ -636,7 +636,8 @@ function IncidentFormInternal(props) {
     .trim()
     .when("showRecipient", (showRecipient, IncidentSchema) =>
     showRecipient == "YES"
-        ? IncidentSchema.required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" }))
+        ? IncidentSchema
+        // required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" }))
         .matches(/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/ , f({ id: "request.management.report.incidents.invalidNic.error.message", defaultMessage: "NIC Number is Required" }))
         : IncidentSchema
     ),
@@ -666,7 +667,8 @@ function IncidentFormInternal(props) {
     .trim()
     .when("showRecipient", (showRecipient, IncidentSchema) =>
     showRecipient == "YES"
-        ? IncidentSchema.required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" }))
+        ? IncidentSchema
+        // .required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" }))
         .matches(/^(?:0|94|\+94)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|912)(0|2|3|4|5|7|9)|7(0|1|2|5|6|7|8)\d)\d{6}$/ , f({ id: "request.management.incident.error.invalidMobile", defaultMessage: "This is not a valid phone number" }))
         : IncidentSchema
     ),
@@ -775,18 +777,15 @@ function IncidentFormInternal(props) {
                     </ul>
             </div>
             <br/>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                         <FormControl className={classes.group} error={touched.language && errors.language} component="fieldset">
                         <FormLabel component="legend">{f({ id: "request.management.incident.create.location.language", defaultMessage: "Select Language*" })}</FormLabel>
                             <RadioGroup
                                 aria-label="Gender"
                                 name="language"
                                 id="language"
-                                // ref= {this.props.securityDepositeRpp}
-                                // className={classes.group}
                                 value={values.language}
                                 onChange={handleChange}
-                                // onChange={(e) => { setLanguage(e.target.value);formErrors.languageErrorMsg = null;dispatch(changeLanguage(e.target.value=="SINHALA" ? "si" : e.target.value=="TAMIL" ? "ta" : "en")); }}
                                 onClick={(e) => {dispatch(changeLanguage(e.target.value=="SINHALA" ? "si" : e.target.value=="TAMIL" ? "ta" : "en"))}}
                                 row
                             >
@@ -814,7 +813,7 @@ function IncidentFormInternal(props) {
                             </RadioGroup>
                             <FormHelperText>{touched.language && errors.language ? errors.language : ""}</FormHelperText>
                         </FormControl>
-                    </Grid>
+                    </Grid> */}
                 <Typography variant="h5" gutterBottom>
                   {f({ id: "request.management.incident.create.basic_information" })}
                 </Typography>
@@ -932,6 +931,8 @@ function IncidentFormInternal(props) {
                         props.match.params.paramIncidentId ? true : false
                       }
                       multiline
+                      rows={4}
+                      inputProps={{ maxLength: 3000 }}
                       value={values.description}
                       variant="outlined"
                       onChange={handleChange}
@@ -1065,7 +1066,7 @@ function IncidentFormInternal(props) {
                                                     ) : null}
                                                 </FormControl>
                                             </Grid> */}
-                      <Grid item xs={12} sm={3}>
+                      {/* <Grid item xs={12} sm={3}>
                         <TextField
                           id="occured_date_date"
                           label={f({ id: "request.management.incident.create.date", defaultMessage: "Request Date" })}
@@ -1073,16 +1074,6 @@ function IncidentFormInternal(props) {
                           value={values.occured_date_date}
                           InputLabelProps={{ shrink: true }}
                           onChange={handleChange}
-                          // inputProps={{
-                          //     max:
-                          //         values.occurrence === "OCCURRED"
-                          //             ? moment().format("YYYY-MM-DD")
-                          //             : null,
-                          //     min:
-                          //         values.occurrence === "WILL_OCCUR"
-                          //             ? moment().format("YYYY-MM-DD")
-                          //             : null
-                          // }}
                           error={errors.occured_date_date}
                           helperText={errors.occured_date_date}
                         />
@@ -1096,7 +1087,7 @@ function IncidentFormInternal(props) {
                           error={errors.occured_date_time}
                           helperText={errors.occured_date_time}
                         />
-                      </Grid>
+                      </Grid> */}
                     </>
                   ) : null}
                   {values.incidentType === "COMPLAINT" ? (

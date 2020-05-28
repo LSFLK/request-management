@@ -13,6 +13,7 @@ import {
 import { withRouter } from "react-router";
 import moment from "moment";
 import { useIntl } from "react-intl";
+import Chip from "@material-ui/core/Chip/Chip";
 
 const CustomTableCell = withRouter(
   withStyles((theme) => ({
@@ -20,6 +21,7 @@ const CustomTableCell = withRouter(
       // padding: "3px 8px",
       fontSize: "14px",
       textAlign: 'center',
+        border:"1px solid rgb(224, 224, 224)",
       "& p.description": {
         overflow: "hidden",
         textOverflow: "ellipsis",
@@ -30,6 +32,10 @@ const CustomTableCell = withRouter(
         "-webkit-box-orient": "vertical",
       },
     },
+      head:{
+          fontSize: "16px",
+          border:"1px solid rgb(224, 224, 224)",
+      }
   }))(TableCell)
 );
 
@@ -128,7 +134,7 @@ function IncidentList({
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.category"})}</CustomTableCell>
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.status"})}</CustomTableCell>
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.severity"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.response_time"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.due_date"})}</CustomTableCell>
           {/* <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.description"})}</CustomTableCell> */}
           {/* <CustomTableCell align="center">Final Resolution</CustomTableCell> */}
         </TableRow>
@@ -181,7 +187,7 @@ function IncidentList({
                 <p>{row.severity}</p>
             </CustomTableCell>
             <CustomTableCell align="center">
-              <p>{row.response_time} h</p>
+                <p>{moment(row.dueDate, "YYYY-MM-DD").fromNow()}</p>
             </CustomTableCell>
               {/* <CustomTableCell>
                 <p>
@@ -212,6 +218,9 @@ function IncidentList({
             }}
             onChangePage={handlePageChange}
           />
+            <CustomTableCell align="center">
+                <Chip label={"Verified"} className={classes.chip} style={{backgroundColor:"rgba(0, 255, 0, 0.2)"}} />
+            </CustomTableCell>
         </TableRow>
         {/* )} */}
       </TableFooter>

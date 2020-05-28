@@ -112,7 +112,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         # election_code = settings.ELECTION
         # incidents = Incident.objects.all().filter(election=election_code).order_by('created_date').reverse()
 
-        incidents = Incident.objects.all().order_by('created_date').reverse()
+        incidents = Incident.objects.all().order_by('due_date')
         user = request.user
 
         # for external entities, they can only view related incidents

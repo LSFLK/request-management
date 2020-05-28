@@ -89,7 +89,10 @@ def get_incident_status_guest(refId):
     elif incident.current_status == StatusType.VERIFIED.name:
         status["reply"] = "Your request has been acknowledged."
     elif incident.current_status == StatusType.INFORMATION_REQUESTED.name or has_pending_information_request(incident):
-        status = get_public_status_on_information_request(incident)
+        # not setting the user to input requested information
+        # status = get_public_status_on_information_request(incident)
+        status["reply"] = "Your request requires further information to proceed. Reach us ealiest or we will contact \
+            you soon, for more information"
     elif incident.current_status == StatusType.ACTION_PENDING.name or incident.current_status == StatusType.ACTION_TAKEN.name \
         or incident.current_status == StatusType.INFORMATION_PROVIDED.name:
         status["reply"] = "Your request is currently being attended to."

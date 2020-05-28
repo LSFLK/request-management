@@ -84,6 +84,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
+# file uload parameters
+MEDIA_URL = '/app/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # TODO: need to use redis channel layer in prod
 CHANNEL_LAYERS = {
     "default": {

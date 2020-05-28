@@ -1266,9 +1266,9 @@
       "code": "COVID19-1",
       "top_category": "COVID-19",
       "sub_category": "Violation of curfew",
-      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_top_category": "COVID-19",
       "sn_sub_category": "ඇඳිරිනීති කඩකිරීම් සම්බන්ධ ගැටලු",
-      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_top_category": "COVID-19",
       "tm_sub_category": "ஊரடங்கு சட்டங்களை மீறல்கள் சிக்கல்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
@@ -1280,9 +1280,9 @@
       "code": "COVID19-2",
       "top_category": "COVID-19",
       "sub_category": "Subsidies and allowances",
-      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_top_category": "COVID-19",
       "sn_sub_category": "සහනාධාර හා දීමනා නිසි පරිදි නොලැබීම්",
-      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_top_category": "COVID-19",
       "tm_sub_category": "மானியங்கள் மற்றும் படிகள் வழங்கப்படுகின்றன",
       "created_date": "2020-01-01T00:00:00Z"
     }
@@ -1294,9 +1294,9 @@
       "code": "COVID19-3",
       "top_category": "COVID-19",
       "sub_category": "Food distribution",
-      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_top_category": "COVID-19",
       "sn_sub_category": "ආහාර බෙදාහැරීම් සම්බන්ධ ගැටලු",
-      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_top_category": "COVID-19",
       "tm_sub_category": "உணவு விநியோகம் சிக்கல்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
@@ -1308,9 +1308,9 @@
       "code": "COVID19-4",
       "top_category": "COVID-19",
       "sub_category": "Clergy",
-      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_top_category": "COVID-19",
       "sn_sub_category": "ආගමික සිද්ධාස්ථාන හා පූජ්‍ය පක්ෂය සම්බන්ධ ගැටලු",
-      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_top_category": "COVID-19",
       "tm_sub_category": "கொள்கைச் மற்றும் மத குருமார்கள் சிக்கல்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
@@ -1321,11 +1321,11 @@
     "fields": {
       "code": "COVID19-5",
       "top_category": "COVID-19",
-      "sub_category": "COVID-19 related problems",
-      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
-      "sn_sub_category": "කොවිඩ්-19 සම්බන්ධ වෙනත් ගැටලු",
-      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
-      "tm_sub_category": "-19 கோவில் தொடர்பான பிரச்சினைகள்",
+      "sub_category": "Other COVID-19 problems",
+      "sn_top_category": "COVID-19",
+      "sn_sub_category": "COVID-19 සම්බන්ධ වෙනත් ගැටලු",
+      "tm_top_category": "COVID-19",
+      "tm_sub_category": "COVID-19 கோவில் தொடர்பான பிரச்சினைகள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
@@ -1382,62 +1382,6 @@
       "sn_sub_category": "ඉහත වර්ගීකරණයන්ට අයත් නොවන අනෙකුත් ඉල්ලීම් හා ගැටලු",
       "tm_top_category": " மற்றவை",
       "tm_sub_category": "தரவரிசையில் வெளியே இதர வேண்டுகோள்கள் மற்றும் பிரச்சினைகள்",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": "100",
-    "fields": {
-      "code": "REJECT-1",
-      "top_category": " Rejected Requests",
-      "sub_category": "Answer letters",
-      "sn_top_category": " ප්‍රතික්ෂේප වන ඉල්ලීම් (Rejected)",
-      "sn_sub_category": "පිළිතුරු ලිපි",
-      "tm_top_category": " நிராகரிக்கப்பட்ட கோரிக்கைகள்",
-      "tm_sub_category": "பதில் கடிதங்கள்",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": "101",
-    "fields": {
-      "code": "REJECT-2",
-      "top_category": " Rejected Requests",
-      "sub_category": "Copies of letters",
-      "sn_top_category": " ප්‍රතික්ෂේප වන ඉල්ලීම් (Rejected)",
-      "sn_sub_category": "පිටපත් ලිපි",
-      "tm_top_category": " நிராகரிக்கப்பட்ட கோரிக்கைகள்",
-      "tm_sub_category": "கடிதங்கள் நகல்கள்",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": "102",
-    "fields": {
-      "code": "REJECT-3",
-      "top_category": " Rejected Requests",
-      "sub_category": "Anonymous petitions",
-      "sn_top_category": " ප්‍රතික්ෂේප වන ඉල්ලීම් (Rejected)",
-      "sn_sub_category": "නිර්නාමික පෙත්සම්",
-      "tm_top_category": " நிராகரிக்கப்பட்ட கோரிக்கைகள்",
-      "tm_sub_category": "அநாமதேய மனுக்களை",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": "103",
-    "fields": {
-      "code": "REJECT-4",
-      "top_category": " Rejected Requests",
-      "sub_category": "Instruction to file with other documents/letters",
-      "sn_top_category": " ප්‍රතික්ෂේප වන ඉල්ලීම් (Rejected)",
-      "sn_sub_category": "උපදෙස් පරිදි ගොනු කරනු ලබන අනෙකුත් ලිපි",
-      "tm_top_category": " நிராகரிக்கப்பட்ட கோரிக்கைகள்",
-      "tm_sub_category": "மற்ற கடிதங்கள் மூலம் வழிமுறைகள் கோப்புகளை",
       "created_date": "2020-01-01T00:00:00Z"
     }
   }

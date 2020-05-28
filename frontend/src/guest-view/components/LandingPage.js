@@ -138,35 +138,38 @@ function HomePage(props) {
           </Grid>
         </Grid>
         <Grid  item xs={6} sm={4}>
-          <Grid className="house-container" item xs={12} sm={12}>
+          {/* <Grid className="house-container" item xs={12} sm={12}>
               <img
               src={houseV2}
               alt="logo"
             />
-          </Grid>
+          </Grid> */}
         </Grid>
         <Grid item xs={12} sm={4}>
           <div style={{ textAlign: "right" }}>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("si"))}
               className={classes.button}
             >
               {" "}
-              Sinhala{" "}
+              සිංහල{" "}
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("ta"))}
               className={classes.button}
             >
               {" "}
-              Tamil{" "}
+              தமிழ்{" "}
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("en"))}
               className={classes.button}

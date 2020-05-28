@@ -27,6 +27,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
+import blue from '@material-ui/core/colors/blue';
 
 import DescriptionSection from "./GuestFormDescriptionSection";
 import CategorySection from "./GuestFormCatogorySection";
@@ -48,7 +49,7 @@ import {
   requestIncidentCatogories,
 } from "../../shared/state/sharedActions";
 
-import {loadOrganization} from "../state/guestViewActions";
+import { loadOrganization } from "../state/guestViewActions";
 
 import {
   createGuestIncident,
@@ -95,29 +96,32 @@ const styles = (theme) => ({
     marginLeft: -20,
   },
   group: {
-    marginLeft:56,
-    marginBottom:-20,
-    marginTop:33
+    marginLeft: 56,
+    marginBottom: -20,
+    marginTop: 33,
   },
   paper2: {
     padding: theme.spacing.unit * 2,
     background: "#ebf5fa",
     marginBottom: 10,
-    marginRight:15,
-    marginTop:15
+    marginRight: 15,
+    marginTop: 15,
+  },
+  note: {
+    backgroundColor: blue[100],
   },
 });
 
-const queryString = require('query-string');
+const queryString = require("query-string");
 
 const VerticalLinearStepper = (props) => {
-    const queryParams = queryString.parse(props.location.search);
+  const queryParams = queryString.parse(props.location.search);
   useEffect(() => {
     dispatch(fetchElections());
     dispatch(fetchCategories());
     dispatch(fetchChannels());
     dispatch(fetchDistricts());
-    dispatch(loadOrganization(queryParams.organization))
+    dispatch(loadOrganization(queryParams.organization ? queryParams.organization : 1));
   }, []);
 
   const { formatMessage: f } = useIntl();
@@ -205,7 +209,7 @@ const VerticalLinearStepper = (props) => {
         ? moment(incidentData.occured_date).format("HH:mm")
         : null,
   });
-  const { selectedLanguage } = useSelector((state) => (state.shared));
+  const { selectedLanguage } = useSelector((state) => state.shared);
 
   // location section
 
@@ -224,14 +228,18 @@ const VerticalLinearStepper = (props) => {
   const [showRecipient, setShowRecipient] = useState(
     incidentId ? incidentData.showRecipient : ""
   );
-  const [title, setTitle] = useState(
-    incidentId ? incidentData.title : ""
-  );
+  const [title, setTitle] = useState(incidentId ? incidentData.title : "");
   const [recipientTitle, setRecipientTitle] = useState(
     incidentId ? incidentData.recipientTitle : ""
   );
   const [language, setLanguage] = useState(
-    incidentId ? incidentData.language : selectedLanguage==="si" ? "SINHALA" : selectedLanguage==="ta" ? "TAMIL" : "ENGLISH",
+    incidentId
+      ? incidentData.language
+      : selectedLanguage === "si"
+      ? "SINHALA"
+      : selectedLanguage === "ta"
+      ? "TAMIL"
+      : "ENGLISH"
   );
   const [incidentDistrict, setIncidentDistrict] = useState(
     incidentId ? incidentData.district : ""
@@ -251,9 +259,7 @@ const VerticalLinearStepper = (props) => {
     recipientName: incidentReporterData
       ? incidentReporterData.recipientName
       : "",
-    recipientNic: incidentReporterData
-      ? incidentReporterData.recipientNic
-      : "",
+    recipientNic: incidentReporterData ? incidentReporterData.recipientNic : "",
     recipientPhone: incidentReporterData
       ? incidentReporterData.recipientPhone
       : "",
@@ -338,21 +344,12 @@ const VerticalLinearStepper = (props) => {
       recipientContactErrorMsg: null,
       recipientLandlineErrorMsg: null,
       incidentEmailErrorMsg: null,
-      recipientEmailErrorMsg: null
+      recipientEmailErrorMsg: null,
     });
     let errorMsg = { ...formErrors };
     let valid = true;
 
-    if (!incidentContact.mobile) {
-      errorMsg = {
-        ...errorMsg,
-        incidentContactErrorMsg: f({
-          id: "request.management.report.incidents.phone.error.message",
-          defaultMessage: "Contact number is required",
-        }),
-      };
-      valid = false;
-    }else{
+    if (incidentContact.mobile) {
       if(!(incidentContact.mobile.match("^[0-9]{10}$"))){
       errorMsg = {
         ...errorMsg,
@@ -366,7 +363,7 @@ const VerticalLinearStepper = (props) => {
     }
 
     if (incidentContact.phone) {
-      if(!(incidentContact.phone.match("^[0-9]{10}$"))){
+      if (!incidentContact.phone.match("^[0-9]{10}$")) {
         errorMsg = {
           ...errorMsg,
           incidentLandlineErrorMsg: f({
@@ -379,7 +376,11 @@ const VerticalLinearStepper = (props) => {
     }
 
     if (incidentContact.email) {
-      if(!(incidentContact.email.match("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"))){
+      if (
+        !incidentContact.email.match(
+          "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$"
+        )
+      ) {
         errorMsg = {
           ...errorMsg,
           incidentEmailErrorMsg: f({
@@ -401,16 +402,7 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    if (!incidentContact.nic) {
-      errorMsg = {
-        ...errorMsg,
-        incidentNicErrorMsg: f({
-          id: "request.management.report.incidents.nic.error.message",
-          defaultMessage: "NIC Number is required",
-        }),
-      };
-      valid = false;
-    }else{
+    if (incidentContact.nic) {
       if(!(incidentContact.nic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$"))){
       errorMsg = {
         ...errorMsg,
@@ -463,16 +455,7 @@ const VerticalLinearStepper = (props) => {
       valid = false;
     }
     if (showRecipient === "YES") {
-      if (!incidentContact.recipientMobile) {
-        errorMsg = {
-          ...errorMsg,
-          recipientContactErrorMsg: f({
-            id: "request.management.report.incidents.phone.error.message",
-            defaultMessage: "Contact number is required",
-          }),
-        };
-        valid = false;
-      }else{
+      if (incidentContact.recipientMobile) {
         if(!(incidentContact.recipientMobile.match("^[0-9]{10}$"))){
         errorMsg = {
           ...errorMsg,
@@ -486,7 +469,11 @@ const VerticalLinearStepper = (props) => {
       }
 
       if (incidentContact.recipientEmail) {
-        if(!(incidentContact.recipientEmail.match("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"))){
+        if (
+          !incidentContact.recipientEmail.match(
+            "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$"
+          )
+        ) {
           errorMsg = {
             ...errorMsg,
             recipientEmailErrorMsg: f({
@@ -499,7 +486,7 @@ const VerticalLinearStepper = (props) => {
       }
 
       if (incidentContact.recipientPhone) {
-        if(!(incidentContact.recipientPhone.match("^[0-9]{10}$"))){
+        if (!incidentContact.recipientPhone.match("^[0-9]{10}$")) {
           errorMsg = {
             ...errorMsg,
             recipientLandlineErrorMsg: f({
@@ -521,16 +508,7 @@ const VerticalLinearStepper = (props) => {
         };
         valid = false;
       }
-      if (!incidentContact.recipientNic) {
-        errorMsg = {
-          ...errorMsg,
-          recipientNicErrorMsg: f({
-            id: "request.management.report.incidents.nic.error.message",
-            defaultMessage: "NIC Number is required",
-          }),
-        };
-        valid = false;
-      }else{
+      if (incidentContact.recipientNic) {
         if(!(incidentContact.recipientNic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$"))){
         errorMsg = {
           ...errorMsg,
@@ -604,16 +582,16 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    if (!language) {
-      errorMsg = {
-        ...errorMsg,
-        languageErrorMsg: f({
-          id: "request.management.report.incidents.recipient.error.message",
-          defaultMessage: "This is required",
-        }),
-      };
-      valid = false;
-    }
+    // if (!language) {
+    //   errorMsg = {
+    //     ...errorMsg,
+    //     languageErrorMsg: f({
+    //       id: "request.management.report.incidents.recipient.error.message",
+    //       defaultMessage: "This is required",
+    //     }),
+    //   };
+    //   valid = false;
+    // }
 
     setFormErrors({ ...errorMsg });
     return valid;
@@ -810,7 +788,17 @@ const VerticalLinearStepper = (props) => {
       }),
       content: (
         <>
-          <FileUploader files={incidentFiles} setFiles={setIncidentFiles} setFileError={setFileError} />
+          <FileUploader
+            files={incidentFiles}
+            setFiles={setIncidentFiles}
+            setFileError={setFileError}
+          />
+          <b>
+            {f({
+              id: "request.management.report.incidents.recaptcha.note",
+              defaultMessage: "You need to tick the box \"I'm not a robot\" below, to submit the form.",
+            })}
+          </b>
           <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
@@ -840,7 +828,7 @@ const VerticalLinearStepper = (props) => {
                 recaptcha: incidentRecaptcha,
                 // location: incidentLocation,
                 address: incidentAddress,
-                language:language,
+                language: language,
                 city: incidentCity,
                 category: incidentCatogory,
                 mainCategory: incidentMainCatogory,
@@ -857,7 +845,7 @@ const VerticalLinearStepper = (props) => {
                 recipientTelephone: incidentContact.recipientPhone,
                 recipientMobile: incidentContact.recipientMobile,
                 recipientEmail: incidentContact.recipientEmail,
-                recipientTitle:recipientTitle
+                recipientTitle: recipientTitle,
               };
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -896,7 +884,7 @@ const VerticalLinearStepper = (props) => {
                 recaptcha: incidentRecaptcha,
                 // location: incidentLocation,
                 address: incidentAddress,
-                language:language,
+                language: language,
                 city: incidentCity,
                 category: incidentCatogory,
                 mainCategory: incidentMainCatogory,
@@ -913,8 +901,8 @@ const VerticalLinearStepper = (props) => {
                 recipientTelephone: incidentContact.recipientPhone,
                 recipientMobile: incidentContact.recipientMobile,
                 recipientEmail: incidentContact.recipientEmail,
-                recipientTitle:recipientTitle,
-                organizationId:queryParams.organization
+                recipientTitle: recipientTitle,
+                organizationId: queryParams.organization,
               };
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -944,7 +932,7 @@ const VerticalLinearStepper = (props) => {
             }
           }
         } else {
-            //updating a existing incident
+          //updating a existing incident
           if (incidentFiles) {
             const fileData = new FormData();
             for (var file of incidentFiles) {
@@ -1160,7 +1148,7 @@ const VerticalLinearStepper = (props) => {
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={6}>
-            <Logo image={organization? organization.logo:null} />
+            <Logo image={organization ? organization.logo : null} />
           </Grid>
         </Grid>
 
@@ -1168,24 +1156,27 @@ const VerticalLinearStepper = (props) => {
           <div style={{ textAlign: "right" }}>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("si"))}
               className={classes.button}
             >
               {" "}
-              Sinhala{" "}
+              සිංහල{" "}
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("ta"))}
               className={classes.button}
             >
               {" "}
-              Tamil{" "}
+              தமிழ்{" "}
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("en"))}
               className={classes.button}
@@ -1222,18 +1213,15 @@ const VerticalLinearStepper = (props) => {
             </Typography></li>
                     </ul>
             </div>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
                         <FormControl className={classes.group} error={formErrors.languageErrorMsg ? true : false} component="fieldset">
                         <FormLabel component="legend">{f({ id: "request.management.incident.create.location.language", defaultMessage: "Select Language*" })}</FormLabel>
                             <RadioGroup
                                 aria-label="Gender"
                                 name="language"
                                 id="language"
-                                // ref= {this.props.securityDepositeRpp}
-                                // className={classes.group}
                                 value={language}
                                 onChange={(e) => { setLanguage(e.target.value);formErrors.languageErrorMsg = null;dispatch(changeLanguage(e.target.value=="SINHALA" ? "si" : e.target.value=="TAMIL" ? "ta" : "en")); }}
-                                // onClick={(e) => { }}
                                 row
                             >
                                 <FormControlLabel
@@ -1260,7 +1248,7 @@ const VerticalLinearStepper = (props) => {
                             </RadioGroup>
                             <FormHelperText>{formErrors.languageErrorMsg ? formErrors.languageErrorMsg : null}</FormHelperText>
                         </FormControl>
-                    </Grid>
+                    </Grid> */}
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => {
           const props = {};
@@ -1328,7 +1316,9 @@ const VerticalLinearStepper = (props) => {
                       onClick={handleNext}
                       className={classes.button}
                       disabled={
-                        index == 3 ? isLoading || !incidentRecaptcha || fileError : isLoading 
+                        index == 3
+                          ? isLoading || !incidentRecaptcha || fileError
+                          : isLoading
                       }
                     >
                       {activeStep === steps.length - 1

@@ -441,14 +441,14 @@ class DomainContainer extends React.Component {
               </Badge>
             </IconButton>
 
-            <Button
+            {/* <Button
               aria-owns={open ? "menu-appbar" : undefined}
               aria-haspopup="true"
               onClick={this.handleLangMenu}
               color="inherit"
             >
               {selectedLanguage}
-            </Button>
+            </Button> */}
 
             <Menu
               id="notifications-appbar"
@@ -479,30 +479,35 @@ class DomainContainer extends React.Component {
               })}
             </Menu>
 
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorLang}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={langMenuOpen}
-              onClose={this.handleLangMenuClose}
+            <div style={{ textAlign: "right",marginLeft:5,marginRight:5 }}>
+            <Button
+              variant={selectedLanguage === "si" ? "outlined" : "text"}
+              color="inherit"
+              onClick={() => this.handleLanguageChange("si")}
+              className={classes.button}
             >
-              <MenuItem onClick={() => this.handleLanguageChange("si")}>
-                Sinhala
-              </MenuItem>
-              <MenuItem onClick={() => this.handleLanguageChange("ta")}>
-                Tamil
-              </MenuItem>
-              <MenuItem onClick={() => this.handleLanguageChange("en")}>
-                English
-              </MenuItem>
-            </Menu>
+              {" "}
+              සිංහල{" "}
+            </Button>
+            <Button
+              variant={selectedLanguage === "ta" ? "outlined" : "text"}              
+              color="inherit"
+              onClick={() => this.handleLanguageChange("ta")}
+              className={classes.button}
+            >
+              {" "}
+              தமிழ்{" "}
+            </Button>
+            <Button
+              variant={selectedLanguage === "en" ? "outlined" : "text"}
+              color="inherit"
+              onClick={() => this.handleLanguageChange("en")}
+              className={classes.button}
+            >
+              {" "}
+              English{" "}
+            </Button>
+          </div>
 
             <Menu
               id="menu-appbar"

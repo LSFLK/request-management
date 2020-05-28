@@ -42,7 +42,7 @@ schema_view = get_swagger_view(title='Issue Backend API')
 def _static_butler(request, path, **kwargs):
     """
     Serve static files using the django static files configuration
-    WITHOUT collectstatic. This is slower, but very useful for API 
+    WITHOUT collectstatic. This is slower, but very useful for API
     only servers where the static files are really just for /admin
 
     Passing insecure=True allows serve_static to process, and ignores
@@ -67,12 +67,26 @@ urlpatterns = [
     path("policedivisions/", common_views.PoliceDivisionList.as_view()),
     path("dsdivisions/", common_views.DSDivisionList.as_view()),
     path("gndivisions/", common_views.GNDivisionList.as_view()),
-    path("politicalparties/", common_views.PoliticalPartyList.as_view()),
-    path("incidents/", incident_views.IncidentList.as_view()),
-    path("incidents/sms", incident_views.SMSIncident.as_view()),
-    path("incidents/<uuid:incident_id>",
-         incident_views.IncidentDetail.as_view()),
-    path("incidents/<uuid:incident_id>/events", event_views.get_event_trail),
+    path(
+        "politicalparties/",
+        common_views.PoliticalPartyList.as_view()
+    ),
+    path(
+        "incidents/",
+        incident_views.IncidentList.as_view()
+    ),
+    path(
+        "incidents/sms",
+        incident_views.SMSIncident.as_view()
+    ),
+    path(
+        "incidents/<uuid:incident_id>",
+        incident_views.IncidentDetail.as_view()
+    ),
+    path(
+        "incidents/<uuid:incident_id>/events",
+        event_views.get_event_trail
+    ),
     path(
         "incidents/<uuid:incident_id>/comment",
         incident_views.IncidentCommentView.as_view(),
@@ -121,7 +135,7 @@ urlpatterns = [
         report_views.ReportingView.as_view(),
     ),
     path(
-        'pdfgen/',
+        "pdfgen/",
         report_views.ReportingAccessView.as_view(),
     ),
     path("incidents/test", incident_views.Test.as_view()
