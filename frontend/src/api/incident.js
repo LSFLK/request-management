@@ -56,6 +56,14 @@ export const getIncidents = async (filters, page = 1) => {
     query += "&district=" + filters.district;
   }
 
+  if (filters.language) {
+    query += "&language=" + filters.language;
+  }
+
+  if (filters.channel) {
+    query += "&channel=" + filters.channel;
+  }
+
   if (filters.startTime && filters.endTime) {
     const startDate = moment(filters.startTime).format("YYYY-MM-DD HH:mm");
     const endDate = moment(filters.endTime).format("YYYY-MM-DD HH:mm");
@@ -68,6 +76,10 @@ export const getIncidents = async (filters, page = 1) => {
 
   if (filters.show_closed) {
     query += "&show_closed=" + filters.show_closed;
+  }
+
+  if (filters.organization) {
+    query += "&organization=" + filters.organization;
   }
 
   if (filters.title) {

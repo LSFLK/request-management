@@ -148,13 +148,15 @@ class IntegrationReactSelect extends React.Component {
             single: null,
         };
     }
+    
 
     handleChange = event => value => {
         this.props.onChange(value.label, value.value);
     };
 
     render() {
-        const { classes, theme, suggestions, categories, value, error, handleChange } = this.props;
+        const { classes, theme, suggestions, categories, value, error, handleChange, categoryLable } = this.props;
+        
         if(categories){
         for (var j = 0; j < categories.length; j++) {
 
@@ -199,7 +201,7 @@ class IntegrationReactSelect extends React.Component {
                             handleChange("category")(selectedOption.value);
                           }}
                         name="category"
-                        placeholder="Search category by name"
+                        placeholder={categoryLable}
                     />
                 </NoSsr>
             </div>

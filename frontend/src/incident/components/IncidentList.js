@@ -216,7 +216,7 @@ function IncidentList({
             onChangePage={handlePageChange}
           />
             <CustomTableCell align="center">
-                <Chip label={"Verified"} className={classes.chip} style={{backgroundColor:"rgba(0, 255, 0, 0.2)"}} />
+              <Chip label={"Requires Attention"} className={classes.chip} style={{backgroundColor:"rgba(0, 255, 0, 0.2)"}} />
             </CustomTableCell>
         </TableRow>
         {/* )} */}

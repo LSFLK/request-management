@@ -99,7 +99,7 @@ function SearchForm(props) {
   }, []);
   const { classes, categories, listType } = props;
   // const severityValues = Array(10).fill(0).map((e, i) => i + 1);
-  const severityValues = ['High','Medium','Low'];
+  const severityValues = ['HIGH','MEDIUM','LOW'];
   const institutions = useSelector(state => state.shared.institutions);
   const organizations = useSelector(state => state.user.organizations);
   const districts = useSelector(state => state.shared.districts);
@@ -107,7 +107,15 @@ function SearchForm(props) {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const {channels} = useSelector((state) => state.shared);
   const { formatMessage: f } = useIntl();
-  
+
+  const categoryLable = f({id: "request.management.incident.review.category_lable", defaultMessage: "Search category by name"});
+  const orgLable = f({id: "request.management.incident.review.org_lable", defaultMessage: "Search organization by name"});
+  const districtLable = f({id: "request.management.incident.review.district_lable", defaultMessage: "Search district by name"});
+
+  const all = {
+    label: "All",
+    value: ""
+}
   let orgSearch = props.incidentType === 'INQUIRY' ?
       (<Search
           institutions={institutions}
@@ -134,7 +142,10 @@ function SearchForm(props) {
         );
       })
     const suggestions = categories.map((o) => ( {label: o.sub_category, value: o.id }) ); 
-
+    
+  suggestions.splice(0,0, all);
+  suggestionOrganizations.splice(0,0, all);
+  suggestionDistricts.splice(0,0, all);
   return (
     <Formik
       initialValues={props.incidentSearchFilter}
@@ -211,12 +222,12 @@ function SearchForm(props) {
                         }
                         displayEmpty
                         name="language"
-                        value={values.status}
+                        value={values.language}
                         onChange={handleChange}
                         className={classes.selectEmpty}
                       >
                         <MenuItem value="">
-                          <em>None</em>
+                          <em>All</em>
                         </MenuItem>
                         <MenuItem value={"SINHALA"}>{f({ id: "request.management.incident.create.location.language.sinhala", defaultMessage: "Language" })}</MenuItem>
                         <MenuItem value={"TAMIL"}>{f({ id: "request.management.incident.create.location.language.tamil", defaultMessage: "Language" })}</MenuItem>
@@ -238,7 +249,7 @@ function SearchForm(props) {
                         className={classes.selectEmpty}
                       >
                         <MenuItem value="">
-                          <em>None</em>
+                          <em>All</em>
                         </MenuItem>
                         {listType == "review" && (<MenuItem value={"NEW"}>New/Unverified</MenuItem>)}
                         {listType == "review" && (<MenuItem value={"VERIFIED"}>Verified</MenuItem>)}
@@ -265,7 +276,7 @@ function SearchForm(props) {
                         className={classes.selectEmpty}
                       >
                         <MenuItem value="">
-                          <em>None</em>
+                          <em>All</em>
                         </MenuItem>
                         {severityValues.map((val) => (
                           <MenuItem value={val} key={val}>{val}</MenuItem>
@@ -290,7 +301,7 @@ function SearchForm(props) {
                         className={classes.selectEmpty}
                       >
                         <MenuItem value="">
-                          <em>None</em>
+                          <em>All</em>
                         </MenuItem>
                         {channels.map((val) => (
                           <MenuItem value={val.id} key={val.id}>{val.name}</MenuItem>
@@ -298,7 +309,7 @@ function SearchForm(props) {
                       </Select>
                     </FormControl>
                     <FormControl className={classes.formControl2}>
-                    <CustomAutocompleteCategory suggestions={suggestions} value={values.category} handleChange={handleChange} categories={categories} />
+                    <CustomAutocompleteCategory suggestions={suggestions} value={values.category} handleChange={handleChange} categories={categories} categoryLable={categoryLable} />
                       {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.category", defaultMessage: "Category"})}
                       </InputLabel>
@@ -326,7 +337,7 @@ function SearchForm(props) {
                       </Select> */}
                     </FormControl>
                     <FormControl className={classes.formControl2}>
-                     <CustomAutocompleteOrganization suggestions={suggestionOrganizations} value={values.organization} handleChange={handleChange} organizations={organizations} />
+                     <CustomAutocompleteOrganization suggestions={suggestionOrganizations} value={values.organization} handleChange={handleChange} organizations={organizations} orgLable={orgLable} />
                       {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.organization", defaultMessage: "Organization"})}
                       </InputLabel>
@@ -389,7 +400,7 @@ function SearchForm(props) {
                       />
                     </FormControl>
                     <FormControl className={classes.formControl2}>
-                    <CustomAutocompleteDistrict suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} />
+                    <CustomAutocompleteDistrict suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} districtLable={districtLable} />
                       {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.location.district", defaultMessage: "District"})}
                       </InputLabel>

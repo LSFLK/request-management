@@ -32,7 +32,7 @@ from django.contrib.contenttypes.models import ContentType
 from ..events import services as event_services
 from ..events.models import Event
 from ..file_upload.models import File
-from ..custom_auth.models import Division, UserLevel, Profile
+from ..custom_auth.models import Division, UserLevel, Profile, Organization
 from django.db import connection
 
 from datetime import datetime
@@ -589,11 +589,13 @@ def get_incidents_before_date(date: str) -> Incident:
     except Exception as e:
         return None
 
-def get_incident_list_by_organization_id(org_id):
-    """ get all incident assigned or linked to given orgnization id. """
+def get_incident_list_by_organization_code(org_code):
+    """ get all incident assigned or linked to given orgnization """
+    # get orgnization id
+    org = Organization.objects.get(code=org_code)
 
     # get user list of the organization
-    profiles = Profile.objects.filter(organization=org_id)
+    profiles = Profile.objects.filter(organization=org)
 
     all_incidents = []
     # all external organizations will all ways be listed on linked-individuals

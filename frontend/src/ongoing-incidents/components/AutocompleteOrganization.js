@@ -154,8 +154,7 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const { classes, theme, suggestions, organizations, value } = this.props;
-
+        const { classes, theme, suggestions, organizations, value, handleChange, orgLable } = this.props;
         for (var j = 0; j < organizations.length; j++) {
             let currOrg = organizations.byIds[j];
             if(value===currOrg.code){
@@ -192,8 +191,11 @@ class IntegrationReactSelect extends React.Component {
                         options={suggestions}
                         components={components}
                         value={organization}
-                        onChange={this.handleChange()}
-                        placeholder="Search organizations by name"
+                        onChange={selectedOption => {
+                            handleChange("organization")(selectedOption.value);
+                          }}
+                        // onChange={this.handleChange()}
+                        placeholder={orgLable}
                     />
                 </NoSsr>
             </div>

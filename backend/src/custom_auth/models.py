@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Organization(models.Model):
-    code = models.CharField(max_length=10)
+    code = models.CharField(max_length=10, unique=True)
     displayName = models.CharField(max_length=200)
     sn_name = models.CharField(max_length=200, null=True, blank=True)
     tm_name = models.CharField(max_length=200, null=True, blank=True)

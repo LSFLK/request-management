@@ -154,7 +154,7 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const { classes, theme, value, dataObj, handleChange } = this.props;
+        const { classes, theme, value, dataObj, handleChange, gnLable } = this.props;
 
         const suggestionGn = dataObj.allCodes.map((c, k) => {
             let currGn = dataObj.byCode[c];
@@ -202,7 +202,7 @@ class IntegrationReactSelect extends React.Component {
                             handleChange("gramaNiladhari")(selectedOption.value);
                           }}
                         name="gramaNiladhari"
-                        placeholder="Search Grama Niladhari Division by name"
+                        placeholder={gnLable}
                     />
                 </NoSsr>
             </div>

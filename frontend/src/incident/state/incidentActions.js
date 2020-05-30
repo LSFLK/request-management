@@ -65,32 +65,32 @@ export const updateInternalIncidentSuccess = createAction('INCIDENT/UPDATE_INTER
 export const updateInternalIncidentError = createAction('INCIDENT/UPDATE_INTERNAL_INCIDENT_ERROR');
 
 export function updateInternalIncident(incidentId, incidentData) {
+    console.log(incidentData)
     return async function(dispatch) {
         dispatch(updateInternalIncidentRequest());
         try{
-            const recipientUpdate = {
-                "name": incidentData["recipientName"],
-                "nic": incidentData["recipientNic"],
-                "title": incidentData["recipientTitle"],
-                "email": incidentData["recipientEmail"],
-                "mobile": incidentData["recipientMobile"],
-                "telephone": incidentData["recipientTelephone"],
-                "address": incidentData["recipientAddress"],
-                "city": incidentData["recipientCity"],
-                "district": incidentData["recipientDistrict"],
-                "gnDivision": incidentData["recipientGramaNiladhari"]
-            }
-            if(incidentData.recipientName !== "" || incidentData.recipientName === undefined){
-            if(incidentData.recipient){
-                await incidentsApi.updateRecipient(incidentData.recipient, recipientUpdate);
-            }else{
-                const recipient = await incidentsApi.insertRecipient(recipientUpdate);
-                console.log(recipient.data);
-                if(recipient.data){
-                incidentData.recipient = recipient.data.id;
+            if(incidentData["showRecipient"]=="YES"){
+                const recipientUpdate = {
+                    "name": incidentData["recipientName"],
+                    "nic": incidentData["recipientNic"],
+                    "title": incidentData["recipientTitle"],
+                    "email": incidentData["recipientEmail"],
+                    "mobile": incidentData["recipientMobile"],
+                    "telephone": incidentData["recipientTelephone"],
+                    "address": incidentData["recipientAddress"],
+                    "city": incidentData["recipientCity"],
+                    "district": incidentData["recipientDistrict"],
+                    "gnDivision": incidentData["recipientGramaNiladhari"]
+                }
+                if(incidentData.recipient){
+                    await incidentsApi.updateRecipient(incidentData.recipient, recipientUpdate);
+                }else{
+                    const recipient = await incidentsApi.insertRecipient(recipientUpdate);
+                    if(recipient.data){
+                        incidentData.recipient = recipient.data.id;
+                    }
                 }
             }
-        }
 
             const incident = (await incidentsApi.updateIncident(incidentId, incidentData)).data;
             const reporterId = incident.reporter;
@@ -107,8 +107,6 @@ export function updateInternalIncident(incidentId, incidentData) {
                 "gnDivision": incidentData["gramaNiladhari"]
             }
             await incidentsApi.updateReporter(reporterId, reporterUpdate);
-           
-            
 
             dispatch(updateInternalIncidentSuccess(incident));
             dispatch(loadIncident(incidentId));

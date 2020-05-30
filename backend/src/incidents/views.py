@@ -60,7 +60,7 @@ from .services import (
     get_incident_status_guest,
     send_canned_response,
     get_incident_status_guest,
-    get_incident_list_by_organization_id
+    get_incident_list_by_organization_code
 )
 
 from ..events import services as event_service
@@ -146,11 +146,6 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         if param_city is not None:
             incidents = incidents.filter(city__contains=param_city)
 
-        # filter by organization
-        param_organization = self.request.query_params.get('organization', None)
-        if param_organization is not None:
-            incidents = get_incident_list_by_organization_id(param_organization)
-
         param_incident_type = self.request.query_params.get('incident_type', None)
         if param_incident_type is not None:
             incidents = incidents.filter(incidentType=param_incident_type)
@@ -216,6 +211,14 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         if param_export is not None:
             # export path will send a different response
             return get_fitlered_incidents_report(incidents, param_export)
+
+        # organization filter shoulb de the last filter as it only returns generic list.
+        # not a Incident object list.
+
+        # filter by organization
+        param_organization = self.request.query_params.get('organization', None)
+        if param_organization is not None:
+            incidents = get_incident_list_by_organization_code(param_organization)
 
         results = self.paginate_queryset(incidents, request, view=self)
         serializer = IncidentSerializer(results, many=True)

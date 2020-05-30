@@ -154,7 +154,7 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const { classes, theme, suggestions, districts, value, handleChange } = this.props;
+        const { classes, theme, suggestions, districts, value, handleChange, districtLable } = this.props;
         if( districts.byCode[value]){
             var district=[
                 {
@@ -192,7 +192,7 @@ class IntegrationReactSelect extends React.Component {
                             handleChange("district")(selectedOption.value);
                           }}
                         name="district"
-                        placeholder="Search districts by name"
+                        placeholder={districtLable}
                     />
                 </NoSsr>
             </div>
