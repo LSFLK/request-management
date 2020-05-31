@@ -99,22 +99,71 @@ function SearchForm(props) {
   }, []);
   const { classes, categories, listType } = props;
   // const severityValues = Array(10).fill(0).map((e, i) => i + 1);
-  const severityValues = ['HIGH','MEDIUM','LOW'];
+  const severityValues = [
+    {
+      label: 'HIGH',
+      value: 'HIGH'
+    },
+    {
+      label: 'MEDIUM',
+      value: 'MEDIUM'
+    },
+    {
+      label: 'LOW',
+      value: 'LOW'
+    }
+  ];
+  const severityValuesSinhala = [
+    {
+      label: 'ඉහල',
+      value: 'HIGH'
+    },
+    {
+      label: 'මධ්යම',
+      value: 'MEDIUM'
+    },
+    {
+      label: 'අඩු',
+      value: 'LOW'
+    }
+  ];
+  const severityValuesTamil = [
+    {
+      label: 'உயர்',
+      value: 'HIGH'
+    },
+    {
+      label: 'மீடியம்',
+      value: 'MEDIUM'
+    },
+    {
+      label: 'குறைந்த',
+      value: 'LOW'
+    }
+  ];
   const institutions = useSelector(state => state.shared.institutions);
   const organizations = useSelector(state => state.user.organizations);
   const districts = useSelector(state => state.shared.districts);
   const [selectedInstitution, setSelectedInstitution] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const {channels} = useSelector((state) => state.shared);
+  const { selectedLanguage } = useSelector((state) => (state.shared));
   const { formatMessage: f } = useIntl();
-
   const categoryLable = f({id: "request.management.incident.review.category_lable", defaultMessage: "Search category by name"});
   const orgLable = f({id: "request.management.incident.review.org_lable", defaultMessage: "Search organization by name"});
   const districtLable = f({id: "request.management.incident.review.district_lable", defaultMessage: "Search district by name"});
 
-  const all = {
+  const allEnglish = {
     label: "All",
     value: ""
+}
+const allSinhala = {
+  label: "සියල්ල",
+  value: ""
+}
+const allTamil = {
+  label: "அனைத்தும்",
+  value: ""
 }
   let orgSearch = props.incidentType === 'INQUIRY' ?
       (<Search
@@ -125,27 +174,89 @@ function SearchForm(props) {
             districts={districts}
             onChange={setSelectedDistrict}
       ></Search>);
-      const suggestionOrganizations = organizations.allIds.map((c, k) => {
+      var suggestionOrganizations = [];
+
+      selectedLanguage=="en" ? 
+      suggestionOrganizations = organizations.allIds.map((c, k) => {
         let currOrg = organizations.byIds[c];
         return (
           currOrg.name !== "NONE" && (
             {label: currOrg.name, value: currOrg.code }
           )
         );
+      }) :
+      selectedLanguage=="si" ? 
+      suggestionOrganizations = organizations.allIds.map((c, k) => {
+        let currOrg = organizations.byIds[c];
+        return (
+          currOrg.name !== "NONE" && (
+            {label: currOrg.sn_name, value: currOrg.code }
+          )
+        );
+      }) :
+      suggestionOrganizations = organizations.allIds.map((c, k) => {
+        let currOrg = organizations.byIds[c];
+        return (
+          currOrg.name !== "NONE" && (
+            {label: currOrg.tm_name, value: currOrg.code }
+          )
+        );
       })
-      const suggestionDistricts = districts.allCodes.map((c, k) => {
+
+      var suggestionDistricts = [];
+      selectedLanguage=="en" ? 
+       suggestionDistricts = districts.allCodes.map((c, k) => {
         let currDistrict = districts.byCode[c];
         return (
           currDistrict.name !== "NONE" && (
             {label: currDistrict.name, value: currDistrict.code }
           )
         );
+      }) :
+      selectedLanguage=="si" ? 
+      suggestionDistricts = districts.allCodes.map((c, k) => {
+        let currDistrict = districts.byCode[c];
+        return (
+          currDistrict.name !== "NONE" && (
+            {label: currDistrict.sn_name, value: currDistrict.code }
+          )
+        );
+      }) :
+      suggestionDistricts = districts.allCodes.map((c, k) => {
+        let currDistrict = districts.byCode[c];
+        return (
+          currDistrict.name !== "NONE" && (
+            {label: currDistrict.tm_name, value: currDistrict.code }
+          )
+        );
       })
-    const suggestions = categories.map((o) => ( {label: o.sub_category, value: o.id }) ); 
-    
-  suggestions.splice(0,0, all);
-  suggestionOrganizations.splice(0,0, all);
-  suggestionDistricts.splice(0,0, all);
+
+      var suggestions = [];
+      selectedLanguage=="en" ? 
+        suggestions = categories.map((o) => ( {label: o.sub_category, value: o.id }) ) :
+      selectedLanguage=="si" ? 
+        suggestions = categories.map((o) => ( {label: o.sn_sub_category, value: o.id }) ) :
+        suggestions = categories.map((o) => ( {label: o.tm_sub_category, value: o.id }) )
+
+        selectedLanguage=="en" ? 
+        suggestions.splice(0,0, allEnglish) :
+      selectedLanguage=="si" ? 
+        suggestions.splice(0,0, allSinhala) :
+        suggestions.splice(0,0, allTamil)
+
+        selectedLanguage=="en" ? 
+        suggestionOrganizations.splice(0,0, allEnglish) :
+      selectedLanguage=="si" ? 
+        suggestionOrganizations.splice(0,0, allSinhala) :
+        suggestionOrganizations.splice(0,0, allTamil)
+
+        selectedLanguage=="en" ? 
+        suggestionDistricts.splice(0,0, allEnglish) :
+      selectedLanguage=="si" ? 
+        suggestionDistricts.splice(0,0, allSinhala) :
+        suggestionDistricts.splice(0,0, allTamil)
+
+  
   return (
     <Formik
       initialValues={props.incidentSearchFilter}
@@ -227,7 +338,7 @@ function SearchForm(props) {
                         className={classes.selectEmpty}
                       >
                         <MenuItem value="">
-                          <em>All</em>
+                          <em>{selectedLanguage == "en" ? "All" : selectedLanguage == "si" ? "සියල්ල" : "அனைத்தும்"}</em>
                         </MenuItem>
                         <MenuItem value={"SINHALA"}>{f({ id: "request.management.incident.create.location.language.sinhala", defaultMessage: "Language" })}</MenuItem>
                         <MenuItem value={"TAMIL"}>{f({ id: "request.management.incident.create.location.language.tamil", defaultMessage: "Language" })}</MenuItem>
@@ -249,13 +360,13 @@ function SearchForm(props) {
                         className={classes.selectEmpty}
                       >
                         <MenuItem value="">
-                          <em>All</em>
+                          <em>{selectedLanguage == "en" ? "All" : selectedLanguage == "si" ? "සියල්ල" : "அனைத்தும்"}</em>
                         </MenuItem>
-                        {listType == "review" && (<MenuItem value={"NEW"}>New/Unverified</MenuItem>)}
-                        {listType == "review" && (<MenuItem value={"VERIFIED"}>Verified</MenuItem>)}
-                        {listType == "review" && (<MenuItem value={"ACTION_PENDING"}>Action Pending</MenuItem>)}
-                        {listType == "archive" && (<MenuItem value={"CLOSED"}>Closed</MenuItem>)}
-                        {listType == "archive" && (<MenuItem value={"INVALIDATED"}>Invalidated</MenuItem>)}
+                        {listType == "review" && (<MenuItem value={"NEW"}>{f({ id: "request.management.home.incidents.list.status_new", defaultMessage: "New/Unverified" })}</MenuItem>)}
+                        {listType == "review" && (<MenuItem value={"VERIFIED"}>{f({ id: "request.management.home.incidents.list.status_verified", defaultMessage: "Verified" })}</MenuItem>)}
+                        {listType == "review" && (<MenuItem value={"ACTION_PENDING"}>{f({ id: "request.management.home.incidents.list.status_action_pending", defaultMessage: "Action Pending" })}</MenuItem>)}
+                        {listType == "archive" && (<MenuItem value={"CLOSED"}>{f({ id: "request.management.home.incidents.list.status_closed", defaultMessage: "Closed" })}</MenuItem>)}
+                        {listType == "archive" && (<MenuItem value={"INVALIDATED"}>{f({ id: "request.management.home.incidents.list.status_invalidated", defaultMessage: "Invalidated" })}</MenuItem>)}
                       </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
@@ -276,11 +387,20 @@ function SearchForm(props) {
                         className={classes.selectEmpty}
                       >
                         <MenuItem value="">
-                          <em>All</em>
+                          <em>{selectedLanguage == "en" ? "All" : selectedLanguage == "si" ? "සියල්ල" : "அனைத்தும்"}</em>
                         </MenuItem>
-                        {severityValues.map((val) => (
-                          <MenuItem value={val} key={val}>{val}</MenuItem>
-                        ))}
+                        {
+                        selectedLanguage == "en" ?
+                        severityValues.map((val) => (
+                          <MenuItem value={val.value} key={val.value}>{val.label}</MenuItem>
+                        )) : selectedLanguage == "si" ?
+                        severityValuesSinhala.map((val) => (
+                          <MenuItem value={val.value} key={val.value}>{val.label}</MenuItem>
+                        )) :
+                        severityValuesTamil.map((val) => (
+                          <MenuItem value={val.value} key={val.value}>{val.label}</MenuItem>
+                        ))
+                        }
                       </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
@@ -301,15 +421,24 @@ function SearchForm(props) {
                         className={classes.selectEmpty}
                       >
                         <MenuItem value="">
-                          <em>All</em>
+                         <em>{selectedLanguage == "en" ? "All" : selectedLanguage == "si" ? "සියල්ල" : "அனைத்தும்"}</em>
                         </MenuItem>
-                        {channels.map((val) => (
+                        {
+                        selectedLanguage == "en" ?
+                        channels.map((val) => (
                           <MenuItem value={val.id} key={val.id}>{val.name}</MenuItem>
-                        ))}
+                        )) : selectedLanguage == "si" ?
+                        channels.map((val) => (
+                          <MenuItem value={val.id} key={val.id}>{val.sn_name}</MenuItem>
+                        )) :
+                        channels.map((val) => (
+                          <MenuItem value={val.id} key={val.id}>{val.tm_name}</MenuItem>
+                        ))
+                        }
                       </Select>
                     </FormControl>
                     <FormControl className={classes.formControl2}>
-                    <CustomAutocompleteCategory suggestions={suggestions} value={values.category} handleChange={handleChange} categories={categories} categoryLable={categoryLable} />
+                    <CustomAutocompleteCategory suggestions={suggestions} value={values.category} handleChange={handleChange} categories={categories} categoryLable={categoryLable} selectedLanguage={selectedLanguage} />
                       {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.category", defaultMessage: "Category"})}
                       </InputLabel>
@@ -337,7 +466,7 @@ function SearchForm(props) {
                       </Select> */}
                     </FormControl>
                     <FormControl className={classes.formControl2}>
-                     <CustomAutocompleteOrganization suggestions={suggestionOrganizations} value={values.organization} handleChange={handleChange} organizations={organizations} orgLable={orgLable} />
+                     <CustomAutocompleteOrganization suggestions={suggestionOrganizations} value={values.organization} handleChange={handleChange} organizations={organizations} orgLable={orgLable} selectedLanguage ={selectedLanguage} />
                       {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.organization", defaultMessage: "Organization"})}
                       </InputLabel>
@@ -400,7 +529,7 @@ function SearchForm(props) {
                       />
                     </FormControl>
                     <FormControl className={classes.formControl2}>
-                    <CustomAutocompleteDistrict suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} districtLable={districtLable} />
+                    <CustomAutocompleteDistrict suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} districtLable={districtLable} selectedLanguage ={selectedLanguage}  />
                       {/* <InputLabel shrink htmlFor="status-label-placeholder">
                       {f({id: "request.management.incident.create.location.district", defaultMessage: "District"})}
                       </InputLabel>

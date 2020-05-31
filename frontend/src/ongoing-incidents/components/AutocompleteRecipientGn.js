@@ -154,24 +154,59 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const { classes, theme, value, dataObj, handleChange } = this.props;
+        const { classes, theme, value, dataObj, handleChange, selectedLanguage } = this.props;
 
-        const suggestionGn = dataObj.allCodes.map((c, k) => {
+          var suggestionGn = [];
+          selectedLanguage=="en" ? 
+          suggestionGn = dataObj.allCodes.map((c, k) => {
             let currGn = dataObj.byCode[c];
             return (
                 currGn.name !== "NONE" && (
                 {label: currGn.name, value: currGn.code }
               )
             );
+          }) :
+          selectedLanguage=="si" ? 
+          suggestionGn = dataObj.allCodes.map((c, k) => {
+            let currGn = dataObj.byCode[c];
+            return (
+                currGn.name !== "NONE" && (
+                {label: currGn.sn_name, value: currGn.code }
+              )
+            );
+          }) :
+          suggestionGn = dataObj.allCodes.map((c, k) => {
+            let currGn = dataObj.byCode[c];
+            return (
+                currGn.name !== "NONE" && (
+                {label: currGn.tm_name, value: currGn.code }
+              )
+            );
           })
 
         if( dataObj.byCode[value]){
-            var gn=[
-                {
-                  label: dataObj.byCode[value].name,
-                  value: value
-                }
-              ]
+            if(selectedLanguage=="en"){
+                var gn=[
+                    {
+                    label: dataObj.byCode[value].name,
+                    value: value
+                    }
+                ]
+            }else if(selectedLanguage=="si"){
+                var gn=[
+                    {
+                      label: dataObj.byCode[value].sn_name,
+                      value: value
+                    }
+                  ]
+            }else{
+                var gn=[
+                    {
+                      label: dataObj.byCode[value].tm_name,
+                      value: value
+                    }
+                  ]
+            }
         }
 
         const selectStyles = {

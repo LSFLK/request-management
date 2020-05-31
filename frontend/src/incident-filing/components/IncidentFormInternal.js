@@ -710,15 +710,42 @@ function IncidentFormInternal(props) {
     }
   }
 
-  const suggestions = complaintCategories ? complaintCategories.map((o) => ( {label: o.sub_category, value: o.id }) ) : []; 
-  const suggestionDistricts = districts.allCodes.map((c, k) => {
-    let currDistrict = districts.byCode[c];
-    return (
-      currDistrict.name !== "NONE" && (
-        {label: currDistrict.name, value: currDistrict.code }
-      )
-    );
-  })
+      var suggestions = [];
+      selectedLanguage=="en" ? 
+        suggestions = complaintCategories ? complaintCategories.map((o) => ( {label: o.sub_category, value: o.id }) ) : [] :
+      selectedLanguage=="si" ? 
+        suggestions = complaintCategories ? complaintCategories.map((o) => ( {label: o.sn_sub_category, value: o.id }) ) : [] :
+        suggestions = complaintCategories ? complaintCategories.map((o) => ( {label: o.tm_sub_category, value: o.id }) ) : []
+
+        var suggestionDistricts = [];
+        selectedLanguage=="en" ? 
+         suggestionDistricts = districts.allCodes.map((c, k) => {
+          let currDistrict = districts.byCode[c];
+          return (
+            currDistrict.name !== "NONE" && (
+              {label: currDistrict.name, value: currDistrict.code }
+            )
+          );
+        }) :
+        selectedLanguage=="si" ? 
+        suggestionDistricts = districts.allCodes.map((c, k) => {
+          let currDistrict = districts.byCode[c];
+          return (
+            currDistrict.name !== "NONE" && (
+              {label: currDistrict.sn_name, value: currDistrict.code }
+            )
+          );
+        }) :
+        suggestionDistricts = districts.allCodes.map((c, k) => {
+          let currDistrict = districts.byCode[c];
+          return (
+            currDistrict.name !== "NONE" && (
+              {label: currDistrict.tm_name, value: currDistrict.code }
+            )
+          );
+        })
+
+
   return (
     <div className={classes.root}>
       <Formik
@@ -861,7 +888,8 @@ function IncidentFormInternal(props) {
                       </div>
                     </FormLabel>
 
-                    {paramIncidentId ? channels.map((c, k) => (
+                    {selectedLanguage == "en" ?
+                    paramIncidentId ? channels.map((c, k) => (
                       <Button
                         key={k}
                         variant="contained"
@@ -886,7 +914,60 @@ function IncidentFormInternal(props) {
                         disabled={c.name == "Web" ? "disabled" : "" }
                       >
                         {c.name}
-                      </Button>))}
+                      </Button>)) : selectedLanguage == "si" ?
+                      paramIncidentId ? channels.map((c, k) => (
+                        <Button
+                          key={k}
+                          variant="contained"
+                          color={values.infoChannel == c.id ? "primary" : ""}
+                          className={classes.button}
+                          onClick={() => {
+                            setFieldValue("infoChannel", c.id, true);
+                          }}
+                          disabled={(paramIncidentId && values.infoChannel == c.id) ? "" : "disabled" }
+                        >
+                          {c.sn_name}
+                        </Button>
+                      )) : channels.map((c, k) => (
+                        <Button
+                          key={k}
+                          variant="contained"
+                          color={values.infoChannel == c.id ? "primary" : ""}
+                          className={classes.button}
+                          onClick={() => {
+                            setFieldValue("infoChannel", c.id, true);
+                          }}
+                          disabled={c.name == "Web" ? "disabled" : "" }
+                        >
+                          {c.sn_name}
+                        </Button>)) :
+                         paramIncidentId ? channels.map((c, k) => (
+                          <Button
+                            key={k}
+                            variant="contained"
+                            color={values.infoChannel == c.id ? "primary" : ""}
+                            className={classes.button}
+                            onClick={() => {
+                              setFieldValue("infoChannel", c.id, true);
+                            }}
+                            disabled={(paramIncidentId && values.infoChannel == c.id) ? "" : "disabled" }
+                          >
+                            {c.tm_name}
+                          </Button>
+                        )) : channels.map((c, k) => (
+                          <Button
+                            key={k}
+                            variant="contained"
+                            color={values.infoChannel == c.id ? "primary" : ""}
+                            className={classes.button}
+                            onClick={() => {
+                              setFieldValue("infoChannel", c.id, true);
+                            }}
+                            disabled={c.name == "Web" ? "disabled" : "" }
+                          >
+                            {c.tm_name}
+                          </Button>))
+                      }
 
                     <FormHelperText>
                       {errors.infoChannel && touched.infoChannel ? (
@@ -983,6 +1064,7 @@ function IncidentFormInternal(props) {
                       {/* <InputLabel htmlFor="category">{f({ id: "request.management.incident.create.category", defaultMessage: "Category" })}*</InputLabel> */}
                       <CustomAutocompleteCategory  
                           suggestions={suggestions} 
+                          selectedLanguage={selectedLanguage}
                           value={values.category} 
                           handleChange={(event) => handleChange(event)}
                           error={(errors.category) == 'Category is Required' ? true : false}
@@ -1617,7 +1699,7 @@ function IncidentFormInternal(props) {
                           error={touched.district && errors.district}
                           className={classes.formControl2}
                         >
-                          <CustomAutocompleteDistrict districtLable={districtLable} suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} />
+                          <CustomAutocompleteDistrict selectedLanguage={selectedLanguage} districtLable={districtLable} suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} />
                           {/* <InputLabel htmlFor="district">{f({ id: "request.management.incident.create.location.district", defaultMessage: "District" })}*</InputLabel>
                           <Select
                             value={values.district}
@@ -1971,7 +2053,7 @@ function IncidentFormInternal(props) {
                                 error={touched.recipientDistrict && errors.recipientDistrict}
                                 className={classes.formControl2}
                               >
-                              <CustomAutocompleteRecipientDistrict districtLable={districtLable} suggestions={suggestionDistricts} value={values.recipientDistrict} handleChange={handleChange} districts={districts} />
+                              <CustomAutocompleteRecipientDistrict selectedLanguage={selectedLanguage} districtLable={districtLable} suggestions={suggestionDistricts} value={values.recipientDistrict} handleChange={handleChange} districts={districts} />
                                 {/* <InputLabel htmlFor="recipientDistrict">{f({ id: "request.management.incident.create.location.district" })}*</InputLabel>
                                 <Select
                                   value={values.recipientDistrict}

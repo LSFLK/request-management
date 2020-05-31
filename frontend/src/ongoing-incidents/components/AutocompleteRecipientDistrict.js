@@ -154,15 +154,31 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const { classes, theme, suggestions, districts, value, handleChange, districtLable } = this.props;
+        const { classes, theme, suggestions, districts, value, handleChange, districtLable, selectedLanguage } = this.props;
 
         if( districts.byCode[value]){
-            var district=[
-                {
-                  label: districts.byCode[value].name,
-                  value: value
+              if(selectedLanguage=="en"){
+                var district=[
+                    {
+                      label: districts.byCode[value].name,
+                      value: value
+                    }
+                  ]
+                }else if(selectedLanguage=="si"){
+                    var district=[
+                        {
+                          label: districts.byCode[value].sn_name,
+                          value: value
+                        }
+                      ]
+                }else{
+                    var district=[
+                        {
+                          label: districts.byCode[value].tm_name,
+                          value: value
+                        }
+                      ]
                 }
-              ]
         }
 
         const selectStyles = {

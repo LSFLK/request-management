@@ -70,6 +70,8 @@ from ..renderer import CustomJSONRenderer
 from rest_framework.renderers import JSONRenderer
 
 import json
+from datetime import datetime, timedelta
+
 from ..custom_auth.models import UserLevel
 from ..custom_auth.services import user_can
 from .permissions import *
@@ -139,7 +141,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         # filter by channel
         param_info_channel = self.request.query_params.get('channel', None)
         if param_info_channel is not None:
-            incidents = incidents.filter(info_channel=param_info_channel)
+            incidents = incidents.filter(infoChannel=param_info_channel)
 
         # filter by city
         param_city = self.request.query_params.get('city', None)
@@ -253,6 +255,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
                 incident_data["recipient"] = recipient.id
 
         incident_data["refId"] = generate_refId(request.user)
+        incident_data["dueDate"] = (datetime.now()+timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%S")
         serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid() == False:

@@ -53,14 +53,18 @@ class UserSerializer(serializers.ModelSerializer):
             if obj.profile.organization is not None:
                 profile["organization"] = {
                     "code": obj.profile.organization.code,
-                    "name": obj.profile.organization.displayName
+                    "name": obj.profile.organization.displayName,
+                    "sn_name": obj.profile.organization.sn_name,
+                    "tm_name": obj.profile.organization.tm_name
                 }
 
             if obj.profile.division is not None:
                 profile["division"] = {
                     "code": obj.profile.division.code,
                     "divisionType": obj.profile.division.division_type,
-                    "name": obj.profile.division.name
+                    "name": obj.profile.division.name,
+                    "sn_name": obj.profile.division.sn_name,
+                    "tm_name": obj.profile.division.tm_name
                 }
 
         return profile

@@ -1031,6 +1031,7 @@ const VerticalLinearStepper = (props) => {
             contactDetials={incidentContact}
             handleContactDetailsChange={setIncidentContact}
             formErrors={formErrors}
+            selectedLanguage={selectedLanguage}
           />
         </>
       ),
@@ -1080,6 +1081,7 @@ const VerticalLinearStepper = (props) => {
           setSelectedCategory={setIncidentCatogory}
           setSelectedMainCategory={setIncidentMainCatogory}
           formErrors={formErrors}
+          selectedLanguage={selectedLanguage}
         />
       ),
       handler: () => {

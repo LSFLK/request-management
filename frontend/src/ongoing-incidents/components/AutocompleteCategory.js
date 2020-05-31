@@ -155,12 +155,13 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const { classes, theme, suggestions, categories, value, error, handleChange, categoryLable } = this.props;
+        const { classes, theme, suggestions, categories, value, error, handleChange, categoryLable, selectedLanguage } = this.props;
         
         if(categories){
         for (var j = 0; j < categories.length; j++) {
 
             if(value==categories[j].id){
+                if(selectedLanguage=="en"){
                 var category=[
                         {
                           label: categories[j].sub_category,
@@ -168,9 +169,26 @@ class IntegrationReactSelect extends React.Component {
                         }
                       ]
                       break;
-            }
+                }else if(selectedLanguage=="si"){
+                    var category=[
+                        {
+                          label: categories[j].sn_sub_category,
+                          value: value
+                        }
+                      ]
+                      break;
+                }else{
+                    var category=[
+                        {
+                          label: categories[j].tm_sub_category,
+                          value: value
+                        }
+                      ]
+                      break;
+                }
         }
     }
+}
 
         const selectStyles = {
             input: base => ({

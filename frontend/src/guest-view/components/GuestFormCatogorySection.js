@@ -104,19 +104,30 @@ const CatogorySection = (props) => {
                           id: "mainCategory",
                         }}
                       >
-                        {MainCategories.map((value,k) => (
+                        {
+                        selectedLanguage == "en" ?
+                        MainCategories.map((value,k) => (
                             <MenuItem value={value.top_category} key={k}>
                               <div className={classes.langCats}>
                                 <div>{value.top_category}</div>
-                                {/* <div>|</div>
-                                <div>{value.sub_category}</div>
-                                <div>|</div>
-                                <div> {value.sn_sub_category}</div>
-                                <div>|</div>
-                                <div> {value.tm_sub_category}</div> */}
                               </div>
                             </MenuItem>
-                          ))}
+                          )) : selectedLanguage == "si" ?
+                          MainCategories.map((value,k) => (
+                            <MenuItem value={value.top_category} key={k}>
+                              <div className={classes.langCats}>
+                                <div>{value.sn_top_category}</div>
+                              </div>
+                            </MenuItem>
+                          )) : 
+                          MainCategories.map((value,k) => (
+                            <MenuItem value={value.top_category} key={k}>
+                              <div className={classes.langCats}>
+                                <div>{value.tm_top_category}</div>
+                              </div>
+                            </MenuItem>
+                          ))
+                        }
                         
                       </Select>
                       <FormHelperText>{formErrors.incidentMainCategoryErrorMsg || ""}</FormHelperText>
@@ -140,42 +151,24 @@ const CatogorySection = (props) => {
                         }}
                       >
                         {
-                          selectedLanguage==="en" ? 
+                          selectedLanguage=="en" ? 
                           SubCategories.map((value,k) => (
                             <MenuItem value={value.id} key={k}>
                               <div className={classes.langCats}>
-                                {/* <div>{value.code}</div>
-                                <div>|</div> */}
                                 <div>{value.sub_category}</div>
-                                {/* <div>|</div>
-                                <div> {value.sn_sub_category}</div>
-                                <div>|</div>
-                                <div> {value.tm_sub_category}</div> */}
                               </div>
                             </MenuItem>
-                          )) : selectedLanguage==="si" ?
+                          )) : selectedLanguage=="si" ?
                           SubCategories.map((value,k) => (
                             <MenuItem value={value.id} key={k}>
                               <div className={classes.langCats}>
-                                {/* <div>{value.code}</div>
-                                <div>|</div>
-                                <div>{value.sub_category}</div>
-                                <div>|</div> */}
                                 <div> {value.sn_sub_category}</div>
-                                {/* <div>|</div>
-                                <div> {value.tm_sub_category}</div> */}
                               </div>
                             </MenuItem>
-                          )) : selectedLanguage==="ta" ?
+                          )) : selectedLanguage=="ta" ?
                           SubCategories.map((value,k) => (
                             <MenuItem value={value.id} key={k}>
                               <div className={classes.langCats}>
-                                {/* <div>{value.code}</div>
-                                <div>|</div>
-                                <div>{value.sub_category}</div>
-                                <div>|</div>
-                                <div> {value.sn_sub_category}</div>
-                                <div>|</div> */}
                                 <div> {value.tm_sub_category}</div>
                               </div>
                             </MenuItem>

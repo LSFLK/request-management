@@ -154,16 +154,35 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const { classes, theme, suggestions, organizations, value, handleChange, orgLable } = this.props;
+        const { classes, theme, suggestions, organizations, value, handleChange, orgLable, selectedLanguage } = this.props;
         for (var j = 0; j < organizations.length; j++) {
             let currOrg = organizations.byIds[j];
             if(value===currOrg.code){
-                var organization=[
+                if(selectedLanguage=="en"){
+                    var organization=[
                         {
                           label: currOrg[j].name,
                           value: value
                         }
                       ]
+                          break;
+                    }else if(selectedLanguage=="si"){
+                        var organization=[
+                            {
+                              label: currOrg[j].sn_name,
+                              value: value
+                            }
+                          ]
+                          break;
+                    }else{
+                        var organization=[
+                            {
+                              label: currOrg[j].tm_name,
+                              value: value
+                            }
+                          ]
+                          break;
+                    }
             }
         }
 
@@ -194,7 +213,6 @@ class IntegrationReactSelect extends React.Component {
                         onChange={selectedOption => {
                             handleChange("organization")(selectedOption.value);
                           }}
-                        // onChange={this.handleChange()}
                         placeholder={orgLable}
                     />
                 </NoSsr>

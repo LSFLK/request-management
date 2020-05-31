@@ -68,6 +68,7 @@ const IncidentContact = (props) => {
     recipientAddress,
     recipientDistrict,
     recipientCity,
+    selectedLanguage
   } = props;
 
   const handlePhoneNumberInput = (update, newValue) => {
@@ -306,11 +307,23 @@ const IncidentContact = (props) => {
                         helperText={formErrors.incidentDistrictErrorMsg || ""}
                         error={formErrors.incidentDistrictErrorMsg ? true : false}
                     >
-                        {districts.allCodes.map(code => (
-                            <MenuItem key={code} value={code}>
-                                {districts.byCode[code].name} | {districts.byCode[code].sn_name} | {districts.byCode[code].tm_name}
-                            </MenuItem>
-                        ))}
+                        {selectedLanguage == "en" ?
+                        districts.allCodes.map(code => (
+                          <MenuItem key={code} value={code}>
+                              {districts.byCode[code].name}
+                          </MenuItem>
+                        )) : selectedLanguage == "si" ?
+                        districts.allCodes.map(code => (
+                          <MenuItem key={code} value={code}>
+                              {districts.byCode[code].sn_name}
+                          </MenuItem>
+                          )) :
+                        districts.allCodes.map(code => (
+                          <MenuItem key={code} value={code}>
+                              {districts.byCode[code].tm_name}
+                          </MenuItem>
+                        ))
+                          }
                     </TextField>
                 </Grid>
                 <Grid item xs={2} sm={6} lg={4} />
@@ -587,11 +600,23 @@ const IncidentContact = (props) => {
                         helperText={formErrors.recipientDistrictErrorMsg || ""}
                         error={formErrors.recipientDistrictErrorMsg ? true : false}
                     >
-                        {districts.allCodes.map(code => (
-                            <MenuItem key={code} value={code}>
-                                {districts.byCode[code].name} | {districts.byCode[code].sn_name} | {districts.byCode[code].tm_name}
-                            </MenuItem>
-                        ))}
+                        {selectedLanguage == "en" ?
+                        districts.allCodes.map(code => (
+                          <MenuItem key={code} value={code}>
+                              {districts.byCode[code].name}
+                          </MenuItem>
+                        )) : selectedLanguage == "si" ?
+                        districts.allCodes.map(code => (
+                          <MenuItem key={code} value={code}>
+                              {districts.byCode[code].sn_name}
+                          </MenuItem>
+                          )) :
+                        districts.allCodes.map(code => (
+                          <MenuItem key={code} value={code}>
+                              {districts.byCode[code].tm_name}
+                          </MenuItem>
+                        ))
+                          }
                     </TextField>
                 </Grid>
                 <Grid item xs={2} sm={6} lg={4} />

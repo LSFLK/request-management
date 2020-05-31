@@ -247,7 +247,7 @@ class Incident(models.Model):
 
     current_decision = models.CharField(max_length=50, default=None, null=True, blank=True)
     occured_date = models.DateTimeField(null=True, blank=True)
-    due_date = models.DateTimeField(null=True, blank=True, default=datetime.now()+timedelta(days=1))
+    due_date = models.DateTimeField(null=True, blank=True)
     response_time = models.IntegerField(default=12)
 
     created_date = models.DateTimeField(auto_now_add=True)
