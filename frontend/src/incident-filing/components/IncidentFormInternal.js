@@ -406,10 +406,6 @@ function IncidentFormInternal(props) {
     const reporter = incident
       ? reporters.byIds[incident.reporter]
       : "";
-    
-    const recipient = incident
-    ? recipients.byIds[incident.recipient]
-    : "";
     if (reporter) {
       Object.assign(initData, {
         reporterName: reporter.name,
@@ -424,6 +420,10 @@ function IncidentFormInternal(props) {
         accusedAffiliation: reporter.accusedPoliticalAffiliation,
       });
     }
+
+    const recipient = incident
+    ? recipients.byIds[incident.recipient]
+    : "";
     if (recipient) {
         Object.assign(initData, {
           recipientName: recipient.name,
@@ -685,7 +685,7 @@ function IncidentFormInternal(props) {
         : IncidentSchema
     ),
 
-    
+
     recipientDistrict: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
     showRecipient == "YES"
         ? IncidentSchema.required(f({ id: "request.management.incident.error.district", defaultMessage: "District is Required" }))
@@ -711,14 +711,14 @@ function IncidentFormInternal(props) {
   }
 
       var suggestions = [];
-      selectedLanguage=="en" ? 
+      selectedLanguage=="en" ?
         suggestions = complaintCategories ? complaintCategories.map((o) => ( {label: o.sub_category, value: o.id }) ) : [] :
-      selectedLanguage=="si" ? 
+      selectedLanguage=="si" ?
         suggestions = complaintCategories ? complaintCategories.map((o) => ( {label: o.sn_sub_category, value: o.id }) ) : [] :
         suggestions = complaintCategories ? complaintCategories.map((o) => ( {label: o.tm_sub_category, value: o.id }) ) : []
 
         var suggestionDistricts = [];
-        selectedLanguage=="en" ? 
+        selectedLanguage=="en" ?
          suggestionDistricts = districts.allCodes.map((c, k) => {
           let currDistrict = districts.byCode[c];
           return (
@@ -727,7 +727,7 @@ function IncidentFormInternal(props) {
             )
           );
         }) :
-        selectedLanguage=="si" ? 
+        selectedLanguage=="si" ?
         suggestionDistricts = districts.allCodes.map((c, k) => {
           let currDistrict = districts.byCode[c];
           return (
@@ -1062,15 +1062,15 @@ function IncidentFormInternal(props) {
                       error={touched.category && errors.category}
                     >
                       {/* <InputLabel htmlFor="category">{f({ id: "request.management.incident.create.category", defaultMessage: "Category" })}*</InputLabel> */}
-                      <CustomAutocompleteCategory  
-                          suggestions={suggestions} 
+                      <CustomAutocompleteCategory
+                          suggestions={suggestions}
                           selectedLanguage={selectedLanguage}
-                          value={values.category} 
+                          value={values.category}
                           handleChange={(event) => handleChange(event)}
                           error={(errors.category) == 'Category is Required' ? true : false}
                           categories={complaintCategories}
                           categoryLable={categoryLable} />
-                      
+
                       {/* <Select
                         value={values.category}
                         onChange={handleChange}
@@ -1736,8 +1736,8 @@ function IncidentFormInternal(props) {
                         <CustomAutocompleteGn
                               gnLable={gnLable}
                               dataObj={getGramaNilidariDivisions(values.district)}
-                              value={values.gramaNiladhari} 
-                              handleChange={handleChange} 
+                              value={values.gramaNiladhari}
+                              handleChange={handleChange}
                               />
 
                           {/* <InputLabel htmlFor="gramaNiladhari">
@@ -1783,7 +1783,7 @@ function IncidentFormInternal(props) {
                             <FormHelperText>{touched.showRecipient ? errors.showRecipient : null}</FormHelperText>
                         </FormControl>
                     </Grid>
-                    
+
                   {values.incidentType === "COMPLAINT" ? (
                     <>
                       {/* <Grid item xs={12} sm={6}>
@@ -2090,8 +2090,8 @@ function IncidentFormInternal(props) {
                               <CustomAutocompleteRecipientGn
                               gnLable={gnLable}
                               dataObj={getGramaNilidariDivisions(values.recipientDistrict)}
-                              value={values.recipientGramaNiladhari} 
-                              handleChange={handleChange} 
+                              value={values.recipientGramaNiladhari}
+                              handleChange={handleChange}
                               />
                                 {/* <InputLabel htmlFor="recipientGramaNiladhari">
                                   {f({ id: "request.management.incident.create.location.gn_division" })}
@@ -2135,7 +2135,7 @@ function IncidentFormInternal(props) {
                       }
                         />
                       </Grid> */}
-                      
+
                       {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="province">Province</InputLabel>
@@ -2161,7 +2161,7 @@ function IncidentFormInternal(props) {
                                             </Select>
                                         </FormControl>
                                     </Grid> */}
-                      
+
                       {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="divisionalSecretariat">
@@ -2197,7 +2197,7 @@ function IncidentFormInternal(props) {
                                             />
                                         </FormControl>
                                     </Grid> */}
-                      
+
                       {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="policeDivision">Police Division</InputLabel> */}

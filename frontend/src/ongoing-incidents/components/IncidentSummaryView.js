@@ -336,8 +336,8 @@ function ContactTab(props) {
                                 <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.district"})} </Typography>
                                 <Typography variant="" gutterBottom>
                                     {
-                                        incident.district && districts.byCode[incident.district] ?
-                                            districts.byCode[incident.district].name : ""
+                                        reporter.district && districts.byCode[reporter.district] ?
+                                            districts.byCode[reporter.district].name : ""
                                     }
                                 </Typography>
                             </Grid>
@@ -347,8 +347,8 @@ function ContactTab(props) {
                                 <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.gn_division"})} </Typography>
                                 <Typography variant="" gutterBottom>
                                     {
-                                        incident.gramaNiladhari && gramaNiladharis.byCode[incident.gramaNiladhari] ?
-                                        gramaNiladharis.byCode[incident.gramaNiladhari].name : ""
+                                        reporter.gramaNiladhari && gramaNiladharis.byCode[reporter.gramaNiladhari] ?
+                                        gramaNiladharis.byCode[reporter.gramaNiladhari].name : ""
                                     }
                                 </Typography>
                             </Grid>

@@ -35,9 +35,9 @@ export function createInternalIncident(incidentData, fileData) {
                 "mobile": incidentData["reporterMobile"],
                 "telephone": incidentData["reporterTelephone"],
                 "address": incidentData["reporterAddress"],
-                "city": incidentData["reporterCity"],
-                "district": incidentData["reporterDistrict"],
-                "gnDivision": incidentData["reporterGramaNiladhari"]
+                "city": incidentData["city"],
+                "district": incidentData["district"],
+                "gnDivision": incidentData["gramaNiladhari"]
             }
             await incidentsApi.updateReporter(reporterId, reporterUpdate);
 
@@ -102,8 +102,8 @@ export function updateInternalIncident(incidentId, incidentData) {
                 "mobile": incidentData["reporterMobile"],
                 "telephone": incidentData["reporterTelephone"],
                 "address": incidentData["reporterAddress"],
-                "city": incidentData["reporterCity"],
-                "district": incidentData["reporterDistrict"],
+                "city": incidentData["city"],
+                "district": incidentData["district"],
                 "gnDivision": incidentData["gramaNiladhari"]
             }
             await incidentsApi.updateReporter(reporterId, reporterUpdate);
