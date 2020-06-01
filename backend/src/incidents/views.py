@@ -651,6 +651,7 @@ class ReporterPublicUserView(APIView):
 
     def put(self, request, reporter_id, format=None):
         snippet = get_reporter_by_id(reporter_id)
+        print(request.data)
         serializer = ReporterSerializer(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()

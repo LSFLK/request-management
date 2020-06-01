@@ -829,10 +829,8 @@ const VerticalLinearStepper = (props) => {
                 // location: incidentLocation,
                 address: incidentAddress,
                 language: language,
-                city: incidentCity,
                 category: incidentCatogory,
                 mainCategory: incidentMainCatogory,
-                district: incidentDistrict,
                 showRecipient: showRecipient,
                 // title:title,
                 // recipientType: incidentContact.recipientType,
@@ -851,8 +849,6 @@ const VerticalLinearStepper = (props) => {
               if (dateTime) {
                 incidentData["occured_date"] = dateTime;
               }
-              incidentData["receivedDate"] = "2020-01-01";
-              incidentData["letterDate"] = "2020-01-01";
 
               let reporterData = {};
               reporterData.name = incidentContact.name;
@@ -861,8 +857,9 @@ const VerticalLinearStepper = (props) => {
               reporterData.telephone = incidentContact.phone;
               reporterData.mobile = incidentContact.mobile;
               reporterData.email = incidentContact.email;
-              // reporterData.reporter_type = incidentContact.reporterType;
               reporterData.address = incidentAddress;
+              reporterData.city = incidentCity;
+              reporterData.district = incidentDistrict;
 
               dispatch(
                 createGuestIncidentWithReporter(
@@ -882,16 +879,12 @@ const VerticalLinearStepper = (props) => {
                 title: "Guest user submit",
                 infoChannel: webInfoChannelId, //info channel is web by default.
                 recaptcha: incidentRecaptcha,
-                // location: incidentLocation,
-                address: incidentAddress,
                 language: language,
-                city: incidentCity,
                 category: incidentCatogory,
                 mainCategory: incidentMainCatogory,
                 district: incidentDistrict,
                 showRecipient: showRecipient,
                 // title:title,
-                // recipientType: incidentContact.recipientType,
                 // recipientLocation: recipientLocation,
                 recipientAddress: recipientAddress,
                 recipientCity: recipientCity,
@@ -908,8 +901,6 @@ const VerticalLinearStepper = (props) => {
               if (dateTime) {
                 incidentData["occured_date"] = dateTime;
               }
-              incidentData["receivedDate"] = "2020-01-01";
-              incidentData["letterDate"] = "2020-01-01";
 
               let reporterData = {};
               reporterData.name = incidentContact.name;
@@ -918,8 +909,9 @@ const VerticalLinearStepper = (props) => {
               reporterData.telephone = incidentContact.phone;
               reporterData.mobile = incidentContact.mobile;
               reporterData.email = incidentContact.email;
-              // reporterData.reporter_type = incidentContact.reporterType;
               reporterData.address = incidentAddress;
+              reporterData.city = incidentCity;
+              reporterData.district = incidentDistrict;
 
               dispatch(
                 createGuestIncidentWithReporter(
