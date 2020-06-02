@@ -188,7 +188,7 @@ function IncidentList({
               <p>{row.severity}</p>
             </CustomTableCell>
             <CustomTableCell align="center">
-              <p>{moment(row.dueDate, "YYYY-MM-DD").fromNow()}</p>
+              <p>{moment(row.dueDate).fromNow()}</p>
             </CustomTableCell>
             
             {/* <CustomTableCell align="center">

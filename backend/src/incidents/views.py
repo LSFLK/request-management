@@ -617,6 +617,7 @@ class IncidentPublicUserView(APIView):
                 incident_data["recipient"] = recipient.id
 
         incident_data["refId"] = generate_refId("GUEST")
+        incident_data["dueDate"] = (datetime.now()+timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%S")
         serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid():
