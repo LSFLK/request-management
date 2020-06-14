@@ -154,7 +154,7 @@ def get_organization_dict(incidents, actionType = "OPENED"):
 def get_daily_category_data(language="sinhala"):
 
     file_dict = {}
-    file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise.js"
+    file_dict["template"] = "/requests/complaints/daily_summery_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
     file_dict["language"] = language
 
@@ -169,7 +169,7 @@ def get_daily_category_data(language="sinhala"):
 def get_closed_daily_category_data(language="sinhala"):
 
     file_dict = {}
-    file_dict["template"] = "/incidents/complaints/daily_closed_summery_report_categorywise.js"
+    file_dict["template"] = "/requests/complaints/daily_closed_summery_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
     file_dict["language"] = language
 
@@ -184,7 +184,7 @@ def get_closed_daily_category_data(language="sinhala"):
 def get_category_data_by_date_range(start_time, end_time, language="sinhala"):
 
     file_dict = {}
-    file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise_with_timefilter.js"
+    file_dict["template"] = "/requests/complaints/daily_summery_report_categorywise_with_timefilter.js"
     file_dict["StartDate"] = start_time
     file_dict["EndDate"] = end_time
     file_dict["language"] = language
@@ -200,7 +200,7 @@ def get_category_data_by_date_range(start_time, end_time, language="sinhala"):
 def get_weekly_closed_complain_category_data(language="sinhala"):
 
     file_dict = {}
-    file_dict["template"] = "/incidents/complaints/weekly_closed_request_report_categorywise.js"
+    file_dict["template"] = "/requests/complaints/weekly_closed_request_report_categorywise.js"
 
     week_data = get_weekly_incidents("CLOSED")
     file_dict["StartDate"] = week_data["start_date"]
@@ -218,7 +218,7 @@ def get_weekly_closed_complain_category_data(language="sinhala"):
 def get_organizationwise_data_with_timefilter(start_time, end_time, language="sinhala"):
 
     file_dict = {}
-    file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
+    file_dict["template"] = "/requests/complaints/summery_report_organizationwise_with_timefilter.js"
     file_dict["StartDate"] = start_time
     file_dict["EndDate"] = end_time
     file_dict["language"] = language
@@ -235,7 +235,7 @@ def get_organizationwise_data_with_timefilter(start_time, end_time, language="si
 def get_weekly_closed_complain_organization_data(language="sinhala"):
 
     file_dict = {}
-    file_dict["template"] = "/incidents/complaints/weekly_closed_request_report_organizationwise.js"
+    file_dict["template"] = "/requests/complaints/weekly_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
     file_dict["language"] = language
 
@@ -254,7 +254,7 @@ def get_weekly_closed_complain_organization_data(language="sinhala"):
 def get_daily_closed_complain_organization_data(language="sinhala"):
 
     file_dict = {}
-    file_dict["template"] = "/incidents/complaints/daily_closed_request_report_organizationwise.js"
+    file_dict["template"] = "/requests/complaints/daily_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
     file_dict["language"] = language
 
