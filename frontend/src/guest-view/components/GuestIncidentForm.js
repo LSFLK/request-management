@@ -121,7 +121,7 @@ const VerticalLinearStepper = (props) => {
     dispatch(fetchCategories());
     dispatch(fetchChannels());
     dispatch(fetchDistricts());
-    // dispatch(loadOrganization(queryParams.organization ? queryParams.organization : 1));
+    dispatch(loadOrganization(queryParams.organization ? queryParams.organization : 1));
   }, []);
 
   const { formatMessage: f } = useIntl();
@@ -130,6 +130,7 @@ const VerticalLinearStepper = (props) => {
   const { elections, categories, channels, districts } = useSelector(
     (state) => state.shared
   );
+    const organization = useSelector((state) => state.guestView.organization);
 
   function removeDuplicates(originalArray, prop) {
     var newArray = [];
@@ -895,7 +896,7 @@ const VerticalLinearStepper = (props) => {
                 recipientMobile: incidentContact.recipientMobile,
                 recipientEmail: incidentContact.recipientEmail,
                 recipientTitle: recipientTitle,
-                // organizationId: queryParams.organization,
+                organizationId: queryParams.organization,
               };
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -1135,15 +1136,13 @@ const VerticalLinearStepper = (props) => {
   }
 
   const isLoading = isLoadingIncident || isLoadingMetaData;
-  // const organization = useSelector((state) => state.guestView.organization);
 
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={6}>
-            {/* <Logo image={organization ? organization.logo : null} /> */}
-            <Logo />
+             <Logo image={organization ? organization.logo : null} />
           </Grid>
         </Grid>
 
